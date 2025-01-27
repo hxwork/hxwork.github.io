@@ -22,24 +22,41 @@ I am a second-year Ph.D. student at the CSE Department, the Chinese University o
 
 # News
 
+- *2024.12*: &nbsp; One paper is accepted to AAAI 2025.
 - *2024.07*: &nbsp; One paper is accepted to ECCV 2024.
 - *2024.03*: &nbsp; One paper is accepted to CVPR 2024.
 
 # Publications
 
+**2025**
+<!-- ######################################################### -->
+
+<div class='paper-box'><div class='paper-box-image'><img src='collections/2025_HybridReg/HybridReg.png' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+**HybridReg: Robust 3D Point Cloud Registration with Hybrid Motions**
+
+*The 39th Annual AAAI Conference on Artificial Intelligence (**AAAI**), 2025*
+
+Keyu Du\*, **Hao Xu**\*, Haipeng Li, Hong Qu, Chi-Wing Fu, Shuaicheng Liu (\* Joint first author)
+
+Paper \| Video \| [Code](https://github.com/mapledky/HybridReg_PyTorch) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+</div>
+</div>
+
 **2024**
 <!-- ######################################################### -->
 
-<div class='paper-box'><div class='paper-box-image'><img src='collections/2024_PointGPT/PointGPT.png' alt="sym" width="100%"></div>
+<div class='paper-box'><div class='paper-box-image'><img src='collections/2024_PointRegGPT/PointRegGPT.png' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
-**PointGPT: Boosting 3D Point Cloud Registration using Generative Point-Cloud Pairs for Training**
+**PointRegGPT: Boosting 3D Point Cloud Registration using Generative Point-Cloud Pairs for Training**
 
 *IEEE/CVF European Conference on Computer Vision (**ECCV**), 2024*
 
 Suyi Chen, **Hao Xu**, Haipeng Li, Kunming Luo, Guanghui Liu, Chi-Wing Fu, Ping Tan, Shuaicheng Liu
 
-Paper \| Video \| Code \| BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+[Paper](https://www.ecva.net/papers/eccv_2024/papers_ECCV/papers/06787.pdf) | [Code](https://github.com/Chen-Suyi/PointRegGPT) | [BibTex](collections/2024_PointRegGPT/PointRegGPT.md) <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
 </div>
 </div>
 
