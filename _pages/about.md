@@ -22,6 +22,7 @@ I am a second-year Ph.D. student at the CSE Department, the Chinese University o
 
 # News
 
+- *2025.02*: &nbsp; One paper is accepted to CVPR 2025.
 - *2024.12*: &nbsp; One paper is accepted to AAAI 2025.
 - *2024.07*: &nbsp; One paper is accepted to ECCV 2024.
 - *2024.03*: &nbsp; One paper is accepted to CVPR 2024.
@@ -29,6 +30,21 @@ I am a second-year Ph.D. student at the CSE Department, the Chinese University o
 # Publications
 
 **2025**
+<!-- ######################################################### -->
+
+<div class='paper-box'><div class='paper-box-image'><img src='collections/2025_UniHOPE/UniHOPE.png' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+**UniHOPE: A Unified Approach for Hand-Object Pose Estimation**
+
+*IEEE/CVF Computer Vision and Pattern Recognition Conference (**CVPR**), 2025*
+
+Yinqiao Wang\*, **Hao Xu**\*, Pheng-Ann Heng, Chi-Wing Fu (\* Joint first author)
+
+Paper \| Video \| [Code](https://github.com/JoyboyWang/UniHOPE_Pytorch) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+</div>
+</div>
+
 <!-- ######################################################### -->
 
 <div class='paper-box'><div class='paper-box-image'><img src='collections/2025_HybridReg/HybridReg.png' alt="sym" width="100%"></div>
@@ -43,6 +59,8 @@ Keyu Du\*, **Hao Xu**\*, Haipeng Li, Hong Qu, Chi-Wing Fu, Shuaicheng Liu (\* Jo
 Paper \| Video \| [Code](https://github.com/mapledky/HybridReg_PyTorch) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
 </div>
 </div>
+
+<!-- ######################################################### -->
 
 **2024**
 <!-- ######################################################### -->
