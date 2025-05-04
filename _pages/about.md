@@ -18,18 +18,32 @@ redirect_from:
 
 # About Me
 
-I am a second-year Ph.D. student at the CSE Department, the Chinese University of Hong Kong (CUHK), supervised by [Prof. Chi-Wing FU, Philip](https://www.cse.cuhk.edu.hk/~cwfu/). I received my Master's degree at the School of Information and Communication Engineering from the University of Electronic Science and Technology of China (UESTC), supervised by [Prof. Guanghui LIU](https://scholar.google.com.hk/citations?user=AjfD95EAAAAJ&hl=zh-CN&oi=ao) and [Prof. Shuaicheng LIU](http://www.liushuaicheng.org/). Before that, I got my Bachelor's degree from Sichuan University (SCU). My research interests include 3D registration, 3D point cloud representation, and 3D hand mesh reconstruction.
+I am a third-year Ph.D. student at the CSE Department, the Chinese University of Hong Kong (CUHK), supervised by [Prof. Chi-Wing FU, Philip](https://www.cse.cuhk.edu.hk/~cwfu/). I received my Master's degree at the School of Information and Communication Engineering from the University of Electronic Science and Technology of China (UESTC), supervised by [Prof. Guanghui LIU](https://scholar.google.com.hk/citations?user=AjfD95EAAAAJ&hl=zh-CN&oi=ao) and [Prof. Shuaicheng LIU](http://www.liushuaicheng.org/). Before that, I got my Bachelor's degree from Sichuan University (SCU). My research interests include 3D registration, 3D point cloud representation, and 3D hand mesh reconstruction.
 
 # News
 
+- *2025.05*: &nbsp; One paper is accepted to SIGGRAPH 2025.
 - *2025.02*: &nbsp; One paper is accepted to CVPR 2025.
 - *2024.12*: &nbsp; One paper is accepted to AAAI 2025.
-- *2024.07*: &nbsp; One paper is accepted to ECCV 2024.
-- *2024.03*: &nbsp; One paper is accepted to CVPR 2024.
 
 # Publications
 
 **2025**
+<!-- ######################################################### -->
+
+<div class='paper-box'><div class='paper-box-image'><img src='collections/2025_HandShadowPoser/HandShadowPoser.png' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+**Hand-Shadow Poser**
+
+*ACM Transactions on Graphics (ACM TOG), vol. 44, no. 4, SIGGRAPH, 2025*
+
+**Hao Xu**\*, Yinqiao Wang\*, Niloy J. Mitra, Shuaicheng Liu, Pheng-Ann Heng, Chi-Wing Fu (\* Joint first author)
+
+Paper \| Video \| [Code](https://github.com/hxwork/HandShadowPoser) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+</div>
+</div>
+
 <!-- ######################################################### -->
 
 <div class='paper-box'><div class='paper-box-image'><img src='collections/2025_UniHOPE/UniHOPE.png' alt="sym" width="100%"></div>
