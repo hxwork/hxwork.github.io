@@ -36,7 +36,7 @@ I am a third-year Ph.D. student at the CSE Department, the Chinese University of
 
 **Hand-Shadow Poser**
 
-*ACM Transactions on Graphics (ACM TOG), vol. 44, no. 4, SIGGRAPH, 2025*
+*ACM Transactions on Graphics (**ACM TOG**), vol. 44, no. 4, **SIGGRAPH**, 2025*
 
 **Hao Xu**\*, Yinqiao Wang\*, Niloy J. Mitra, Shuaicheng Liu, Pheng-Ann Heng, Chi-Wing Fu (\* Joint first author)
 
