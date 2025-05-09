@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hand Shadow Art - Research Results</title>
     <style>
         /* Define the font using @font-face */
@@ -12,20 +12,15 @@
             src: url('./assets/LinBiolinum_Rah.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
-            font-display: swap; /* 添加这一行以改善字体加载 */
         }
 
         body {
-            font-family: 'Linux Biolinum', Arial, sans-serif; /* 确保字体应用到整个body */
+            font-family: 'Linux Biolinum', Arial, sans-serif; /* Use Linux Biolinum, fallback to Arial */
+            src: url('./assets/LinBiolinum_Rah.ttf') format('truetype');
             margin: 0;
             padding: 0;
             background-color: #000000; /* Dark background */
             color: #f8f9fa; /* Light text color */
-        }
-
-        /* 确保字体在所有文本元素上应用 */
-        h1, h2, h3, h4, h5, h6, p, span, div, a {
-            font-family: 'Linux Biolinum', Arial, sans-serif;
         }
 
         header {
@@ -332,70 +327,6 @@
             max-width: 80%;
             margin: 10px auto;
         }
-
-        /* 添加移动设备响应式样式 */
-        @media only screen and (max-width: 768px) {
-            .container {
-                width: 95%;
-            }
-            
-            .case {
-                width: 90%;
-                padding: 15px;
-            }
-            
-            .case img.shadow-mask,
-            .case img.reproduced-shadow {
-                width: 30vw;
-                height: 30vw;
-            }
-            
-            .case img.spinning-gif,
-            .case video.spinning-gif {
-                width: 80vw;
-                height: 40vw;
-            }
-            
-            .youtube-container {
-                width: 90%;
-                padding-bottom: calc(90% * var(--aspect-ratio));
-            }
-            
-            #abstract-section p {
-                width: 95%;
-                font-size: 1em;
-            }
-            
-            header .subtitle {
-                font-size: 2em;
-            }
-            
-            /* 作者信息在移动设备上的样式 */
-            div[style*="margin-bottom: 30px;"] span[style*="white-space: nowrap;"] {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            /* 调整链接按钮在移动设备上的间距 */
-            div[style*="display: flex; justify-content: center; margin-bottom: 30px;"] {
-                gap: 20px;
-            }
-        }
-        
-        /* 确保触摸设备上的交互正常工作 */
-        @media (hover: none) {
-            .video-progress-container:hover .progress-slider {
-                display: block;
-                width: 18px;
-                height: 18px;
-            }
-            
-            .video-progress-container:hover {
-                height: 8px;
-            }
-        }
     </style>
 </head>
 
@@ -531,10 +462,6 @@
         <h2 style="color: #FFCC4C; margin-bottom: 20px; font-size: 3em; text-align: center;">Overall Framework</h2>
         
         <img src="./assets/framework.png" alt="Overall Framework" style="width: 90%; max-width: 1500px; margin-top: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
-        
-        <p style="margin-top: 30px; text-align: justify; font-size: 1.1em; line-height: 1.6; color: #ffffff; width: 90%; margin-left: auto; margin-right: auto;">
-            Hand-Shadow Poser is a three-stage framework consisting of: (i) A generative hand assignment module to predict plausible left-right hand shapes from the ambiguous shadow, by exploring diverse hypotheses via a conditional generative model; (ii) a generalized hand-shadow alignment module to robustly recover 3D poses of each hand-shape hypothesis to coarsely align with the shadow, followed by a similarity-driven strategy for selecting high-quality candidates; and (iii) a shadow-feature-aware refinement module to iteratively optimize hand poses to reproduce salient features of shadow shape and ensure physical feasibility through carefully-designed constraints.
-        </p>
     </div>
 
     <!-- Clean divider line -->
@@ -547,10 +474,10 @@
         
         <!-- Move copy button to top right corner -->
         <div style="position: absolute; top: 15px; right: 15px;">
-            <button id="copy-bibtex" style="background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9em; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-family: 'Linux Biolinum', Arial, sans-serif;">
+            <button id="copy-bibtex" style="background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9em; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
                 Copy BibTeX
             </button>
-            <span id="copy-status" style="margin-left: 10px; opacity: 0; transition: opacity 0.5s; font-size: 0.9em; font-family: 'Linux Biolinum', Arial, sans-serif;"></span>
+            <span id="copy-status" style="margin-left: 10px; opacity: 0; transition: opacity 0.5s; font-size: 0.9em;"></span>
         </div>
             
         <pre style="color: #ffffff; font-family: 'Consolas', 'Monaco', monospace; font-size: 1em; line-height: 1.6; margin: 0;"><code>@inproceedings{xu2025handshadow,
@@ -1534,84 +1461,6 @@
                 this.style.transform = 'translateY(0)';
                 this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
             });
-        });
-
-        // 添加触摸事件支持
-        document.addEventListener('DOMContentLoaded', function() {
-            // 为视频进度条添加触摸事件支持
-            document.querySelectorAll('.video-progress-container').forEach(container => {
-                container.addEventListener('touchstart', function(e) {
-                    e.preventDefault();
-                    handleProgressBarInteraction(e.touches[0], this);
-                });
-                
-                container.addEventListener('touchmove', function(e) {
-                    e.preventDefault();
-                    if (isDragging && currentProgressContainer) {
-                        updateProgressOnDrag(e.touches[0]);
-                    }
-                });
-            });
-            
-            // 为轮播图添加触摸滑动支持
-            const sliderWrappers = document.querySelectorAll('.slider-wrapper');
-            sliderWrappers.forEach(wrapper => {
-                let startX = 0;
-                let isDragging = false;
-                
-                wrapper.addEventListener('touchstart', function(e) {
-                    startX = e.touches[0].clientX;
-                    isDragging = true;
-                });
-                
-                wrapper.addEventListener('touchmove', function(e) {
-                    if (!isDragging) return;
-                    e.preventDefault();
-                    
-                    const currentX = e.touches[0].clientX;
-                    const diff = startX - currentX;
-                    const containerId = this.id.replace('-wrapper', '');
-                    
-                    // 向左滑动 (diff > 0) 显示下一张，向右滑动 (diff < 0) 显示上一张
-                    if (Math.abs(diff) > 50) {
-                        if (diff > 0) {
-                            // 模拟点击右箭头
-                            const rightArrow = document.getElementById(`${containerId}-right`);
-                            if (rightArrow && rightArrow.style.opacity !== '0.5') {
-                                rightArrow.click();
-                            }
-                        } else {
-                            // 模拟点击左箭头
-                            const leftArrow = document.getElementById(`${containerId}-left`);
-                            if (leftArrow && leftArrow.style.opacity !== '0.5') {
-                                leftArrow.click();
-                            }
-                        }
-                        isDragging = false;
-                    }
-                });
-                
-                wrapper.addEventListener('touchend', function() {
-                    isDragging = false;
-                });
-            });
-            
-            // 检测设备类型并调整视频行为
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-            if (isMobile) {
-                // 在移动设备上，点击视频切换播放/暂停状态
-                document.querySelectorAll('.spinning-gif').forEach(video => {
-                    if (video.tagName === 'VIDEO') {
-                        video.addEventListener('click', function() {
-                            if (this.paused) {
-                                this.play();
-                            } else {
-                                this.pause();
-                            }
-                        });
-                    }
-                });
-            }
         });
 
     </script>
