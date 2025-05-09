@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Shadow Art - Research Results</title>
+    <style>
+        /* Define the font using @font-face */
+        @font-face {
+            font-family: 'Linux Biolinum';
+            src: url('./assets/LinBiolinum_Rah.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Linux Biolinum', Arial, sans-serif; /* Use Linux Biolinum, fallback to Arial */
+            src: url('./assets/LinBiolinum_Rah.ttf') format('truetype');
+            margin: 0;
+            padding: 0;
+            background-color: #000000; /* Dark background */
+            color: #f8f9fa; /* Light text color */
+        }
+
+        header {
+            text-align: center;
+            padding: 1.5em 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        header img {
+            max-width: 80%; /* Changed to 80% width */
+            height: auto;
+            margin: 0 10%; /* Adjusted left and right margins to 10% each, centering the image */
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin: 0.5em 0 0;
+            color: #f8f9fa; /* Light text color */
+        }
+
+        h2 {
+            font-family: 'Linux Biolinum', serif; /* Use the imported font */
+            font-variant: small-caps; /* Apply small caps */
+            font-size: 24px; /* Adjust size if necessary */
+            font-weight: normal; /* Ensure normal weight */
+            line-height: 1.5; /* Adjust line spacing */
+            margin: 10px 0; /* Adjust spacing */
+        }
+
+        /* New subtitle styling */
+        header .subtitle {
+            font-size: 3em; /* Increase the font size for the gallery text */
+            color: #ffffff; /* White color for subtitle */
+            margin-top: 30px; /* Add more space above the subtitle */
+        }
+        
+        .texture-gifs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: -10px; /* Adjust as needed */
+            margin-top: 20px;
+        }
+
+        .texture-gifs img {
+            object-fit: cover;
+        }
+
+        .container {
+            width: 90%; /* Maintain relative width */
+            max-width: 1920px; /* Optional: Set a max width for better layout control */
+            margin: 0 auto; /* Ensure additional horizontal centering */
+            display: flex;
+            flex-wrap: wrap; /* Allow items to wrap within the container */
+            gap: 20px;
+            justify-content: center; /* Center items within the container horizontally */
+            align-items: center; /* Center vertically */
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-around; /* Ensure space is properly distributed */
+            margin-bottom: 20px; /* Space between rows */
+        }
+
+        .case {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            width: 40%; /* Each case takes approximately half the row */
+            padding: 30px;
+            align-items: center;
+        }
+
+        /* Change case name color to white */
+        .case h2 {
+            font-size: 1.5em;
+            margin-top: 0;
+            color: #ffffff; /* White color for case names */
+        }
+
+        .case .results {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: 1em 0;
+        }
+
+        /* Circle boundary and color inversion for shadow mask */
+        .case img.shadow-mask {
+            width: 20vw; /* Increased from 15vw to 20vw */
+            height: 20vw; /* Increased from 15vw to 20vw */
+            max-width: 200px; /* Increased from 150px to 200px */
+            max-height: 200px; /* Increased from 150px to 200px */
+            border-radius: 50%; /* Keep circular border */
+            object-fit: cover; /* Ensure image fits the circle */
+            filter: invert(1); /* Keep color inversion */
+            box-shadow: 0 0 1vw 0.5vw rgba(0, 0, 0, 0.8); /* Keep shadow effect */
+        }
+
+        .case img.reproduced-shadow {
+            width: 20vw; /* Increased from 15vw to 20vw */
+            height: 20vw; /* Increased from 15vw to 20vw */
+            max-width: 200px; /* Increased from 150px to 200px */
+            max-height: 200px; /* Increased from 150px to 200px */
+            border-radius: 50%; /* Keep circular border */
+            object-fit: cover; /* Ensure image fits the circle */
+            box-shadow: 0 0 1vw 0.5vw rgba(255, 255, 255, 0.8); /* Keep shadow effect */
+        }
+
+        .case img {
+            width: 20vw; /* Increased from 15vw to 20vw */
+            height: auto; /* Maintain aspect ratio */
+            max-width: 200px; /* Increased from 150px to 200px */
+            border-radius: 8px; /* Keep rounded corners */
+            box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.3); /* Keep shadow effect */
+        }
+
+        .case img.spinning-gif,
+        .case video.spinning-gif {
+            width: 25vw; /* Keep same width as other images */
+            height: 25vw; /* Use fixed aspect ratio */
+            max-width: 250px; /* Maximum width limit */
+            max-height: 250px; /* Maximum height limit */
+            border-radius: 8px; /* Keep rounded corners */
+            box-shadow: 0 0.2vw 0.4vw rgba(0, 0, 0, 0.3); /* Keep shadow effect */
+            object-fit: cover; /* Ensure video content fits container */
+        }
+
+        footer {
+            text-align: center;
+            padding: 2em 0;
+            background-color: #343a40; /* Dark footer */
+            color: #f8f9fa; /* Light text color */
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #007bff; /* Highlight color for links */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .youtube-container {
+            position: relative;
+            width: 60%; /* Video container width */
+            --aspect-ratio: calc(9 / 16); /* Define aspect ratio variable: height/width */
+            padding-bottom: calc(60% * var(--aspect-ratio)); /* Automatically calculate height: container width × aspect ratio */
+            height: 0;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            margin: 20px auto 0; /* Add top margin and center */
+        }
+        
+        .youtube-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .youtube-container.playing {
+            width: 50%; /* Video container width */
+            padding-bottom: calc(50% * var(--aspect-ratio)); /* Automatically calculate height */
+            margin: 20px auto 0; /* Add top margin and center */
+        }
+        
+        #abstract-video-container {
+            display: flex;
+            flex-direction: column; /* Changed to vertical arrangement */
+            align-items: center; /* Horizontal centering */
+            width: 90%; /* Slightly increased container width */
+            margin: 0 auto;
+            transition: all 0.5s ease;
+        }
+        
+        #abstract-section {
+            width: 80%; /* Same width as video container */
+            max-width: 100%; /* Allow full width usage */
+            margin: 0 auto; /* Center display */
+            padding: 0 0 20px 0; /* Only keep bottom padding */
+            transition: opacity 0.5s ease;
+        }
+
+        .spotlight-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 300px;
+            z-index: 2;
+            pointer-events: none;
+            overflow: hidden;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 255, 255, 0.2) 20%,
+                rgba(255, 255, 255, 0.1) 40%,
+                rgba(255, 255, 255, 0.05) 60%,
+                rgba(0, 0, 0, 0) 100%
+            );
+        }
+
+        header {
+            text-align: center;
+            padding: 1.5em 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        #cover-video {
+            position: relative;
+            z-index: 1;
+        }
+
+        a[href]:hover {
+            color: #00bfff !important; /* Bright blue */
+            border-bottom: 1px solid #00bfff !important;
+        }
+
+        #siggraph-video {
+            cursor: pointer; /* Basic pointer style */
+            transition: filter 0.3s ease;
+        }
+
+        #siggraph-video.paused {
+            cursor: play; /* Show play icon */
+            filter: brightness(0.8); /* Only reduce brightness to indicate paused state */
+        }
+
+        #siggraph-video:not(.paused):hover {
+            cursor: pause; /* Show pause icon */
+        }
+
+        /* Remove pause indicator related styles */
+        .video-pause-indicator {
+            display: none; /* Completely hide pause indicator */
+        }
+
+        .texture-gifs {
+            position: relative; /* Provide positioning context for pause indicator */
+        }
+
+        .texture-gifs:hover .video-pause-indicator {
+            opacity: 1;
+        }
+
+        /* Video progress bar styles */
+        .video-progress-container {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            margin: 10px 0;
+            position: relative;
+            cursor: pointer;
+            transition: height 0.2s ease;
+        }
+
+        .video-progress-container:hover {
+            height: 6px;
+        }
+
+        .video-progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: rgba(255,255,255,0.7); /* Default color, will be dynamically replaced */
+            border-radius: 2px;
+            transition: none; /* Remove transition effect for real-time updates */
+            position: relative;
+        }
+        
+        /* Progress bar slider styles */
+        .progress-slider {
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 12px;
+            height: 12px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 3px rgba(0,0,0,0.5);
+            display: none;
+        }
+        
+        .video-progress-container:hover .progress-slider {
+            display: block;
+        }
+
+        /* Ensure progress bar is centered in case elements */
+        .case .video-progress-container {
+            max-width: 80%;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Move spotlight effect inside header, directly above the video -->
+    <header>
+        <!-- Spotlight effect -->
+        <div class="spotlight-container"></div>
+        
+        <video 
+            id="cover-video"
+            src="./assets/cover.mp4" 
+            alt="Gallery of Hand Shadow Art" 
+            style="display: block; margin: 0 auto; width: 100%; max-width: 100%;"
+            autoplay
+            muted
+            playsinline
+            loop
+        ></video>
+        
+        <!-- SIGGRAPH Texture GIFs -->
+        <div class="texture-gifs">
+            <video 
+                id="siggraph-video"
+                src="./assets/SIGGRAPH2025.mp4" 
+                autoplay
+                muted
+                playsinline
+                loop
+                style="width: 60%; max-width: 80vw; margin: 0 auto; display: block; cursor: pointer;"
+            ></video>
+        </div>
+
+        <!-- Add author information section -->
+        <div style="width: 90%; margin: 30px auto 10px; text-align: center;">
+            <!-- Add SIGGRAPH 2025 identifier -->
+            <div style="margin-bottom: 55px;">
+                <span style="font-size: 2.0em; color: #FFCC4C; font-weight: bold; letter-spacing: 1px;">
+                    SIGGRAPH 2025 (ACM TOG)
+                </span>
+            </div>
+            
+            <div style="margin-bottom: 30px;">
+                <span style="font-size: 1.4em; color: #ffffff; white-space: nowrap; display: block;">
+                    <span><a href="https://hxwork.github.io/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Hao Xu</a><sup>1*</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="https://joyboywang.github.io/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Yinqiao Wang</a><sup>1*</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="http://www0.cs.ucl.ac.uk/staff/n.mitra/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Niloy J. Mitra</a><sup>2, 3</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="http://www.liushuaicheng.org/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Shuaicheng Liu</a><sup>4</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="http://www.cse.cuhk.edu.hk/~pheng/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Pheng-Ann Heng</a><sup>1</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="https://www.cse.cuhk.edu.hk/~cwfu/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Chi-Wing Fu</a><sup>1</sup></span>
+                </span>
+            </div>
+
+            <div style="font-size: 1.4em; color: #ffffff; margin-bottom: 30px;">
+                <span style="white-space: nowrap; display: block;">
+                    <span><sup>1</sup>The Chinese University of Hong Kong</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span><sup>2</sup>University College London</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span><sup>3</sup>Adobe Research</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span><sup>4</sup>University of Electronic Science and Technology of China</span>
+                </span>
+            </div>
+            <div style="font-size: 1em; color: #ffffff; margin-bottom: 30px;">
+                <span>* Equal contribution</span>
+            </div>
+        </div>
+
+        <!-- Add Paper and Code links -->
+        <div style="display: flex; justify-content: center; margin-bottom: 30px; gap: 40px;">
+            <!-- Paper link -->
+            <a href="#" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; color: #ffffff; text-decoration: none; transition: transform 0.3s ease, color 0.3s ease;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" style="margin-bottom: 5px;">
+                        <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>
+                        <path d="M4.5 12.5A.5.5 0 0 1 5 12h3a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0-2A.5.5 0 0 1 5 10h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm1.639-3.708 1.33.886 1.854-1.855a.25.25 0 0 1 .289-.047l1.888.974V7.5a.5.5 0 0 1-.5.5H5a.5.5 0 0 1-.5-.5V7s1.54-1.274 1.639-1.208zM6.25 6a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5z"/>
+                    </svg>
+                    <span style="font-size: 1.2em;">Paper</span>
+                </div>
+            </a>
+            
+            <!-- Code link -->
+            <a href="https://github.com/hxwork/HandShadowPoser" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; color: #ffffff; text-decoration: none; transition: transform 0.3s ease, color 0.3s ease;">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" style="margin-bottom: 5px;">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                    <span style="font-size: 1.2em;">Code</span>
+                </div>
+            </a>
+        </div>
+
+        <!-- Clean divider line -->
+        <div style="width: 50%; margin: 40px auto; height: 1px; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));"></div>
+
+        <!-- Modified layout: Place Abstract and video vertically -->
+        <div style="display: flex; flex-direction: column; align-items: center; width: 90%; margin: 0 auto;" id="abstract-video-container">
+            <!-- Abstract section - placed at the top -->
+            <div style="margin: 0 auto 20px;" id="abstract-section">
+                <h2 style="color: #FFCC4C; margin-bottom: 20px; font-size: 2.5em;">Abstract</h2>
+                <p style="margin: 0 auto; width: 80%; font-size: 1.1em; line-height: 1.6; text-align: justify;">
+                    Hand shadow art creatively uses hand shadows to produce expressive shapes on walls. We study the inverse problem: given a target shape, we aim to find hand poses that create a shadow resembling the input. This is challenging due to the vast design space of 3D hand poses and anatomical constraints. Our Hand-Shadow Poser pipeline decouples anatomical constraints from shadow shape requirements through three stages: a generative hand assignment module exploring diverse hand shape hypotheses, a hand-shadow alignment module inferring coarse poses, and a shadow-feature-aware refinement module optimizing for physical plausibility. Our approach is trainable on generic public hand data without specialized datasets. We validate our method on a benchmark of 210 diverse shadow shapes and demonstrate that it effectively generates hand poses for a wide variety of shapes in over 85% of benchmark cases.
+                </p>
+            </div>
+            
+            <!-- YouTube video container -->
+            <div class="youtube-container">
+                <iframe 
+                    id="youtube-player"
+                    src="https://www.youtube.com/embed/1HW5vfX3ifY"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+                
+            </div>
+        </div>
+
+        <!-- Clean divider line -->
+        <div style="width: 50%; margin: 40px auto; height: 1px; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));"></div>
+
+        <h2 style="color: #FFCC4C; margin-bottom: 20px; font-size: 3em; text-align: center;">Gallery</h2>
+    </header>
+
+    <!-- Dynamic Results Section -->
+    <div class="container" id="results-container">
+        <!-- Dynamic content will be inserted here by JavaScript -->
+    </div>
+
+    <!-- Clean divider line -->
+    <div style="width: 50%; margin: 40px auto; height: 1px; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));"></div>
+
+    <!-- Add Overall Framework section -->
+    <div style="width: 80%; margin: 40px auto; padding: 30px; background-color: rgba(0,0,0,0.3); border-radius: 12px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05);">
+        <h2 style="color: #FFCC4C; margin-bottom: 20px; font-size: 3em; text-align: center;">Overall Framework</h2>
+        
+        <img src="./assets/framework.png" alt="Overall Framework" style="width: 90%; max-width: 1500px; margin-top: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.4);">
+    </div>
+
+    <!-- Clean divider line -->
+    <div style="width: 50%; margin: 40px auto; height: 1px; background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.5), rgba(255,255,255,0));"></div>
+
+    <h2 style="color: #FFCC4C; margin-bottom: 25px; font-size: 3em; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Citation</h2>
+
+    <!-- BibTeX Citation Section -->
+    <div style="width: 80%; margin: 40px auto; padding: 30px; background-color: rgba(0,0,0,0.3); border-radius: 12px; text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 15px rgba(255,255,255,0.15); position: relative;">
+        
+        <!-- Move copy button to top right corner -->
+        <div style="position: absolute; top: 15px; right: 15px;">
+            <button id="copy-bibtex" style="background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9em; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+                Copy BibTeX
+            </button>
+            <span id="copy-status" style="margin-left: 10px; opacity: 0; transition: opacity 0.5s; font-size: 0.9em;"></span>
+        </div>
+            
+        <pre style="color: #ffffff; font-family: 'Consolas', 'Monaco', monospace; font-size: 1em; line-height: 1.6; margin: 0;"><code>@inproceedings{xu2025handshadow,
+    title={Hand-Shadow Poser},
+    author={Xu, Hao and Wang, Yinqiao and Mitra, Niloy J. and Liu, Shuaicheng and Heng, Pheng-Ann and Fu, Chi-Wing},
+    booktitle={SIGGRAPH 2025},
+    year={2025},
+    publisher={ACM}
+}</code></pre>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p style="color: #aaaaaa; font-size: 1em; margin-top: 30px;">Created by Hand-Shadow Poser Research Group</p>
+    </footer>
+
+    <script>
+        /**
+         * Configuration: Shape names and folder paths
+         */
+        const shapeNames = ["crab", "rabbit_pg", "multiplying_rabbit", "bird-2", "horse", "man-11", "elephant", "plant-4", "bull", "man-6", "kangaroo", "cat", "rabbit", "1", "3", "4", "6", "7", "8", "9", "B", "C", "D", "E", "F", "J", "K", "L", "Heart-1", "HCircle-3"]; // Example shape names, adjust as needed
+        const shadowMaskFolder = "./assets/supp_rendered/input_mask/"; // DON'T CHANGE
+        const concatVideosFolder = "./assets/supp_rendered/concat_videos/"; // Use path for merged videos
+        const reproducedFolder = "./assets/supp_rendered/rendered_shadow/"; // DON'T CHANGE
+    
+        // Define the color list for reproduced shadows
+        const colorList = ['red', 'purple', 'yellow', 'blue', 'white', 'green'];
+    
+        // Define new color mapping (brightened version)
+        const colorMap = {
+            'red': 'rgb(224, 175, 172)',      // Brightened red
+            'purple': 'rgb(202, 178, 216)',   // Brightened purple
+            'yellow': 'rgb(222, 208, 142)',   // Brightened yellow
+            'blue': 'rgb(168, 187, 216)',     // Brightened blue
+            'white': 'rgb(215, 215, 215)',    // Brightened white
+            'green': 'rgb(197, 213, 165)'     // Brightened green
+        };
+
+        // Select container for rendering cases
+        const container = document.getElementById("results-container");
+
+        const shapeNameMapping = {
+            "crab": "\"Crab\"",
+            "rabbit_pg": "\"Stanford bunny\"",
+            "multiplying_rabbit": "\"Two rabbits\"",
+            "bird-2": "\"Eagle\"",
+            "horse": "\"Horse\"",
+            "man-11": "\"Famer\"",
+            "elephant": "\"Elephant\"",
+            "plant-4": "\"Flower\"",
+            "bull": "\"Bull\"",
+            "man-6": "\"Abraham lincoln\"", 
+            "kangaroo": "\"Kangaroo\"", 
+            "cat": "\"Cat\"", 
+            "rabbit": "\"Rabbit\"",
+            "1": "\"Number 1\"",
+            "3": "\"Number 3\"",
+            "4": "\"Number 4\"", 
+            "6": "\"Number 6\"", 
+            "7": "\"Number 7\"", 
+            "8": "\"Number 8\"", 
+            "9": "\"Number 9\"", 
+            "B": "\"Uppercase B\"", 
+            "C": "\"Uppercase C\"", 
+            "D": "\"Uppercase D\"", 
+            "E": "\"Uppercase E\"",  
+            "F": "\"Uppercase F\"", 
+            "J": "\"Uppercase J\"", 
+            "K": "\"Uppercase K\"", 
+            "L": "\"Uppercase L\"", 
+            "Heart-1": "\"Heart\"", 
+            "HCircle-3": "\"Half circle\"", 
+            // Add more mappings as needed
+        };
+
+        // Divide cases into three groups
+        const group1Cases = ["crab", "rabbit_pg", "multiplying_rabbit", "bird-2", "horse", "man-11", "elephant", "plant-4", "bull", "man-6", "kangaroo", "cat", "rabbit"];
+        const group2Cases = ["1", "3", "4", "6", "7", "8", "9", "B", "C", "D", "E", "F", "J", "K", "L"];
+        const group3Cases = shapeNames.filter(name => !group1Cases.includes(name) && !group2Cases.includes(name));
+
+        // Clear container to regenerate content
+        container.innerHTML = '';
+
+        // Function to create three slider containers
+        function createSlider(cases, title, containerId) {
+            // Create title
+            const sliderTitle = document.createElement('h3');
+            sliderTitle.textContent = title;
+            sliderTitle.style.textAlign = 'center';
+            sliderTitle.style.color = '#ffffff';
+            sliderTitle.style.margin = '40px 0 20px';
+            sliderTitle.style.fontSize = '2em';
+            container.appendChild(sliderTitle);
+            
+            // Create outer wrapper for slider container
+            const sliderWrapper = document.createElement('div');
+            sliderWrapper.className = 'slider-wrapper';
+            sliderWrapper.id = `${containerId}-wrapper`;
+            sliderWrapper.style.position = 'relative';
+            sliderWrapper.style.width = '90%';
+            sliderWrapper.style.margin = '-150px auto 80px';
+            sliderWrapper.style.overflow = 'hidden';
+            sliderWrapper.style.height = '700px';
+            sliderWrapper.style.borderRadius = '10px';
+            sliderWrapper.style.padding = '20px';
+            sliderWrapper.style.backgroundColor = 'rgba(0,0,0,0.2)';
+            
+            // Create slider container
+            const sliderContainer = document.createElement('div');
+            sliderContainer.className = 'slider-container';
+            sliderContainer.id = containerId;
+            sliderContainer.style.position = 'relative';
+            sliderContainer.style.width = '100%';
+            sliderContainer.style.height = '100%';
+            
+            // Add left and right arrows
+            const leftArrow = document.createElement('div');
+            leftArrow.className = 'slider-arrow left';
+            leftArrow.id = `${containerId}-left`;
+            leftArrow.innerHTML = '&#10094;';
+            leftArrow.style.position = 'absolute';
+            leftArrow.style.left = '10px';
+            leftArrow.style.top = '50%';
+            leftArrow.style.transform = 'translateY(-50%)';
+            leftArrow.style.zIndex = '10';
+            leftArrow.style.fontSize = '24px';
+            leftArrow.style.color = 'white';
+            leftArrow.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            leftArrow.style.borderRadius = '50%';
+            leftArrow.style.width = '40px';
+            leftArrow.style.height = '40px';
+            leftArrow.style.display = 'flex';
+            leftArrow.style.justifyContent = 'center';
+            leftArrow.style.alignItems = 'center';
+            leftArrow.style.cursor = 'pointer';
+            leftArrow.style.transition = 'all 0.3s ease';
+            
+            const rightArrow = document.createElement('div');
+            rightArrow.className = 'slider-arrow right';
+            rightArrow.id = `${containerId}-right`;
+            rightArrow.innerHTML = '&#10095;';
+            rightArrow.style.position = 'absolute';
+            rightArrow.style.right = '10px';
+            rightArrow.style.top = '50%';
+            rightArrow.style.transform = 'translateY(-50%)';
+            rightArrow.style.zIndex = '10';
+            rightArrow.style.fontSize = '24px';
+            rightArrow.style.color = 'white';
+            rightArrow.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            rightArrow.style.borderRadius = '50%';
+            rightArrow.style.width = '40px';
+            rightArrow.style.height = '40px';
+            rightArrow.style.display = 'flex';
+            rightArrow.style.justifyContent = 'center';
+            rightArrow.style.alignItems = 'center';
+            rightArrow.style.cursor = 'pointer';
+            rightArrow.style.transition = 'all 0.3s ease';
+            
+            // Add indicators container
+            const indicatorsContainer = document.createElement('div');
+            indicatorsContainer.className = 'slider-indicators';
+            indicatorsContainer.id = `${containerId}-indicators`;
+            indicatorsContainer.style.position = 'absolute';
+            indicatorsContainer.style.bottom = '10px';
+            indicatorsContainer.style.left = '50%';
+            indicatorsContainer.style.transform = 'translateX(-50%)';
+            indicatorsContainer.style.display = 'flex';
+            indicatorsContainer.style.justifyContent = 'center';
+            indicatorsContainer.style.gap = '10px';
+            indicatorsContainer.style.zIndex = '5';
+            
+            // Create elements for each case
+            cases.forEach((shapeName, index) => {
+                const shadowMaskPath = `${shadowMaskFolder}${shapeName}.png`;
+                const concatVideoPath = `${concatVideosFolder}${shapeName}.mp4`; // Use merged video path
+                
+                // Determine color
+                const colorIndex = index % colorList.length;
+                const colorName = colorList[colorIndex];
+                const mappedColor = colorMap[colorName] || colorName;
+                const reproducedShadowPath = `${reproducedFolder}${shapeName}_${colorName}.png`;
+                
+                // Create case element
+                const caseElement = document.createElement('div');
+                caseElement.className = `case ${containerId}-case`;
+                caseElement.style.borderColor = mappedColor;
+                caseElement.style.position = 'absolute';
+                caseElement.style.top = '0';
+                caseElement.style.left = '0';
+                caseElement.style.width = '100%';
+                caseElement.style.height = '100%';
+                caseElement.style.display = 'flex';
+                caseElement.style.flexDirection = 'column';
+                caseElement.style.alignItems = 'center';
+                caseElement.style.justifyContent = 'center';
+                caseElement.style.opacity = index === 0 ? '1' : '0';
+                caseElement.style.visibility = index === 0 ? 'visible' : 'hidden';
+                caseElement.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                
+                // Create image container
+                const resultsDiv = document.createElement('div');
+                resultsDiv.className = 'results';
+                resultsDiv.style.display = 'flex';
+                resultsDiv.style.flexDirection = 'row';
+                resultsDiv.style.justifyContent = 'center';
+                resultsDiv.style.alignItems = 'center';
+                resultsDiv.style.gap = '20px';
+                resultsDiv.style.margin = '1em 0';
+                
+                // Add four images
+                const shadowMaskImg = document.createElement('img');
+                shadowMaskImg.src = shadowMaskPath;
+                shadowMaskImg.alt = `Shadow Mask for ${shapeName}`;
+                shadowMaskImg.className = 'shadow-mask';
+                shadowMaskImg.loading = 'lazy';
+                shadowMaskImg.onerror = function() { this.style.display = 'none'; };
+                resultsDiv.appendChild(shadowMaskImg);
+                
+                // Create single merged video element
+                const spinVideo = document.createElement('video');
+                spinVideo.src = concatVideoPath; // Use merged video path
+                spinVideo.alt = `Hand Shadow Video for ${shapeName}`;
+                spinVideo.className = 'spinning-gif';
+                spinVideo.autoplay = true;
+                spinVideo.loop = false;
+                spinVideo.muted = true;
+                spinVideo.playsInline = true;
+                spinVideo.controls = false;
+                spinVideo.style.objectFit = 'contain';
+                
+                // Scale video size proportionally
+                const scaleFactor = 1.5; // Scale factor
+                spinVideo.style.width = `${50 * scaleFactor}vw`; // Scale width proportionally
+                spinVideo.style.height = `${25 * scaleFactor}vw`; // Scale height proportionally
+                spinVideo.style.maxWidth = `${500 * scaleFactor}px`; // Scale maximum width proportionally
+                spinVideo.style.maxHeight = `${250 * scaleFactor}px`; // Scale maximum height proportionally
+                
+                // Ensure enough space between video and progress bar
+                spinVideo.style.marginBottom = '30px'; // Add bottom margin for progress bar space
+                
+                spinVideo.style.backgroundColor = 'rgba(0,0,0,0.1)';
+                spinVideo.dataset.shapeName = shapeName;
+                spinVideo.dataset.videoGroup = `video-group-${shapeName}`;
+                spinVideo.onerror = function() { this.style.display = 'none'; };
+                spinVideo.addEventListener('ended', function() {
+                    const video = this;
+                    video.pause();
+                    setTimeout(function() {
+                        video.currentTime = 0;
+                        video.play().catch(err => console.log('Unable to autoplay video:', err));
+                    }, 2000);
+                });
+                spinVideo.addEventListener('loadedmetadata', function() {
+                    if (typeof adjustVideoSize === 'function') {
+                        adjustVideoSize(this);
+                    }
+                });
+                // Add timeupdate event listener to update progress bar
+                spinVideo.addEventListener('timeupdate', function() {
+                    updateProgressBar(this);
+                });
+                // Add mouse hover events
+                spinVideo.addEventListener('mouseenter', function() {
+                    // Record current playback state
+                    this.dataset.wasPlaying = !this.paused;
+                    // Pause video
+                    if (!this.paused) {
+                        this.pause();
+                    }
+                });
+                spinVideo.addEventListener('mouseleave', function() {
+                    // If previously playing, resume playback
+                    if (this.dataset.wasPlaying === "true") {
+                        this.play().catch(err => console.log('Unable to resume video playback:', err));
+                    }
+                });
+
+                resultsDiv.appendChild(spinVideo);
+                
+                const reproducedImg = document.createElement('img');
+                reproducedImg.src = reproducedShadowPath;
+                reproducedImg.alt = `Reproduced Shadow for ${shapeName}`;
+                reproducedImg.className = 'reproduced-shadow';
+                reproducedImg.loading = 'lazy';
+                reproducedImg.onerror = function() { this.style.display = 'none'; };
+                resultsDiv.appendChild(reproducedImg);
+                
+                // Add case to slider container
+                sliderContainer.appendChild(caseElement);
+                
+                // Add title first (above images)
+                const titleElement = document.createElement('h2');
+                titleElement.textContent = shapeNameMapping[shapeName] || shapeName;
+                titleElement.style.color = mappedColor;
+                // titleElement.style.margin = '10px 0 20px 0'; // Increase bottom margin
+                titleElement.style.fontSize = '2em'; // Increase title font size
+                caseElement.appendChild(titleElement);
+                
+                // Add results div to case element
+                caseElement.appendChild(resultsDiv);
+                
+                // Create progress bar container
+                const progressContainer = document.createElement('div');
+                progressContainer.className = 'video-progress-container';
+                progressContainer.dataset.videoGroup = `video-group-${shapeName}`;
+                progressContainer.style.position = 'relative'; // Ensure correct positioning
+                progressContainer.style.zIndex = '5'; // Increase z-index to ensure visibility
+                progressContainer.style.marginTop = '10px'; // Maintain distance from video
+                progressContainer.style.width = '80%'; // Control width
+                progressContainer.style.maxWidth = '600px'; // Limit maximum width
+                
+                // Create progress bar
+                const progressBar = document.createElement('div');
+                progressBar.className = 'video-progress-bar';
+                progressBar.style.backgroundColor = mappedColor; // Set progress bar color to match case color
+                
+                // Create slider
+                const progressSlider = document.createElement('div');
+                progressSlider.className = 'progress-slider';
+                
+                // Assemble progress bar
+                progressBar.appendChild(progressSlider);
+                progressContainer.appendChild(progressBar);
+                caseElement.appendChild(progressContainer);
+                
+                // Add progress bar click event
+                progressContainer.addEventListener('mousedown', function(e) {
+                    handleProgressBarInteraction(e, this);
+                });
+                
+                // Create indicator dot
+                const indicator = document.createElement('div');
+                indicator.className = `slider-indicator ${containerId}-indicator`;
+                indicator.dataset.index = index;
+                indicator.dataset.container = containerId;
+                indicator.style.width = '12px';
+                indicator.style.height = '12px';
+                indicator.style.borderRadius = '50%';
+                indicator.style.backgroundColor = index === 0 ? mappedColor : 'rgba(255,255,255,0.3)';
+                indicator.style.cursor = 'pointer';
+                indicator.style.transition = 'all 0.3s ease';
+                
+                // Add indicator click event
+                indicator.addEventListener('click', function() {
+                    const clickedIndex = parseInt(this.dataset.index);
+                    const containerID = this.dataset.container;
+                    
+                    if (currentSlides[containerID] !== clickedIndex) {
+                        // Hide current case
+                        const currentCase = document.querySelectorAll(`.${containerID}-case`)[currentSlides[containerID]];
+                        currentCase.style.opacity = '0';
+                        currentCase.style.transform = clickedIndex > currentSlides[containerID] ? 'translateX(-30%)' : 'translateX(30%)';
+                        
+                        // Update all indicators
+                        document.querySelectorAll(`.${containerID}-indicator`).forEach((ind, i) => {
+                            const indColorIndex = i % colorList.length;
+                            const indColorName = colorList[indColorIndex];
+                            const indMappedColor = colorMap[indColorName] || indColorName;
+                            ind.style.backgroundColor = i === clickedIndex ? indMappedColor : 'rgba(255,255,255,0.3)';
+                        });
+                        
+                        // Delay showing new case
+                        setTimeout(() => {
+                            currentCase.style.visibility = 'hidden';
+                            
+                            // Update current index
+                            currentSlides[containerID] = clickedIndex;
+                            
+                            // Show new case
+                            const newCase = document.querySelectorAll(`.${containerID}-case`)[clickedIndex];
+                            newCase.style.transform = clickedIndex > currentSlides[containerID] ? 'translateX(30%)' : 'translateX(-30%)';
+                            newCase.style.visibility = 'visible';
+                            
+                            // Force reflow
+                            void newCase.offsetWidth;
+                            
+                            // Animate display
+                            newCase.style.opacity = '1';
+                            newCase.style.transform = 'translateX(0)';
+                            
+                            // Update arrow states
+                            updateArrows(containerID, cases.length);
+                        }, 600);
+                    }
+                });
+                
+                // Add indicator to indicators container
+                indicatorsContainer.appendChild(indicator);
+            });
+            
+            // Add elements to DOM
+            sliderWrapper.appendChild(leftArrow);
+            sliderWrapper.appendChild(rightArrow);
+            sliderWrapper.appendChild(sliderContainer);
+            sliderContainer.appendChild(indicatorsContainer);
+            container.appendChild(sliderWrapper);
+            
+            return {
+                containerId,
+                totalSlides: cases.length
+            };
+        }
+
+        // Create three slider containers
+        const slider1 = createSlider(group1Cases, "Hand-Shadow Art Examples", "slider1");
+        const slider2 = createSlider(group2Cases, "Alphanumeric & Number Examples", "slider2");
+        const slider3 = createSlider(group3Cases, "More Examples", "slider3");
+
+        // Set state and event handling for each slider container
+        const sliders = [slider1, slider2, slider3];
+        const currentSlides = {
+            slider1: 0,
+            slider2: 0,
+            slider3: 0
+        };
+
+        // Set arrow hover effect and click events
+        sliders.forEach(slider => {
+            const { containerId, totalSlides } = slider;
+            const leftArrow = document.getElementById(`${containerId}-left`);
+            const rightArrow = document.getElementById(`${containerId}-right`);
+            
+            // Left arrow hover effect
+            leftArrow.addEventListener('mouseenter', () => {
+                if (currentSlides[containerId] > 0) {
+                    leftArrow.style.backgroundColor = 'rgba(255,255,255,0.3)';
+                    leftArrow.style.transform = 'translateY(-50%) scale(1.1)';
+                }
+            });
+            
+            leftArrow.addEventListener('mouseleave', () => {
+                leftArrow.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                leftArrow.style.transform = 'translateY(-50%) scale(1)';
+            });
+            
+            // Right arrow hover effect
+            rightArrow.addEventListener('mouseenter', () => {
+                if (currentSlides[containerId] < totalSlides - 1) {
+                    rightArrow.style.backgroundColor = 'rgba(255,255,255,0.3)';
+                    rightArrow.style.transform = 'translateY(-50%) scale(1.1)';
+                }
+            });
+            
+            rightArrow.addEventListener('mouseleave', () => {
+                rightArrow.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                rightArrow.style.transform = 'translateY(-50%) scale(1)';
+            });
+            
+            // Left arrow click event
+            leftArrow.addEventListener('click', () => {
+                if (currentSlides[containerId] > 0) {
+                    // Hide current case (fade out to right)
+                    const currentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
+                    currentCase.style.transform = 'translateX(30%)';
+                    currentCase.style.opacity = '0';
+                    
+                    // Update indicators
+                    document.querySelectorAll(`.${containerId}-indicator`).forEach((ind, i) => {
+                        const indColorIndex = i % colorList.length;
+                        const indColorName = colorList[indColorIndex];
+                        const indMappedColor = colorMap[indColorName] || indColorName;
+                        ind.style.backgroundColor = i === currentSlides[containerId] - 1 ? indMappedColor : 'rgba(255,255,255,0.3)';
+                    });
+                    
+                    // Use setTimeout to ensure transition completes before hiding element
+                    setTimeout(() => {
+                        currentCase.style.visibility = 'hidden';
+                        
+                        // Update current case index
+                        currentSlides[containerId]--;
+                        
+                        // Prepare new current case (initial position on left)
+                        const newCurrentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
+                        newCurrentCase.style.transform = 'translateX(-30%)';
+                        newCurrentCase.style.visibility = 'visible';
+                        
+                        // Force browser reflow, ensure CSS changes are applied
+                        void newCurrentCase.offsetWidth;
+                        
+                        // Use requestAnimationFrame to apply changes on next frame
+                        requestAnimationFrame(() => {
+                            newCurrentCase.style.opacity = '1';
+                            newCurrentCase.style.transform = 'translateX(0)';
+                        });
+                        
+                        // Update arrow states
+                        updateArrows(containerId, totalSlides);
+                    }, 600);
+                }
+            });
+            
+            // Right arrow click event
+            rightArrow.addEventListener('click', () => {
+                if (currentSlides[containerId] < totalSlides - 1) {
+                    // Hide current case (fade out to left)
+                    const currentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
+                    currentCase.style.transform = 'translateX(-30%)';
+                    currentCase.style.opacity = '0';
+                    
+                    // Update indicators
+                    document.querySelectorAll(`.${containerId}-indicator`).forEach((ind, i) => {
+                        const indColorIndex = i % colorList.length;
+                        const indColorName = colorList[indColorIndex];
+                        const indMappedColor = colorMap[indColorName] || indColorName;
+                        ind.style.backgroundColor = i === currentSlides[containerId] + 1 ? indMappedColor : 'rgba(255,255,255,0.3)';
+                    });
+                    
+                    // Use setTimeout to ensure transition completes before hiding element
+                    setTimeout(() => {
+                        currentCase.style.visibility = 'hidden';
+                        
+                        // Update current case index
+                        currentSlides[containerId]++;
+                        
+                        // Prepare new current case (initial position on right)
+                        const newCurrentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
+                        newCurrentCase.style.transform = 'translateX(30%)';
+                        newCurrentCase.style.visibility = 'visible';
+                        
+                        // Force browser reflow, ensure CSS changes are applied
+                        void newCurrentCase.offsetWidth;
+                        
+                        // Use requestAnimationFrame to apply changes on next frame
+                        requestAnimationFrame(() => {
+                            newCurrentCase.style.opacity = '1';
+                            newCurrentCase.style.transform = 'translateX(0)';
+                        });
+                        
+                        // Update arrow states
+                        updateArrows(containerId, totalSlides);
+                    }, 600);
+                }
+            });
+            
+            // Initialize arrow states
+            updateArrows(containerId, totalSlides);
+        });
+
+        // Set indicator click events
+        document.querySelectorAll('.slider-indicator').forEach(indicator => {
+            indicator.addEventListener('click', () => {
+                const index = parseInt(indicator.dataset.index);
+                const containerId = indicator.dataset.container;
+                const totalSlides = sliders.find(s => s.containerId === containerId).totalSlides;
+                
+                if (currentSlides[containerId] !== index) {
+                    // Determine slide direction
+                    const direction = index > currentSlides[containerId] ? -1 : 1;
+                    
+                    // Hide current case
+                    const currentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
+                    currentCase.style.transform = `translateX(${direction * 30}%)`;
+                    currentCase.style.opacity = '0';
+                    
+                    // Update indicators
+                    document.querySelectorAll(`.${containerId}-indicator`).forEach((ind, i) => {
+                        const indColorIndex = i % colorList.length;
+                        const indColorName = colorList[indColorIndex];
+                        const indMappedColor = colorMap[indColorName] || indColorName;
+                        ind.style.backgroundColor = i === index ? indMappedColor : 'rgba(255,255,255,0.3)';
+                    });
+                    
+                    // Use setTimeout to ensure transition completes before hiding element
+                    setTimeout(() => {
+                        currentCase.style.visibility = 'hidden';
+                        
+                        // Update current case index
+                        currentSlides[containerId] = index;
+                        
+                        // Prepare new current case (initial position on opposite side)
+                        const newCurrentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
+                        newCurrentCase.style.transform = `translateX(${-direction * 30}%)`;
+                        newCurrentCase.style.visibility = 'visible';
+                        
+                        // Force browser reflow, ensure CSS changes are applied
+                        void newCurrentCase.offsetWidth;
+                        
+                        // Use requestAnimationFrame to apply changes on next frame
+                        requestAnimationFrame(() => {
+                            newCurrentCase.style.opacity = '1';
+                            newCurrentCase.style.transform = 'translateX(0)';
+                        });
+                        
+                        // Update arrow states
+                        updateArrows(containerId, totalSlides);
+                    }, 600);
+                }
+            });
+        });
+
+        // Function to update arrow states
+        function updateArrows(containerId, totalSlides) {
+            const leftArrow = document.getElementById(`${containerId}-left`);
+            const rightArrow = document.getElementById(`${containerId}-right`);
+            
+            leftArrow.style.opacity = currentSlides[containerId] === 0 ? '0.5' : '1';
+            leftArrow.style.cursor = currentSlides[containerId] === 0 ? 'not-allowed' : 'pointer';
+            
+            rightArrow.style.opacity = currentSlides[containerId] === totalSlides - 1 ? '0.5' : '1';
+            rightArrow.style.cursor = currentSlides[containerId] === totalSlides - 1 ? 'not-allowed' : 'pointer';
+            
+            // Update indicator states
+            document.querySelectorAll(`.${containerId}-indicator`).forEach((indicator, index) => {
+                const colorIndex = index % colorList.length;
+                const colorName = colorList[colorIndex];
+                const mappedColor = colorMap[colorName] || colorName;
+                
+                indicator.style.backgroundColor = index === currentSlides[containerId] 
+                    ? mappedColor 
+                    : 'rgba(255,255,255,0.3)';
+            });
+        }
+
+        // Add video playback controls
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add playback controls for all videos
+            document.querySelectorAll('.spinning-gif').forEach(video => {
+                if (video.tagName === 'VIDEO') {
+                    // Ensure video loads automatically
+                    video.addEventListener('loadeddata', function() {
+                        video.play().catch(e => {
+                            console.error("Error playing video:", e);
+                        });
+                    });
+                }
+            });
+            
+            // Initialize progress bar drag functionality
+            initProgressBarDrag();
+        });
+        
+        // Update progress bar function
+        function updateProgressBar(video) {
+            if (video.duration) {
+                const progressPercentage = (video.currentTime / video.duration) * 100;
+                const videoGroup = video.dataset.videoGroup;
+                const progressBar = document.querySelector(`.video-progress-container[data-video-group="${videoGroup}"] .video-progress-bar`);
+                
+                if (progressBar) {
+                    // Use requestAnimationFrame to ensure update is synchronized with browser rendering, improving update frequency
+                    requestAnimationFrame(() => {
+                        progressBar.style.width = `${progressPercentage}%`;
+                    });
+                }
+            }
+        }
+        
+        // Handle progress bar interaction
+        function handleProgressBarInteraction(event, progressContainer) {
+            // Calculate click position corresponding to video time
+            const rect = progressContainer.getBoundingClientRect();
+            const clickPosition = (event.clientX - rect.left) / rect.width;
+            
+            // Get video group ID
+            const videoGroup = progressContainer.dataset.videoGroup;
+            // Find corresponding video
+            const targetVideo = document.querySelector(`video[data-video-group="${videoGroup}"]`);
+            
+            // Ensure video is loaded
+            if (targetVideo && targetVideo.readyState >= 2) {
+                // Set current time of video
+                const newTime = clickPosition * targetVideo.duration;
+                targetVideo.currentTime = newTime;
+                
+                // If video is paused, start playing
+                if (targetVideo.paused) {
+                    targetVideo.play();
+                }
+                
+                // Immediately update progress bar
+                const progressBar = progressContainer.querySelector('.video-progress-bar');
+                progressBar.style.width = `${clickPosition * 100}%`;
+            }
+        }
+        
+        // Initialize progress bar drag functionality
+        function initProgressBarDrag() {
+            let isDragging = false;
+            let currentProgressContainer = null;
+            let currentVideo = null;
+            let wasPaused = false;
+            
+            // Listen for mouse down events on all progress bars
+            document.querySelectorAll('.video-progress-container').forEach(container => {
+                container.addEventListener('mousedown', function(e) {
+                    // Prevent event bubbling and default behavior
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Set dragging state
+                    isDragging = true;
+                    currentProgressContainer = this;
+                    
+                    // Get related video
+                    const videoGroup = this.dataset.videoGroup;
+                    const video = document.querySelector(`video[data-video-group="${videoGroup}"]`);
+                    
+                    if (video) {
+                        currentVideo = video;
+                        
+                        // Record current playback state of video
+                        wasPaused = video.paused;
+                        
+                        // Pause video
+                        video.pause();
+                        
+                        // Immediately update progress bar position
+                        updateProgressOnDrag(e);
+                    }
+                    
+                    // Add global mouse move and release event listeners
+                    document.addEventListener('mousemove', handleMouseMove);
+                    document.addEventListener('mouseup', handleMouseUp);
+                });
+            });
+            
+            // Mouse move handling function
+            function handleMouseMove(e) {
+                if (isDragging && currentProgressContainer) {
+                    updateProgressOnDrag(e);
+                }
+            }
+            
+            // Mouse release handling function
+            function handleMouseUp() {
+                if (isDragging && currentVideo) {
+                    // If video was not paused before, resume playback
+                    if (!wasPaused) {
+                        currentVideo.play();
+                    }
+                }
+                
+                // Reset dragging state
+                isDragging = false;
+                currentProgressContainer = null;
+                currentVideo = null;
+                
+                // Remove global event listeners
+                document.removeEventListener('mousemove', handleMouseMove);
+                document.removeEventListener('mouseup', handleMouseUp);
+            }
+            
+            // Update progress bar and video time while dragging
+            function updateProgressOnDrag(e) {
+                if (currentProgressContainer && currentVideo) {
+                    const rect = currentProgressContainer.getBoundingClientRect();
+                    let clickPosition = (e.clientX - rect.left) / rect.width;
+                    
+                    // Limit to 0-1 range
+                    clickPosition = Math.max(0, Math.min(1, clickPosition));
+                    
+                    // Update progress bar
+                    const progressBar = currentProgressContainer.querySelector('.video-progress-bar');
+                    progressBar.style.width = `${clickPosition * 100}%`;
+                    
+                    // Update video time
+                    if (currentVideo.duration) {
+                        const newTime = clickPosition * currentVideo.duration;
+                        currentVideo.currentTime = newTime;
+                    }
+                }
+            }
+        }
+
+        // Add YouTube API script
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+        
+        // YouTube API ready, create player
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        // Listen for changes in player state
+        function onPlayerStateChange(event) {
+            var container = document.querySelector('.youtube-container');
+            
+            // Remove code for Abstract disappearing, only keep style changes for video container
+            if (event.data === YT.PlayerState.PLAYING) {
+                container.classList.add('playing');
+            } 
+            // State 0(ended), 2(paused) restore original layout
+            else if (event.data === YT.PlayerState.ENDED || event.data === YT.PlayerState.PAUSED) {
+                container.classList.remove('playing');
+            }
+        }
+
+        // Add code for video loop control
+        document.addEventListener('DOMContentLoaded', function() {
+            const coverVideo = document.getElementById('cover-video');
+            
+            // Listen for video end event
+            coverVideo.addEventListener('ended', function() {
+                // Pause video after ending, then restart after 2 seconds
+                coverVideo.pause();
+                setTimeout(function() {
+                    coverVideo.play();
+                }, 2000);
+            });
+        });
+
+        // Remove floating video functionality, switch to simple video control
+        document.addEventListener('DOMContentLoaded', function() {
+            const youtubeContainer = document.querySelector('.youtube-container');
+            
+            // Remove floating-related CSS classes and event listeners
+            youtubeContainer.classList.remove('floating');
+            
+            // Remove close button
+            const closeButton = youtubeContainer.querySelector('.floating-close');
+            if (closeButton) {
+                closeButton.remove();
+            }
+            
+            // Remove floating-related styles
+            const floatingStyles = document.querySelectorAll('style');
+            floatingStyles.forEach(style => {
+                const cssText = style.textContent;
+                if (cssText.includes('.floating')) {
+                    // Keep styles but remove floating-related rules
+                    style.textContent = cssText.replace(/\.youtube-container\.floating\s*\{[^}]*\}/g, '');
+                }
+            });
+        });
+
+        // Add hover pause functionality for SIGGRAPH video
+        document.addEventListener('DOMContentLoaded', function() {
+            const siggraphVideo = document.getElementById('siggraph-video');
+            
+            // Pause video on mouse hover
+            siggraphVideo.addEventListener('mouseenter', function() {
+                if (!siggraphVideo.paused) {
+                    siggraphVideo.pause();
+                    siggraphVideo.classList.add('paused');
+                }
+            });
+            
+            // Resume playing video when mouse leaves
+            siggraphVideo.addEventListener('mouseleave', function() {
+                if (siggraphVideo.paused) {
+                    siggraphVideo.play();
+                    siggraphVideo.classList.remove('paused');
+                }
+            });
+
+        });
+
+        // Add higher frequency progress update for all videos
+        function setupHighFrequencyProgressUpdate() {
+            document.querySelectorAll('.spinning-gif').forEach(video => {
+                if (video.tagName === 'VIDEO') {
+                    // Use requestAnimationFrame to create high-frequency update loop
+                    let animationFrameId;
+                    
+                    function updateProgress() {
+                        if (!video.paused && video.duration) {
+                            const progressPercentage = (video.currentTime / video.duration) * 100;
+                            const videoGroup = video.dataset.videoGroup;
+                            const progressBar = document.querySelector(`.video-progress-container[data-video-group="${videoGroup}"] .video-progress-bar`);
+                            
+                            if (progressBar) {
+                                progressBar.style.width = `${progressPercentage}%`;
+                            }
+                        }
+                        
+                        // Continue loop
+                        animationFrameId = requestAnimationFrame(updateProgress);
+                    }
+                    
+                    // Start updating loop
+                    updateProgress();
+                    
+                    // Cancel update loop when video is paused or ended
+                    video.addEventListener('pause', () => {
+                        cancelAnimationFrame(animationFrameId);
+                    });
+                    
+                    video.addEventListener('ended', () => {
+                        cancelAnimationFrame(animationFrameId);
+                    });
+                    
+                    // Restart update loop when video starts playing
+                    video.addEventListener('play', () => {
+                        cancelAnimationFrame(animationFrameId); // Prevent repetition
+                        updateProgress();
+                    });
+                }
+            });
+        }
+        
+        // Set high-frequency progress update and video synchronization check after DOM loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add playback controls for all videos
+            document.querySelectorAll('.spinning-gif').forEach(video => {
+                if (video.tagName === 'VIDEO') {
+                    // Ensure video loads automatically
+                    video.addEventListener('loadeddata', function() {
+                        video.play().catch(e => {
+                            console.error("Error playing video:", e);
+                        });
+                    });
+                }
+            });
+            
+            // Initialize progress bar drag functionality
+            initProgressBarDrag();
+            
+            // Set high-frequency progress update
+            setupHighFrequencyProgressUpdate();
+
+        });
+
+        // Handle video hover
+        function handleVideoHover(video, isHovering) {
+            if (isHovering) {
+                // Record current playback state
+                video.dataset.wasPlaying = !video.paused;
+                // Pause video
+                if (!video.paused) {
+                    video.pause();
+                }
+            } else {
+                // If previously playing, resume playback
+                if (video.dataset.wasPlaying === "true") {
+                    video.play().catch(err => console.log('Unable to resume video playback:', err));
+                }
+            }
+        }
+
+        // Add copy BibTeX functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const copyButton = document.getElementById('copy-bibtex');
+            const copyStatus = document.getElementById('copy-status');
+            
+            // Modify position and style of copy status element
+            copyStatus.style.position = 'absolute';
+            copyStatus.style.top = '100%'; // Place below button
+            copyStatus.style.left = '50%'; // Center horizontally
+            copyStatus.style.transform = 'translateX(-50%)'; // Ensure fully centered
+            copyStatus.style.marginTop = '8px'; // Maintain some distance from button
+            copyStatus.style.fontSize = '0.9em';
+            copyStatus.style.fontWeight = 'bold';
+            copyStatus.style.textAlign = 'center';
+            copyStatus.style.whiteSpace = 'nowrap';
+            
+            copyButton.addEventListener('click', function() {
+                const bibtexText = document.querySelector('pre code').textContent;
+                
+                navigator.clipboard.writeText(bibtexText).then(function() {
+                    copyStatus.textContent = 'Copied!';
+                    copyStatus.style.opacity = '1';
+                    copyStatus.style.color = '#8aff8a';
+                    
+                    // Hide status message after 2 seconds
+                    setTimeout(function() {
+                        copyStatus.style.opacity = '0';
+                    }, 2000);
+                }, function() {
+                    copyStatus.textContent = 'Failed to copy';
+                    copyStatus.style.opacity = '1';
+                    copyStatus.style.color = '#ff8a8a';
+                });
+            });
+            
+            // Add hover effect for button
+            copyButton.addEventListener('mouseenter', function() {
+                this.style.backgroundColor = 'rgba(255,255,255,0.15)';
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 4px 8px rgba(0,0,0,0.3)';
+            });
+            
+            copyButton.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'rgba(255,255,255,0.08)';
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

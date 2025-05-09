@@ -40,7 +40,7 @@ I am a third-year Ph.D. student at the CSE Department, the Chinese University of
 
 **Hao Xu**\*, Yinqiao Wang\*, Niloy J. Mitra, Shuaicheng Liu, Pheng-Ann Heng, Chi-Wing Fu (\* Joint first author)
 
-Paper \| Video \| [Code](https://github.com/hxwork/HandShadowPoser) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+[Paper](collections/2025_HandShadowPoser/webpage.html) \| Video \| [Code](https://github.com/hxwork/HandShadowPoser) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
 </div>
 </div>
 
