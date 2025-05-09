@@ -154,10 +154,9 @@
         }
 
         footer {
-            text-align: center;
             padding: 2em 0;
-            background-color: #343a40; /* Dark footer */
-            color: #f8f9fa; /* Light text color */
+            background-color: #000000; /* Dark footer */
+            color: #ffffff; /* Light text color */
         }
 
         footer p {
@@ -327,6 +326,47 @@
             max-width: 80%;
             margin: 10px auto;
         }
+
+        .hover-card {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .hover-card:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 15px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        /* 为作者信息添加悬停效果 */
+        .author-link {
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .author-link:hover {
+            transform: translateY(-3px);
+            text-shadow: 0 5px 15px rgba(255, 204, 76, 0.5);
+        }
+
+        .author-link::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #FFCC4C;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease;
+        }
+
+        .author-link:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
     </style>
 </head>
 
@@ -371,12 +411,12 @@
             
             <div style="margin-bottom: 30px;">
                 <span style="font-size: 1.4em; color: #ffffff; white-space: nowrap; display: block;">
-                    <span><a href="https://hxwork.github.io/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Hao Xu</a><sup>1*</sup></span> &nbsp;&nbsp;&nbsp;
-                    <span><a href="https://joyboywang.github.io/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Yinqiao Wang</a><sup>1*</sup></span> &nbsp;&nbsp;&nbsp;
-                    <span><a href="http://www0.cs.ucl.ac.uk/staff/n.mitra/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Niloy J. Mitra</a><sup>2, 3</sup></span> &nbsp;&nbsp;&nbsp;
-                    <span><a href="http://www.liushuaicheng.org/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Shuaicheng Liu</a><sup>4</sup></span> &nbsp;&nbsp;&nbsp;
-                    <span><a href="http://www.cse.cuhk.edu.hk/~pheng/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Pheng-Ann Heng</a><sup>1</sup></span> &nbsp;&nbsp;&nbsp;
-                    <span><a href="https://www.cse.cuhk.edu.hk/~cwfu/" target="_blank" rel="noopener noreferrer" style="color: #ffffff; text-decoration: none; border-bottom: 1px dotted #ffffff; transition: color 0.3s, border-bottom 0.3s;">Chi-Wing Fu</a><sup>1</sup></span>
+                    <span><a href="https://hxwork.github.io/" target="_blank" rel="noopener noreferrer" class="author-link" style="color: #ffffff; text-decoration: none;">Hao Xu</a><sup>1*</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="https://joyboywang.github.io/" target="_blank" rel="noopener noreferrer" class="author-link" style="color: #ffffff; text-decoration: none;">Yinqiao Wang</a><sup>1*</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="http://www0.cs.ucl.ac.uk/staff/n.mitra/" target="_blank" rel="noopener noreferrer" class="author-link" style="color: #ffffff; text-decoration: none;">Niloy J. Mitra</a><sup>2, 3</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="http://www.liushuaicheng.org/" target="_blank" rel="noopener noreferrer" class="author-link" style="color: #ffffff; text-decoration: none;">Shuaicheng Liu</a><sup>4</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="http://www.cse.cuhk.edu.hk/~pheng/" target="_blank" rel="noopener noreferrer" class="author-link" style="color: #ffffff; text-decoration: none;">Pheng-Ann Heng</a><sup>1</sup></span> &nbsp;&nbsp;&nbsp;
+                    <span><a href="https://www.cse.cuhk.edu.hk/~cwfu/" target="_blank" rel="noopener noreferrer" class="author-link" style="color: #ffffff; text-decoration: none;">Chi-Wing Fu</a><sup>1</sup></span>
                 </span>
             </div>
 
@@ -396,7 +436,7 @@
         <!-- Add Paper and Code links -->
         <div style="display: flex; justify-content: center; margin-bottom: 30px; gap: 40px;">
             <!-- Paper link -->
-            <a href="#" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; color: #ffffff; text-decoration: none; transition: transform 0.3s ease, color 0.3s ease;">
+            <a href="#" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; color: #ffffff; text-decoration: none; transition: transform 0.3s ease, color 0.3s ease; position: relative;" class="author-link">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" style="margin-bottom: 5px;">
                         <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/>
@@ -407,7 +447,7 @@
             </a>
             
             <!-- Code link -->
-            <a href="https://github.com/hxwork/HandShadowPoser" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; color: #ffffff; text-decoration: none; transition: transform 0.3s ease, color 0.3s ease;">
+            <a href="https://github.com/hxwork/HandShadowPoser" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; color: #ffffff; text-decoration: none; transition: transform 0.3s ease, color 0.3s ease; position: relative;" class="author-link">
                 <div style="display: flex; flex-direction: column; align-items: center;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16" style="margin-bottom: 5px;">
                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
@@ -470,7 +510,7 @@
     <h2 style="color: #FFCC4C; margin-bottom: 25px; font-size: 3em; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Citation</h2>
 
     <!-- BibTeX Citation Section -->
-    <div style="width: 80%; margin: 40px auto; padding: 30px; background-color: rgba(0,0,0,0.3); border-radius: 12px; text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 0 15px rgba(255,255,255,0.15); position: relative;">
+    <div class="hover-card" style="width: auto; max-width: 80%; margin: 40px auto; padding: 30px; background-color: rgba(0,0,0,0.3); border-radius: 12px; text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); position: relative; display: inline-block; left: 50%; transform: translateX(-50%);">
         
         <!-- Move copy button to top right corner -->
         <div style="position: absolute; top: 15px; right: 15px;">
@@ -490,8 +530,27 @@
     </div>
 
     <!-- Footer Section -->
-    <footer>
-        <p style="color: #aaaaaa; font-size: 1em; margin-top: 30px;">Created by Hand-Shadow Poser Research Group</p>
+    <footer style="background-image: linear-gradient(to bottom, 
+                rgba(0,0,0,1) 0%, 
+                rgba(0,0,0,0.95) 5%,
+                rgba(0,0,0,0.9) 8%,
+                rgba(0,0,0,0.8) 12%,
+                rgba(0,0,0,0.7) 16%,
+                rgba(0,0,0,0.6) 20%,
+                rgba(0,0,0,0.5) 24%,
+                rgba(0,0,0,0.4) 28%,
+                rgba(0,0,0,0.3) 32%,
+                rgba(0,0,0,0.2) 36%,
+                rgba(0,0,0,0.1) 40%,
+                rgba(0,0,0,0.05) 45%,
+                rgba(0,0,0,0) 50%), 
+                url('./assets/3D_printing.png'); 
+                background-size: cover; 
+                background-position: center; 
+                height: 200px; 
+                margin-top: 50px; 
+                position: relative;">
+        <!-- 移除了原有的文字内容 -->
     </footer>
 
     <script>
@@ -583,7 +642,6 @@
             sliderWrapper.style.height = '700px';
             sliderWrapper.style.borderRadius = '10px';
             sliderWrapper.style.padding = '20px';
-            sliderWrapper.style.backgroundColor = 'rgba(0,0,0,0.2)';
             
             // Create slider container
             const sliderContainer = document.createElement('div');
@@ -603,12 +661,12 @@
             leftArrow.style.top = '50%';
             leftArrow.style.transform = 'translateY(-50%)';
             leftArrow.style.zIndex = '10';
-            leftArrow.style.fontSize = '24px';
+            leftArrow.style.fontSize = '36px'; // 增大字体大小
             leftArrow.style.color = 'white';
             leftArrow.style.backgroundColor = 'rgba(0,0,0,0.5)';
             leftArrow.style.borderRadius = '50%';
-            leftArrow.style.width = '40px';
-            leftArrow.style.height = '40px';
+            leftArrow.style.width = '80px'; // 保持宽度
+            leftArrow.style.height = '80px'; // 保持高度
             leftArrow.style.display = 'flex';
             leftArrow.style.justifyContent = 'center';
             leftArrow.style.alignItems = 'center';
@@ -624,12 +682,12 @@
             rightArrow.style.top = '50%';
             rightArrow.style.transform = 'translateY(-50%)';
             rightArrow.style.zIndex = '10';
-            rightArrow.style.fontSize = '24px';
+            rightArrow.style.fontSize = '36px'; // 增大字体大小
             rightArrow.style.color = 'white';
             rightArrow.style.backgroundColor = 'rgba(0,0,0,0.5)';
             rightArrow.style.borderRadius = '50%';
-            rightArrow.style.width = '40px';
-            rightArrow.style.height = '40px';
+            rightArrow.style.width = '80px'; // 增大宽度，与左箭头一致
+            rightArrow.style.height = '80px'; // 增大高度，与左箭头一致
             rightArrow.style.display = 'flex';
             rightArrow.style.justifyContent = 'center';
             rightArrow.style.alignItems = 'center';
@@ -646,6 +704,7 @@
             indicatorsContainer.style.transform = 'translateX(-50%)';
             indicatorsContainer.style.display = 'flex';
             indicatorsContainer.style.justifyContent = 'center';
+            indicatorsContainer.style.alignItems = 'center'; // 确保垂直居中对齐
             indicatorsContainer.style.gap = '10px';
             indicatorsContainer.style.zIndex = '5';
             
@@ -675,7 +734,9 @@
                 caseElement.style.justifyContent = 'center';
                 caseElement.style.opacity = index === 0 ? '1' : '0';
                 caseElement.style.visibility = index === 0 ? 'visible' : 'hidden';
-                caseElement.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                caseElement.style.transition = 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                // 确保所有case元素都有初始transform值，即使是第一个显示的case
+                caseElement.style.transform = index === 0 ? 'translateX(0)' : 'translateX(30%)';
                 
                 // Create image container
                 const resultsDiv = document.createElement('div');
@@ -813,55 +874,90 @@
                 indicator.className = `slider-indicator ${containerId}-indicator`;
                 indicator.dataset.index = index;
                 indicator.dataset.container = containerId;
-                indicator.style.width = '12px';
-                indicator.style.height = '12px';
-                indicator.style.borderRadius = '50%';
-                indicator.style.backgroundColor = index === 0 ? mappedColor : 'rgba(255,255,255,0.3)';
-                indicator.style.cursor = 'pointer';
-                indicator.style.transition = 'all 0.3s ease';
                 
-                // Add indicator click event
+                // 创建固定大小的容器，确保所有指示器占用相同空间
+                indicator.style.width = '16px'; // 统一容器大小
+                indicator.style.height = '16px'; // 统一容器大小
+                indicator.style.display = 'flex';
+                indicator.style.justifyContent = 'center'; // 水平居中
+                indicator.style.alignItems = 'center'; // 垂直居中
+                indicator.style.cursor = 'pointer';
+                
+                // 创建内部圆点
+                const dot = document.createElement('div');
+                dot.className = `indicator-dot ${containerId}-dot`;
+                dot.style.width = index === 0 ? '16px' : '12px'; // 当前选中的点更大
+                dot.style.height = index === 0 ? '16px' : '12px'; // 当前选中的点更大
+                dot.style.borderRadius = '50%';
+                dot.style.backgroundColor = index === 0 ? mappedColor : 'rgba(255,255,255,0.3)';
+                dot.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)'; // 平滑过渡效果
+                
+                // 将圆点添加到指示器容器中
+                indicator.appendChild(dot);
+                
+                // 添加点击事件到指示器
                 indicator.addEventListener('click', function() {
                     const clickedIndex = parseInt(this.dataset.index);
                     const containerID = this.dataset.container;
+                    const currentIndex = currentSlides[containerID]; // 保存当前索引用于比较
                     
-                    if (currentSlides[containerID] !== clickedIndex) {
-                        // Hide current case
-                        const currentCase = document.querySelectorAll(`.${containerID}-case`)[currentSlides[containerID]];
-                        currentCase.style.opacity = '0';
-                        currentCase.style.transform = clickedIndex > currentSlides[containerID] ? 'translateX(-30%)' : 'translateX(30%)';
+                    // 如果正在过渡或点击的是当前页面，则不执行操作
+                    if (isTransitioning[containerID] || currentIndex === clickedIndex) {
+                        return;
+                    }
+                    
+                    // 设置过渡状态为true
+                    isTransitioning[containerID] = true;
+                    
+                    // 隐藏当前case
+                    const currentCase = document.querySelectorAll(`.${containerID}-case`)[currentIndex];
+                    currentCase.style.opacity = '0';
+                    currentCase.style.transform = clickedIndex > currentIndex ? 'translateX(-30%)' : 'translateX(30%)';
+                    
+                    // 立即更新所有指示器
+                    document.querySelectorAll(`.${containerID}-dot`).forEach((dot, i) => {
+                        const indColorIndex = i % colorList.length;
+                        const indColorName = colorList[indColorIndex];
+                        const indMappedColor = colorMap[indColorName] || indColorName;
+                        dot.style.backgroundColor = i === clickedIndex ? indMappedColor : 'rgba(255,255,255,0.3)';
                         
-                        // Update all indicators
-                        document.querySelectorAll(`.${containerID}-indicator`).forEach((ind, i) => {
-                            const indColorIndex = i % colorList.length;
-                            const indColorName = colorList[indColorIndex];
-                            const indMappedColor = colorMap[indColorName] || indColorName;
-                            ind.style.backgroundColor = i === clickedIndex ? indMappedColor : 'rgba(255,255,255,0.3)';
-                        });
+                        // 更新指示器大小
+                        dot.style.width = i === clickedIndex ? '16px' : '12px';
+                        dot.style.height = i === clickedIndex ? '16px' : '12px';
+                    });
+                    
+                    // 延迟显示新case - 减少延迟时间
+                    setTimeout(() => {
+                        currentCase.style.visibility = 'hidden';
                         
-                        // Delay showing new case
-                        setTimeout(() => {
-                            currentCase.style.visibility = 'hidden';
-                            
-                            // Update current index
-                            currentSlides[containerID] = clickedIndex;
-                            
-                            // Show new case
-                            const newCase = document.querySelectorAll(`.${containerID}-case`)[clickedIndex];
-                            newCase.style.transform = clickedIndex > currentSlides[containerID] ? 'translateX(30%)' : 'translateX(-30%)';
-                            newCase.style.visibility = 'visible';
-                            
-                            // Force reflow
-                            void newCase.offsetWidth;
-                            
-                            // Animate display
+                        // 更新当前索引
+                        currentSlides[containerID] = clickedIndex;
+                        
+                        // 显示新case
+                        const newCase = document.querySelectorAll(`.${containerID}-case`)[clickedIndex];
+                        
+                        // 确保新case有正确的初始位置，即使是第一次显示
+                        newCase.style.transform = clickedIndex > currentIndex ? 'translateX(30%)' : 'translateX(-30%)';
+                        newCase.style.visibility = 'visible';
+                        newCase.style.opacity = '0';
+                        
+                        // 强制重排
+                        void newCase.offsetWidth;
+                        
+                        // 动画显示
+                        requestAnimationFrame(() => {
                             newCase.style.opacity = '1';
                             newCase.style.transform = 'translateX(0)';
-                            
-                            // Update arrow states
-                            updateArrows(containerID, cases.length);
-                        }, 600);
-                    }
+                        });
+                        
+                        // 更新箭头状态
+                        updateArrows(containerID, cases.length);
+                        
+                        // 设置一个定时器，在过渡完成后重置过渡状态 - 减少等待时间
+                        setTimeout(() => {
+                            isTransitioning[containerID] = false;
+                        }, 400); // 减少等待时间
+                    }, 400); // 减少等待时间
                 });
                 
                 // Add indicator to indicators container
@@ -892,6 +988,13 @@
             slider1: 0,
             slider2: 0,
             slider3: 0
+        };
+
+        // 添加一个状态变量来跟踪是否正在进行过渡动画
+        const isTransitioning = {
+            slider1: false,
+            slider2: false,
+            slider3: false
         };
 
         // Set arrow hover effect and click events
@@ -928,87 +1031,115 @@
             
             // Left arrow click event
             leftArrow.addEventListener('click', () => {
-                if (currentSlides[containerId] > 0) {
-                    // Hide current case (fade out to right)
+                if (currentSlides[containerId] > 0 && !isTransitioning[containerId]) {
+                    isTransitioning[containerId] = true;
+                    
+                    // 隐藏当前case (fade out to right)
                     const currentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
                     currentCase.style.transform = 'translateX(30%)';
                     currentCase.style.opacity = '0';
                     
-                    // Update indicators
-                    document.querySelectorAll(`.${containerId}-indicator`).forEach((ind, i) => {
+                    // 更新指示器
+                    document.querySelectorAll(`.${containerId}-dot`).forEach((dot, i) => {
                         const indColorIndex = i % colorList.length;
                         const indColorName = colorList[indColorIndex];
                         const indMappedColor = colorMap[indColorName] || indColorName;
-                        ind.style.backgroundColor = i === currentSlides[containerId] - 1 ? indMappedColor : 'rgba(255,255,255,0.3)';
+                        dot.style.backgroundColor = i === currentSlides[containerId] - 1 ? indMappedColor : 'rgba(255,255,255,0.3)';
+                        
+                        // 更新指示器大小
+                        dot.style.width = i === currentSlides[containerId] - 1 ? '16px' : '12px';
+                        dot.style.height = i === currentSlides[containerId] - 1 ? '16px' : '12px';
                     });
                     
-                    // Use setTimeout to ensure transition completes before hiding element
+                    // 减少等待时间
                     setTimeout(() => {
                         currentCase.style.visibility = 'hidden';
                         
-                        // Update current case index
+                        // 更新当前case索引
                         currentSlides[containerId]--;
                         
-                        // Prepare new current case (initial position on left)
+                        // 准备新的当前case (初始位置在左侧)
                         const newCurrentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
+                        
+                        // 确保新case有正确的初始位置，即使是第一次显示
                         newCurrentCase.style.transform = 'translateX(-30%)';
                         newCurrentCase.style.visibility = 'visible';
+                        newCurrentCase.style.opacity = '0';
                         
-                        // Force browser reflow, ensure CSS changes are applied
+                        // 强制浏览器重排
                         void newCurrentCase.offsetWidth;
                         
-                        // Use requestAnimationFrame to apply changes on next frame
+                        // 使用requestAnimationFrame在下一帧应用更改
                         requestAnimationFrame(() => {
                             newCurrentCase.style.opacity = '1';
                             newCurrentCase.style.transform = 'translateX(0)';
                         });
                         
-                        // Update arrow states
+                        // 更新箭头状态
                         updateArrows(containerId, totalSlides);
-                    }, 600);
+                        
+                        // 减少等待时间
+                        setTimeout(() => {
+                            isTransitioning[containerId] = false;
+                        }, 400);
+                    }, 400);
                 }
             });
             
             // Right arrow click event
             rightArrow.addEventListener('click', () => {
-                if (currentSlides[containerId] < totalSlides - 1) {
-                    // Hide current case (fade out to left)
+                if (currentSlides[containerId] < totalSlides - 1 && !isTransitioning[containerId]) {
+                    isTransitioning[containerId] = true;
+                    
+                    // 隐藏当前case (fade out to left)
                     const currentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
                     currentCase.style.transform = 'translateX(-30%)';
                     currentCase.style.opacity = '0';
                     
-                    // Update indicators
-                    document.querySelectorAll(`.${containerId}-indicator`).forEach((ind, i) => {
+                    // 更新指示器
+                    document.querySelectorAll(`.${containerId}-dot`).forEach((dot, i) => {
                         const indColorIndex = i % colorList.length;
                         const indColorName = colorList[indColorIndex];
                         const indMappedColor = colorMap[indColorName] || indColorName;
-                        ind.style.backgroundColor = i === currentSlides[containerId] + 1 ? indMappedColor : 'rgba(255,255,255,0.3)';
+                        dot.style.backgroundColor = i === currentSlides[containerId] + 1 ? indMappedColor : 'rgba(255,255,255,0.3)';
+                        
+                        // 更新指示器大小
+                        dot.style.width = i === currentSlides[containerId] + 1 ? '16px' : '12px';
+                        dot.style.height = i === currentSlides[containerId] + 1 ? '16px' : '12px';
                     });
                     
-                    // Use setTimeout to ensure transition completes before hiding element
+                    // 减少等待时间
                     setTimeout(() => {
                         currentCase.style.visibility = 'hidden';
                         
-                        // Update current case index
+                        // 更新当前case索引
                         currentSlides[containerId]++;
                         
-                        // Prepare new current case (initial position on right)
+                        // 准备新的当前case (初始位置在右侧)
                         const newCurrentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
+                        
+                        // 确保新case有正确的初始位置，即使是第一次显示
                         newCurrentCase.style.transform = 'translateX(30%)';
                         newCurrentCase.style.visibility = 'visible';
+                        newCurrentCase.style.opacity = '0';
                         
-                        // Force browser reflow, ensure CSS changes are applied
+                        // 强制浏览器重排
                         void newCurrentCase.offsetWidth;
                         
-                        // Use requestAnimationFrame to apply changes on next frame
+                        // 使用requestAnimationFrame在下一帧应用更改
                         requestAnimationFrame(() => {
                             newCurrentCase.style.opacity = '1';
                             newCurrentCase.style.transform = 'translateX(0)';
                         });
                         
-                        // Update arrow states
+                        // 更新箭头状态
                         updateArrows(containerId, totalSlides);
-                    }, 600);
+                        
+                        // 减少等待时间
+                        setTimeout(() => {
+                            isTransitioning[containerId] = false;
+                        }, 400);
+                    }, 400);
                 }
             });
             
@@ -1023,47 +1154,60 @@
                 const containerId = indicator.dataset.container;
                 const totalSlides = sliders.find(s => s.containerId === containerId).totalSlides;
                 
-                if (currentSlides[containerId] !== index) {
-                    // Determine slide direction
-                    const direction = index > currentSlides[containerId] ? -1 : 1;
+                if (currentSlides[containerId] !== index && !isTransitioning[containerId]) {
+                    // 设置过渡状态为true
+                    isTransitioning[containerId] = true;
                     
-                    // Hide current case
+                    // 确定滑动方向
+                    const direction = index > currentSlides[containerId] ? 1 : -1;
+                    
+                    // 隐藏当前case
                     const currentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
-                    currentCase.style.transform = `translateX(${direction * 30}%)`;
+                    currentCase.style.transform = `translateX(${-direction * 30}%)`;
                     currentCase.style.opacity = '0';
                     
-                    // Update indicators
-                    document.querySelectorAll(`.${containerId}-indicator`).forEach((ind, i) => {
+                    // 更新指示器
+                    document.querySelectorAll(`.${containerId}-dot`).forEach((dot, i) => {
                         const indColorIndex = i % colorList.length;
                         const indColorName = colorList[indColorIndex];
                         const indMappedColor = colorMap[indColorName] || indColorName;
-                        ind.style.backgroundColor = i === index ? indMappedColor : 'rgba(255,255,255,0.3)';
+                        dot.style.backgroundColor = i === index ? indMappedColor : 'rgba(255,255,255,0.3)';
+                        
+                        // 更新指示器大小
+                        dot.style.width = i === index ? '16px' : '12px';
+                        dot.style.height = i === index ? '16px' : '12px';
                     });
                     
-                    // Use setTimeout to ensure transition completes before hiding element
+                    // 使用setTimeout确保过渡完成后再隐藏元素
                     setTimeout(() => {
                         currentCase.style.visibility = 'hidden';
                         
-                        // Update current case index
+                        // 更新当前case索引
                         currentSlides[containerId] = index;
                         
-                        // Prepare new current case (initial position on opposite side)
+                        // 准备新的当前case (初始位置在相反方向)
                         const newCurrentCase = document.querySelectorAll(`.${containerId}-case`)[currentSlides[containerId]];
-                        newCurrentCase.style.transform = `translateX(${-direction * 30}%)`;
+                        newCurrentCase.style.transform = `translateX(${direction * 30}%)`;
                         newCurrentCase.style.visibility = 'visible';
+                        newCurrentCase.style.opacity = '0';
                         
-                        // Force browser reflow, ensure CSS changes are applied
+                        // 强制浏览器重排，确保CSS更改被应用
                         void newCurrentCase.offsetWidth;
                         
-                        // Use requestAnimationFrame to apply changes on next frame
+                        // 使用requestAnimationFrame在下一帧应用更改
                         requestAnimationFrame(() => {
                             newCurrentCase.style.opacity = '1';
                             newCurrentCase.style.transform = 'translateX(0)';
                         });
                         
-                        // Update arrow states
+                        // 更新箭头状态
                         updateArrows(containerId, totalSlides);
-                    }, 600);
+                        
+                        // 设置一个定时器，在过渡完成后重置过渡状态
+                        setTimeout(() => {
+                            isTransitioning[containerId] = false;
+                        }, 400);
+                    }, 400);
                 }
             });
         });
@@ -1079,16 +1223,23 @@
             rightArrow.style.opacity = currentSlides[containerId] === totalSlides - 1 ? '0.5' : '1';
             rightArrow.style.cursor = currentSlides[containerId] === totalSlides - 1 ? 'not-allowed' : 'pointer';
             
-            // Update indicator states
-            document.querySelectorAll(`.${containerId}-indicator`).forEach((indicator, index) => {
-                const colorIndex = index % colorList.length;
-                const colorName = colorList[colorIndex];
-                const mappedColor = colorMap[colorName] || colorName;
-                
-                indicator.style.backgroundColor = index === currentSlides[containerId] 
-                    ? mappedColor 
-                    : 'rgba(255,255,255,0.3)';
-            });
+            // 只有在非过渡状态下才更新指示器
+            if (!isTransitioning[containerId]) {
+                // 更新指示器状态
+                document.querySelectorAll(`.${containerId}-dot`).forEach((dot, index) => {
+                    const colorIndex = index % colorList.length;
+                    const colorName = colorList[colorIndex];
+                    const mappedColor = colorMap[colorName] || colorName;
+                    
+                    dot.style.backgroundColor = index === currentSlides[containerId] 
+                        ? mappedColor 
+                        : 'rgba(255,255,255,0.3)';
+                    
+                    // 更新指示器大小
+                    dot.style.width = index === currentSlides[containerId] ? '16px' : '12px';
+                    dot.style.height = index === currentSlides[containerId] ? '16px' : '12px';
+                });
+            }
         }
 
         // Add video playback controls
