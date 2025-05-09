@@ -12,15 +12,20 @@
             src: url('./assets/LinBiolinum_Rah.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
+            font-display: swap; /* 添加这一行以改善字体加载 */
         }
 
         body {
-            font-family: 'Linux Biolinum', Arial, sans-serif; /* Use Linux Biolinum, fallback to Arial */
-            src: url('./assets/LinBiolinum_Rah.ttf') format('truetype');
+            font-family: 'Linux Biolinum', Arial, sans-serif; /* 确保字体应用到整个body */
             margin: 0;
             padding: 0;
             background-color: #000000; /* Dark background */
             color: #f8f9fa; /* Light text color */
+        }
+
+        /* 确保字体在所有文本元素上应用 */
+        h1, h2, h3, h4, h5, h6, p, span, div, a {
+            font-family: 'Linux Biolinum', Arial, sans-serif;
         }
 
         header {
@@ -542,10 +547,10 @@
         
         <!-- Move copy button to top right corner -->
         <div style="position: absolute; top: 15px; right: 15px;">
-            <button id="copy-bibtex" style="background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9em; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+            <button id="copy-bibtex" style="background-color: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; transition: all 0.3s ease; font-size: 0.9em; letter-spacing: 0.5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); font-family: 'Linux Biolinum', Arial, sans-serif;">
                 Copy BibTeX
             </button>
-            <span id="copy-status" style="margin-left: 10px; opacity: 0; transition: opacity 0.5s; font-size: 0.9em;"></span>
+            <span id="copy-status" style="margin-left: 10px; opacity: 0; transition: opacity 0.5s; font-size: 0.9em; font-family: 'Linux Biolinum', Arial, sans-serif;"></span>
         </div>
             
         <pre style="color: #ffffff; font-family: 'Consolas', 'Monaco', monospace; font-size: 1em; line-height: 1.6; margin: 0;"><code>@inproceedings{xu2025handshadow,
