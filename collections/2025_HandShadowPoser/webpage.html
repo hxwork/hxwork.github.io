@@ -92,7 +92,7 @@
             flex-direction: column;
             text-align: center;
             width: 40%; /* Each case takes approximately half the row */
-            padding: 30px;
+            padding: 20px 0 0 0; 
             align-items: center;
         }
 
@@ -367,6 +367,20 @@
             transform: scaleX(1);
             transform-origin: bottom left;
         }
+
+        #copy-bibtex {
+            background-color: rgba(255,255,255,0.08); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            color: white; 
+            padding: 8px 15px; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-size: 0.9em; 
+            letter-spacing: 0.5px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-family: 'Linux Biolinum', Arial, sans-serif; /* 添加Linux Biolinum字体 */
+        }
     </style>
 </head>
 
@@ -422,10 +436,10 @@
 
             <div style="font-size: 1.4em; color: #ffffff; margin-bottom: 30px;">
                 <span style="white-space: nowrap; display: block;">
-                    <span><sup>1</sup>The Chinese University of Hong Kong</span> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span><sup>2</sup>University College London</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span><sup>1</sup>CUHK</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span><sup>2</sup>UCL</span> &nbsp;&nbsp;&nbsp;&nbsp;
                     <span><sup>3</sup>Adobe Research</span> &nbsp;&nbsp;&nbsp;&nbsp;
-                    <span><sup>4</sup>University of Electronic Science and Technology of China</span>
+                    <span><sup>4</sup>UESTC</span>
                 </span>
             </div>
             <div style="font-size: 1em; color: #ffffff; margin-bottom: 30px;">
@@ -650,6 +664,9 @@
             sliderContainer.style.position = 'relative';
             sliderContainer.style.width = '100%';
             sliderContainer.style.height = '100%';
+            sliderContainer.style.display = 'flex'; // 添加flex布局
+            sliderContainer.style.justifyContent = 'center'; // 水平居中
+            sliderContainer.style.alignItems = 'center'; // 垂直居中
             
             // Add left and right arrows
             const leftArrow = document.createElement('div');
@@ -726,16 +743,18 @@
                 caseElement.style.position = 'absolute';
                 caseElement.style.top = '0';
                 caseElement.style.left = '0';
+                caseElement.style.right = '0'; // 添加右侧定位
+                caseElement.style.margin = '0 auto'; // 添加水平居中的margin
                 caseElement.style.width = '100%';
                 caseElement.style.height = '100%';
                 caseElement.style.display = 'flex';
                 caseElement.style.flexDirection = 'column';
-                caseElement.style.alignItems = 'center';
-                caseElement.style.justifyContent = 'center';
+                caseElement.style.alignItems = 'center'; // 确保子元素水平居中
+                caseElement.style.justifyContent = 'center'; // 垂直居中
                 caseElement.style.opacity = index === 0 ? '1' : '0';
                 caseElement.style.visibility = index === 0 ? 'visible' : 'hidden';
                 caseElement.style.transition = 'opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-                // 确保所有case元素都有初始transform值，即使是第一个显示的case
+                // 确保所有case元素都有初始transform值，但不添加水平偏移
                 caseElement.style.transform = index === 0 ? 'translateX(0)' : 'translateX(30%)';
                 
                 // Create image container
@@ -833,8 +852,10 @@
                 const titleElement = document.createElement('h2');
                 titleElement.textContent = shapeNameMapping[shapeName] || shapeName;
                 titleElement.style.color = mappedColor;
-                // titleElement.style.margin = '10px 0 20px 0'; // Increase bottom margin
                 titleElement.style.fontSize = '2em'; // Increase title font size
+                titleElement.style.textAlign = 'center'; // 添加居中对齐
+                titleElement.style.width = '100%'; // 确保标题占据整个宽度
+                titleElement.style.margin = '10px 0 20px 0'; // 添加上下边距
                 caseElement.appendChild(titleElement);
                 
                 // Add results div to case element
