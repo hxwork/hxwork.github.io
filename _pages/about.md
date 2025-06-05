@@ -38,9 +38,11 @@ I am a third-year Ph.D. student at the CSE Department, the Chinese University of
 
 *ACM Transactions on Graphics (**ACM TOG**), vol. 44, no. 4, **SIGGRAPH**, 2025*
 
+<span style="color:red">Our results are featured on the back cover of the TOG journal for SIGGRAPH 2025.</span>
+
 **Hao Xu**\*, Yinqiao Wang\*, Niloy J. Mitra, Shuaicheng Liu, Pheng-Ann Heng, Chi-Wing Fu (\* Joint first author)
 
-[Project Page](collections/2025_HandShadowPoser/webpage.html) \| [Video](https://www.youtube.com/embed/1HW5vfX3ifY) \| [Code](https://github.com/hxwork/HandShadowPoser) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+[Project Page](collections/2025_HandShadowPoser/webpage.html) \| [Paper](https://arxiv.org/abs/2505.07012) \| [Video](https://www.youtube.com/embed/1HW5vfX3ifY) \| [Code](https://github.com/hxwork/HandShadowPoser) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
 </div>
 </div>
 
@@ -55,7 +57,7 @@ I am a third-year Ph.D. student at the CSE Department, the Chinese University of
 
 Yinqiao Wang\*, **Hao Xu**\*, Pheng-Ann Heng, Chi-Wing Fu (\* Joint first author)
 
-Paper \| Video \| [Code](https://github.com/JoyboyWang/UniHOPE_Pytorch) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+[Paper](https://arxiv.org/abs/2503.13303) \| [Code](https://github.com/JoyboyWang/UniHOPE_Pytorch) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
 </div>
 </div>
 
@@ -70,7 +72,7 @@ Paper \| Video \| [Code](https://github.com/JoyboyWang/UniHOPE_Pytorch) | BibTex
 
 Keyu Du\*, **Hao Xu**\*, Haipeng Li, Hong Qu, Chi-Wing Fu, Shuaicheng Liu (\* Joint first author)
 
-Paper \| Video \| [Code](https://github.com/mapledky/HybridReg_PyTorch) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+[Paper](https://ojs.aaai.org/index.php/AAAI/article/view/32284) \| [Code](https://github.com/mapledky/HybridReg_PyTorch) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
 </div>
 </div>
 
