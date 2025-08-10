@@ -22,9 +22,9 @@ I am a third-year Ph.D. student at the CSE Department, the Chinese University of
 
 # News
 
+- *2025.08*: &nbsp; One paper is accepted to T-PAMI.
 - *2025.05*: &nbsp; One paper is accepted to SIGGRAPH 2025.
 - *2025.02*: &nbsp; One paper is accepted to CVPR 2025.
-- *2024.12*: &nbsp; One paper is accepted to AAAI 2025.
 
 # Publications
 
