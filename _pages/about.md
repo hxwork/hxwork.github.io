@@ -31,6 +31,21 @@ I am a third-year Ph.D. student at the CSE Department, the Chinese University of
 **2025**
 <!-- ######################################################### -->
 
+<div class='paper-box'><div class='paper-box-image'><img src='collections/2025_HandBooster+/HandBooster+.png' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+**HandBooster+: Boosting 3D Hand-Mesh Reconstruction from Data Synthesis to Progressive Multi-Hypothesis Aggregation**
+
+*IEEE Transactions on Pattern Analysis and Machine Intelligence (T-PAMI), 2025*
+
+**Hao Xu**, Haipeng Li, Yinqiao Wang, Shuaicheng Liu, Chi-Wing Fu
+
+Paper \| Code | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+</div>
+</div>
+
+<!-- ######################################################### -->
+
 <div class='paper-box'><div class='paper-box-image'><img src='collections/2025_HandShadowPoser/HandShadowPoser.png' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
 
