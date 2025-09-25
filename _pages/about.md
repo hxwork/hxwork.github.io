@@ -38,7 +38,7 @@ I am a fourth-year Ph.D. student at the CSE Department, the Chinese University o
 
 *ACM SIGGRAPH Asia (Conference), 2025*
 
-Keyu Du\*, Jingyu Hu\*, Haipeng Li, **Hao Xu**, Haibin Huang, Chi-Wing Fu, and Shuaicheng Liu (\* Joint first author)
+Keyu Du\*, Jingyu Hu\*, Haipeng Li, **Hao Xu**, Haibin Huang, Chi-Wing Fu, Shuaicheng Liu (\* Joint first author)
 
 [Paper](https://arxiv.org/abs/2509.17431v2) \| [Code](https://github.com/mapledky/NSR_PyTorch) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
 </div>
