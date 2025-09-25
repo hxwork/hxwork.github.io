@@ -18,10 +18,11 @@ redirect_from:
 
 # About Me
 
-I am a third-year Ph.D. student at the CSE Department, the Chinese University of Hong Kong (CUHK), supervised by [Prof. Chi-Wing FU, Philip](https://www.cse.cuhk.edu.hk/~cwfu/). I received my Master's degree at the School of Information and Communication Engineering from the University of Electronic Science and Technology of China (UESTC), supervised by [Prof. Guanghui LIU](https://scholar.google.com.hk/citations?user=AjfD95EAAAAJ&hl=zh-CN&oi=ao) and [Prof. Shuaicheng LIU](http://www.liushuaicheng.org/). Before that, I got my Bachelor's degree from Sichuan University (SCU). My research interests include 3D registration, 3D point cloud representation, and 3D hand mesh reconstruction.
+I am a fourth-year Ph.D. student at the CSE Department, the Chinese University of Hong Kong (CUHK), supervised by [Prof. Chi-Wing FU, Philip](https://www.cse.cuhk.edu.hk/~cwfu/). I received my Master's degree at the School of Information and Communication Engineering from the University of Electronic Science and Technology of China (UESTC), supervised by [Prof. Guanghui LIU](https://scholar.google.com.hk/citations?user=AjfD95EAAAAJ&hl=zh-CN&oi=ao) and [Prof. Shuaicheng LIU](http://www.liushuaicheng.org/). Before that, I got my Bachelor's degree from Sichuan University (SCU). My research interests include 3D registration, 3D point cloud representation, and 3D hand mesh reconstruction.
 
 # News
 
+- *2025.09*: &nbsp; One paper is accepted to SIGGRAPH Asia 2025.
 - *2025.08*: &nbsp; One paper is accepted to T-PAMI.
 - *2025.05*: &nbsp; One paper is accepted to SIGGRAPH 2025.
 - *2025.02*: &nbsp; One paper is accepted to CVPR 2025.
@@ -29,6 +30,20 @@ I am a third-year Ph.D. student at the CSE Department, the Chinese University of
 # Publications
 
 **2025**
+<!-- ######################################################### -->
+<div class='paper-box'><div class='paper-box-image'><img src='collections/2025_HNSR/HNSR.png' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+**Hierarchical Neural Semantic Representation for 3D Semantic Correspondence**
+
+*ACM SIGGRAPH Asia (Conference), 2025*
+
+Keyu Du\*, Jingyu Hu\*, Haipeng Li, **Hao Xu**, Haibin Huang, Chi-Wing Fu, and Shuaicheng Liu (\* Joint first author)
+
+[Paper](https://arxiv.org/abs/2509.17431v2) \| [Code](https://github.com/mapledky/NSR_PyTorch) | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+</div>
+</div>
+
 <!-- ######################################################### -->
 
 <div class='paper-box'><div class='paper-box-image'><img src='collections/2025_HandBooster+/HandBooster+.png' alt="sym" width="100%"></div>
@@ -40,7 +55,7 @@ I am a third-year Ph.D. student at the CSE Department, the Chinese University of
 
 **Hao Xu**, Haipeng Li, Yinqiao Wang, Shuaicheng Liu, Chi-Wing Fu
 
-Paper \| Code | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+[Paper](https://ieeexplore.ieee.org/abstract/document/11120448/) \| Code | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
 </div>
 </div>
 
