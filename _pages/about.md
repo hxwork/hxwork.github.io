@@ -22,12 +22,45 @@ I am a fourth-year Ph.D. student at the CSE Department, the Chinese University o
 
 # News
 
+- *2026.01*: &nbsp; One paper is accepted to IJCV.
+- *2026.01*: &nbsp; One paper is accepted to ICLR 2026.
 - *2025.09*: &nbsp; One paper is accepted to SIGGRAPH Asia 2025.
 - *2025.08*: &nbsp; One paper is accepted to T-PAMI.
-- *2025.05*: &nbsp; One paper is accepted to SIGGRAPH 2025.
-- *2025.02*: &nbsp; One paper is accepted to CVPR 2025.
 
 # Publications
+
+**2026**
+<!-- ######################################################### -->
+<div class='paper-box'><div class='paper-box-image'><img src='collections/2026_OMNet_IJCV/OMNet_IJCV.png' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+**Robust Partial-to-Partial Point Cloud Registration with Overlapping Mask Learning**
+
+*International Journal of Computer Vision (IJCV), 2026*
+
+**Hao Xu**, Guanghui Liu, Bing Zeng, Shuaicheng Liu
+
+Paper | Code | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+</div>
+</div>
+
+<!-- ######################################################### -->
+<div class='paper-box'><div class='paper-box-image'><img src='collections/2026_EgoHandICL/EgoHandICL.png' alt="sym" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+**EgoHandICL: Egocentric 3D Hand Reconstruction with In-Context Learning**
+
+*International Conference on Learning Representations (ICLR), 2026*
+
+Binzhu Xie\*, Shi Qiu\*, Sicheng Zhang, Yinqiao Wang, **Hao Xu**, Muzammal Naseer, Chi-Wing Fu, Pheng-Ann Heng (\* Joint first author)
+
+[Paper](https://arxiv.org/abs/2601.19850) \| Code | BibTex <strong><span class='show_paper_citations' data='3WQTKocAAAAJ:WF5omc3nYNoC'></span></strong>
+</div>
+</div>
+
+<!-- ######################################################### -->
+<!-- ######################################################### -->
+<!-- ######################################################### -->
 
 **2025**
 <!-- ######################################################### -->
