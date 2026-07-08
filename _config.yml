@@ -7,11 +7,21 @@
 
 # Site Settings
 title                    : "Hao XU"
-description              : # "Harbin Institute of Technology (HIT)"
+description              : "Academic homepage of Hao XU"
+url                      : "https://hxwork.github.io"
+repository               : "hxwork/hxwork.github.io"
 google_scholar_stats_use_cdn : true
 
 # google analytics
 google_analytics_id      :  "G-9976N9H92G" # get google_analytics_id from https://analytics.google.com/analytics/
+
+# visitor map
+visitor_map:
+  enabled: true
+  provider: "mapmyvisitors"
+  script_src: "https://mapmyvisitors.com/map.js?cl=ffffff&w=a&t=tt&d=BG4iiG4DdiUR-btuirmMWWKkevkZ9kX5gvY7c52-9xM"
+  image_src: "https://mapmyvisitors.com/map.png?d=BG4iiG4DdiUR-btuirmMWWKkevkZ9kX5gvY7c52-9xM&cl=ffffff"
+  stats_url: "https://mapmyvisitors.com/web/1c6co"
 
 # SEO Related
 google_site_verification :  # get google_site_verification from https://search.google.com/search-console/about
@@ -20,13 +30,13 @@ baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.ba
 
 # Site Author
 author:
-  name             : "Hao XU (徐昊)\n"
+  name             : "Hao XU (徐昊)"
   avatar           : "images/xh.jpeg"
   bio              : ""
   employer         :
   pubmed           : 
   email            : "xuhao@cse.cuhk.edu.hk"
-  googlescholar    : "https://scholar.google.com.hk/citations?user=M7qfdFwAAAAJ&hl"
+  googlescholar    : "https://scholar.google.com.hk/citations?user=M7qfdFwAAAAJ&hl=en"
   researchgate     :  # e.g., "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -151,6 +161,7 @@ whitelist:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
+  - jekyll-redirect-from
   - jemoji
 
 

@@ -1,0 +1,19 @@
+{% assign visitor_map = site.visitor_map %}
+{% if visitor_map.enabled and visitor_map.provider == "mapmyvisitors" %}
+<span class='anchor' id='visitor-map'></span>
+
+<h1 class="visitor-map-title">Visitor Map</h1>
+
+<div class="visitor-map-widget visitor-map-widget--mapmyvisitors">
+  {% if visitor_map.script_src %}
+  <script type="text/javascript" id="mapmyvisitors" src="{{ visitor_map.script_src }}"></script>
+  {% endif %}
+  {% if visitor_map.image_src and visitor_map.stats_url %}
+  <noscript>
+    <a class="visitor-map-widget__fallback" href="{{ visitor_map.stats_url }}" title="Visit tracker" target="_blank" rel="noopener noreferrer">
+      <img class="visitor-map-widget__image" src="{{ visitor_map.image_src }}" alt="Visitor map showing where homepage visitors are from">
+    </a>
+  </noscript>
+  {% endif %}
+</div>
+{% endif %}
