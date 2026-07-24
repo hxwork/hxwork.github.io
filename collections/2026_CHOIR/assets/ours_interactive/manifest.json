@@ -1,0 +1,86 @@
+[
+  {
+    "id": "IMG_5142",
+    "video": "IMG_5142.mp4",
+    "glb": "glb/sequence.glb",
+    "stage": null,
+    "caption": "This sequence features a textureless and irregular object, highlighting robust reconstruction under weak appearance cues and ambiguous object geometry.",
+    "intrinsics": {
+      "fx": 1294.245849609375,
+      "fy": 1294.245849609375,
+      "cx": 960.0,
+      "cy": 540.0
+    },
+    "camera": {
+      "target": [
+        0.04868,
+        -0.05831,
+        -0.34955
+      ],
+      "distance": 0.54239
+    }
+  },
+  {
+    "id": "3510",
+    "video": "3510.mp4",
+    "glb": "glb/sequence.glb",
+    "stage": null,
+    "caption": "This case involves rapidly changing dynamic contact, with the rest-pose heat map evolving over time to reflect shifting hand-object contact regions.",
+    "intrinsics": {
+      "fx": 1049.4927978515625,
+      "fy": 1049.4927978515625,
+      "cx": 960.0,
+      "cy": 540.0
+    },
+    "camera": {
+      "target": [
+        0.07336,
+        -0.08818,
+        -0.36743
+      ],
+      "distance": 0.42
+    }
+  },
+  {
+    "id": "4902",
+    "video": "4902.mp4",
+    "glb": "glb/sequence.glb",
+    "stage": null,
+    "caption": "This example stresses a thin contact region, requiring contact-aware alignment to preserve subtle hand-object contact under occlusion.",
+    "intrinsics": {
+      "fx": 1153.7403564453125,
+      "fy": 1153.7403564453125,
+      "cx": 960.0,
+      "cy": 540.0
+    },
+    "camera": {
+      "target": [
+        0.22575,
+        -0.07246,
+        -0.45773
+      ],
+      "distance": 0.66597
+    }
+  },
+  {
+    "id": "IMG_5222",
+    "video": "IMG_5222.mp4",
+    "glb": "glb/sequence.glb",
+    "stage": null,
+    "caption": "This moving-camera sequence includes a thin contact region and dynamic viewpoint changes, while maintaining consistent and correct contact throughout motion (top row of teaser in our main paper).",
+    "intrinsics": {
+      "fx": 957.4194946289062,
+      "fy": 957.4194946289062,
+      "cx": 960.0,
+      "cy": 540.0
+    },
+    "camera": {
+      "target": [
+        0.0201,
+        -0.04467,
+        -0.32205
+      ],
+      "distance": 0.64498
+    }
+  }
+]
