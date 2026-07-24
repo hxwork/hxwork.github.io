@@ -1,0 +1,2083 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CHOIR: Contact-aware 4D Hand-Object Interaction Reconstruction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="page">
+
+        <!-- HERO CARD -->
+        <header class="hero">
+            <div class="hero-card">
+                <h1>CHOIR: Contact-aware 4D Hand-Object Interaction Reconstruction</h1>
+                <p class="authors">
+                    <span class="author">Hao Xu<sup>1</sup></span>
+                    <span class="author">Yilin Liu<sup>2</sup></span>
+                    <span class="author">Yinqiao Wang<sup>1</sup></span>
+                    <span class="author">Chi-Wing Fu<sup>1</sup></span>
+                    <span class="author">Niloy J. Mitra<sup>2,3</sup></span>
+                </p>
+                <p class="affiliations">
+                    <span><sup>1</sup>Chinese University of Hong Kong</span>
+                    <span><sup>2</sup>University College London</span>
+                    <span><sup>3</sup>Adobe Research</span>
+                </p>
+            </div>
+        </header>
+
+        <main>
+            <section id="overview" class="section overview-section">
+                <figure class="teaser-figure">
+                    <img src="assets/images/teaser.png" alt="CHOIR teaser results">
+                </figure>
+                <div class="abstract-block">
+                    <p>
+                        We ask whether everyday open-world monocular videos can be turned into reusable 4D
+                        interaction primitives: articulated hand motion, object shape with 6D pose over time, and
+                        the when/where of contact. We present CHOIR, a Contact-aware HOI Reconstruction framework
+                        that uses contact as an explicit coupling signal between hands and objects. CHOIR initializes
+                        a coarse 4D HOI sequence from open-world visual priors, rectifies hand-object placement with
+                        a <em>generative HOI spatial rectification</em> module, and refines the result through
+                        contact-aware joint optimization. Experiments on controlled and challenging videos show that
+                        CHOIR improves object reconstruction, physical plausibility, and temporal consistency over
+                        state-of-the-art methods.
+                    </p>
+                </div>
+                <section class="pipeline-figure" aria-labelledby="pipeline-title">
+                    <h2 id="pipeline-title">Method Overview</h2>
+                    <div class="pipeline-stage-grid">
+                        <figure class="pipeline-stage-card">
+                            <div class="pipeline-stage-image">
+                                <img src="assets/images/Stage1.png" alt="Stage 1 coarse 4D HOI initialization">
+                            </div>
+                            <figcaption>
+                                From a monocular video, we first obtain 2D HOI cues and initialize 3D hand and object
+                                reconstructions to form isolated sequences.
+                            </figcaption>
+                        </figure>
+                        <figure class="pipeline-stage-card">
+                            <div class="pipeline-stage-image">
+                                <img src="assets/images/Stage2.png" alt="Stage 2 generative HOI spatial rectification">
+                            </div>
+                            <figcaption>
+                                A flow-matching generative HOI spatial rectification module rectifies hand-object
+                                relative placement before initial contact correspondence construction.
+                            </figcaption>
+                        </figure>
+                        <figure class="pipeline-stage-card">
+                            <div class="pipeline-stage-image">
+                                <img src="assets/images/Stage3.png" alt="Stage 3 hierarchical contact-aware optimization">
+                            </div>
+                            <figcaption>
+                                Contact-aware optimization refines the sequence across phases, yielding
+                                physically consistent 4D HOI sequences.
+                            </figcaption>
+                        </figure>
+                    </div>
+                </section>
+            </section>
+
+            <!-- Our Results -->
+            <section id="our-results" class="section">
+                <div class="our-results-heading">
+                    <h2>Our Representative Examples</h2>
+                    <div class="our-results-nav" aria-label="Representative examples navigation">
+                        <button class="our-results-arrow" id="ourResultsPrev" aria-label="Previous case">
+                            <span aria-hidden="true">‹</span>
+                        </button>
+                        <span class="our-results-counter"><span id="ourResultsCurrent">1</span> / <span
+                                id="ourResultsTotal">0</span></span>
+                        <button class="our-results-arrow" id="ourResultsNext" aria-label="Next case">
+                            <span aria-hidden="true">›</span>
+                        </button>
+                    </div>
+                </div>
+                <p class="section-desc">Explore representative sequences with synchronized input video, reconstructed
+                    4D geometry, and rest-pose contact predictions. Click on the above arrows to browse different representative examples.</p>
+
+                <div class="our-results-carousel">
+                    <div id="ourResultsCases"></div>
+                </div>
+            </section>
+
+
+            <!-- Results -->
+            <section id="results" class="section">
+                <h2>Qualitative Comparison with SOTA Methods</h2>
+
+                <div class="comparison-toolbar" aria-label="Comparison view controls">
+                    <div class="comparison-dataset-wrapper">
+                        <span class="comparison-dataset-label">Dataset <span class="filter-click-hint">click to switch</span></span>
+                        <div class="dataset-toggle-group comparison-dataset-toggle-group" role="tablist" aria-label="Comparison dataset">
+                            <button class="dataset-toggle comparison-dataset-toggle is-active" type="button" data-dataset="Self-captured" aria-selected="true" title="Click to switch">Self-captured</button>
+                            <button class="dataset-toggle comparison-dataset-toggle" type="button" data-dataset="TASTE-Rob" aria-selected="false" title="Click to switch">TASTE-Rob</button>
+                            <button class="dataset-toggle comparison-dataset-toggle" type="button" data-dataset="HO3D" aria-selected="false" title="Click to switch">HO3D</button>
+                        </div>
+                    </div>
+                    <div class="comparison-view-wrapper">
+                        <span class="comparison-dataset-label">Toggle views <span class="filter-click-hint">click to switch</span></span>
+                        <div class="comparison-view-toggle-group" role="radiogroup" aria-label="Visible comparison views">
+                            <button class="comparison-view-toggle is-active" type="button" data-view-mode="all" aria-pressed="true" title="Click to switch">All</button>
+                            <button class="comparison-view-toggle" type="button" data-view-mode="front" aria-pressed="false" title="Click to switch">Camera-only</button>
+                            <button class="comparison-view-toggle" type="button" data-view-mode="left" aria-pressed="false" title="Click to switch">Side-only</button>
+                        </div>
+                    </div>
+                    <div class="comparison-pager comparison-pager--top" id="comparisonPager" aria-label="Comparison pagination">
+                        <button class="comparison-page-btn" id="comparisonPrev" type="button" aria-label="Previous comparison page">‹</button>
+                        <span class="comparison-page-count"><span id="comparisonPageCurrent">1</span>/<span id="comparisonPageTotal">1</span> pages</span>
+                        <button class="comparison-page-btn" id="comparisonNext" type="button" aria-label="Next comparison page">›</button>
+                    </div>
+                </div>
+
+                <!-- Column headers -->
+                <div class="comparison-table" id="comparisonTable">
+                    <div class="comparison-header" id="comparisonHeader"></div>
+                </div>
+            </section>
+
+            <!-- More Results -->
+            <section id="more-results" class="section">
+                <div class="more-results-heading">
+                    <h2>More Qualitative Results of Our Method</h2>
+                </div>
+                <p class="section-desc" id="moreResultsDesc"></p>
+                <div class="more-results-toolbar">
+                    <div class="comparison-dataset-wrapper">
+                        <span class="comparison-dataset-label">Dataset <span class="filter-click-hint">click to switch</span></span>
+                        <div class="dataset-toggle-group" role="tablist" aria-label="More results dataset">
+                            <button class="dataset-toggle is-active" type="button" data-dataset="Self-captured" title="Click to switch">Self-captured</button>
+                            <button class="dataset-toggle" type="button" data-dataset="TASTE-Rob" title="Click to switch">TASTE-Rob</button>
+                        </div>
+                    </div>
+                    <div class="more-results-pager more-results-pager--top" id="moreResultsPager" aria-label="More results pagination">
+                        <button class="more-results-page-btn" id="moreResultsPrev" type="button" aria-label="Previous more results page">‹</button>
+                        <span class="more-results-page-count"><span id="moreResultsPageCurrent">1</span>/<span id="moreResultsPageTotal">1</span> pages</span>
+                        <button class="more-results-page-btn" id="moreResultsNext" type="button" aria-label="Next more results page">›</button>
+                    </div>
+                </div>
+                <div class="more-results-filters-section">
+                    <span class="comparison-dataset-label">Filter by <span class="filter-click-hint">click to switch</span></span>
+                    <div class="more-results-filters" id="moreResultsFilters" aria-label="Filter results by motion attributes">
+                        <div class="filter-group" data-group="camera" role="radiogroup" aria-label="Camera filter">
+                            <span class="filter-group-label">Camera</span>
+                            <div class="filter-group-pills">
+                                <button type="button" class="filter-chip is-active" data-group="camera" data-value="all" aria-pressed="true" title="Click to switch"><span>All</span></button>
+                                <button type="button" class="filter-chip" data-group="camera" data-value="static" aria-pressed="false" title="Click to switch"><span>Static-only</span></button>
+                                <button type="button" class="filter-chip" data-group="camera" data-value="dynamic" aria-pressed="false" title="Click to switch"><span>Dynamic-only</span></button>
+                            </div>
+                        </div>
+                        <div class="filter-group" data-group="motion" role="radiogroup" aria-label="Motion filter">
+                            <span class="filter-group-label">Motion</span>
+                            <div class="filter-group-pills">
+                                <button type="button" class="filter-chip is-active" data-group="motion" data-value="all" aria-pressed="true" title="Click to switch"><span>Translation+Rotation</span></button>
+                                <button type="button" class="filter-chip" data-group="motion" data-value="translation" aria-pressed="false" title="Click to switch"><span>Translation-only</span></button>
+                            </div>
+                        </div>
+                        <div class="filter-group" data-group="contact" role="radiogroup" aria-label="Contact filter">
+                            <span class="filter-group-label">Contact</span>
+                            <div class="filter-group-pills">
+                                <button type="button" class="filter-chip is-active" data-group="contact" data-value="all" aria-pressed="true" title="Click to switch"><span>All</span></button>
+                                <button type="button" class="filter-chip" data-group="contact" data-value="fix" aria-pressed="false" title="Click to switch"><span>Fix-only</span></button>
+                                <button type="button" class="filter-chip" data-group="contact" data-value="dynamic" aria-pressed="false" title="Click to switch"><span>Dynamic-only</span></button>
+                            </div>
+                        </div>
+                        <div class="filter-actions">
+                            <button type="button" class="filter-clear" id="moreResultsFilterClear">Reset</button>
+                            <span class="filter-match-count" id="moreResultsMatchCount" aria-live="polite"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="more-results-column-header" aria-hidden="true">
+                    <div class="more-results-header-spacer"></div>
+                    <div class="more-results-header-label">Input video</div>
+                    <div class="more-results-header-label">Front</div>
+                    <div class="more-results-header-label">Contact map</div>
+                    <div class="more-results-header-label">Left</div>
+                    <div class="more-results-header-label">Top</div>
+                </div>
+                <div class="more-results-grid" id="moreResultsGrid"></div>
+            </section>
+
+            <!-- Bimanual Cases -->
+            <section id="challenging-cases" class="section">
+                <h2>Bimanual Cases</h2>
+                <p class="section-desc">Our method generalizes to challenging bimanual scenarios — two-hand two-object and two-hand one-object hand–object interaction. Drag the 3D viewer to explore the reconstruction from any angle.</p>
+                <div id="challengingCasesList"></div>
+            </section>
+
+            <section class="code-release section" aria-label="Code release">
+                <!-- <p>Our code and training dataset will be released on <a href="#" aria-label="GitHub repository placeholder">GitHub</a>.</p> -->
+                <p>Our code and training dataset will be released.</p>
+            </section>
+        </main>
+        <footer class="footer">
+            <!-- <p>Contact: <a href="mailto:[your-email]">xxx</a></p> -->
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    <script src="js/embedded_data.js"></script>
+    <script src="js/input_video_annotations.js"></script>
+    <script src="js/compare_with_baselines_manifest.js"></script>
+    <script src="js/compare_with_baselines_inthe_wild_manifest.js"></script>
+    <script src="js/compare_with_baselines_ho3d_manifest.js?v=ho3d-13-cases"></script>
+    <script src="js/comparison_tracking.js"></script>
+    <script>
+        const moreResultsSeqIndex = new Map();
+        function rebuildMoreResultsSeqIndex(datasets) {
+            moreResultsSeqIndex.clear();
+            let seq = 1;
+            (datasets || []).forEach(dataset => {
+                (dataset.items || []).forEach(item => {
+                    moreResultsSeqIndex.set(`${dataset.id}::${item.id}`, seq);
+                    seq += 1;
+                });
+            });
+        }
+        function getMoreResultsSeq(datasetId, itemId) {
+            return moreResultsSeqIndex.get(`${datasetId}::${itemId}`) || null;
+        }
+        function formatSeq(n) {
+            return String(n).padStart(3, '0');
+        }
+        window.getMoreResultsSeq = getMoreResultsSeq;
+        window.formatSeq = formatSeq;
+        if (window.MORE_RESULTS_MANIFEST_DATA && Array.isArray(window.MORE_RESULTS_MANIFEST_DATA.datasets)) {
+            rebuildMoreResultsSeqIndex(window.MORE_RESULTS_MANIFEST_DATA.datasets);
+        }
+
+        (function () {
+            const table = document.querySelector('#results .comparison-table');
+            if (!table) return;
+
+            const header = document.getElementById('comparisonHeader') || table.querySelector('.comparison-header');
+            const viewButtons = Array.from(document.querySelectorAll('.comparison-view-toggle'));
+            const COMPARE_DUMMY_VIDEO = 'combined_grid.mp4';
+            const COMPARE_PAGE_SIZE = 4;
+            const COMPARE_VIEW_OPTIONS = [
+                { view: 'front', label: 'Camera view' },
+                { view: 'left', label: 'Side view' }
+            ];
+            const COMPARE_METHODS = [
+                { method: 'HOLD', label: 'HOLD', labelClass: 'hold-label', viewClass: 'hold-view-label' },
+                { method: 'MagicHOI', label: 'MagicHOI', labelClass: 'magichoi-label', viewClass: 'magichoi-view-label' },
+                { method: 'ours', label: 'CHOIR (ours)', labelClass: 'ours-label', viewClass: 'ours-view-label' }
+            ];
+            const fallbackCases = ['sequence_1', 'sequence_2', 'sequence_3', 'sequence_4'].map((id, idx) => ({
+                id,
+                label: `Sequence ${idx + 1}`,
+                methods: {
+                    input: [{ view: 'input', src: COMPARE_DUMMY_VIDEO }],
+                    HOLD: [{ view: 'front', src: COMPARE_DUMMY_VIDEO }, { view: 'left', src: COMPARE_DUMMY_VIDEO }],
+                    MagicHOI: [{ view: 'front', src: COMPARE_DUMMY_VIDEO }, { view: 'left', src: COMPARE_DUMMY_VIDEO }],
+                    ours: [{ view: 'front', src: COMPARE_DUMMY_VIDEO }, { view: 'left', src: COMPARE_DUMMY_VIDEO }]
+                }
+            }));
+            const COMPARE_DATASETS = [
+                {
+                    id: 'TASTE-Rob',
+                    label: 'TASTE-Rob',
+                    cases: (window.COMPARE_WITH_BASELINES && window.COMPARE_WITH_BASELINES.cases && window.COMPARE_WITH_BASELINES.cases.length)
+                        ? window.COMPARE_WITH_BASELINES.cases
+                        : fallbackCases
+                },
+                {
+                    id: 'Self-captured',
+                    label: 'Self-captured',
+                    cases: (window.COMPARE_WITH_BASELINES_ITW && window.COMPARE_WITH_BASELINES_ITW.cases && window.COMPARE_WITH_BASELINES_ITW.cases.length)
+                        ? window.COMPARE_WITH_BASELINES_ITW.cases
+                        : []
+                },
+                {
+                    id: 'HO3D',
+                    label: 'HO3D',
+                    cases: (window.COMPARE_WITH_BASELINES_HO3D && window.COMPARE_WITH_BASELINES_HO3D.cases && window.COMPARE_WITH_BASELINES_HO3D.cases.length)
+                        ? window.COMPARE_WITH_BASELINES_HO3D.cases
+                        : []
+                }
+            ];
+            const COMPARE_PLAYBACK_RATES = {
+                HO3D: 0.2
+            };
+            const COMPARE_INPUT_ASPECTS = {
+                'Self-captured': { ratio: 16 / 9, css: '16 / 9' },
+                'TASTE-Rob': { ratio: 16 / 9, css: '16 / 9' },
+                'HO3D': { ratio: 4 / 3, css: '4 / 3' }
+            };
+            const DEFAULT_COMPARE_INPUT_ASPECT = { ratio: 16 / 9, css: '16 / 9' };
+            let activeCompareDatasetId = 'Self-captured';
+            let compareCases = (COMPARE_DATASETS.find(dataset => dataset.id === activeCompareDatasetId) || COMPARE_DATASETS[0]).cases;
+            const pager = document.getElementById('comparisonPager');
+            const prevBtn = document.getElementById('comparisonPrev');
+            const nextBtn = document.getElementById('comparisonNext');
+            const pageCurrent = document.getElementById('comparisonPageCurrent');
+            const pageTotal = document.getElementById('comparisonPageTotal');
+            let totalPages = Math.max(1, Math.ceil(compareCases.length / COMPARE_PAGE_SIZE));
+            let currentPage = 0;
+            let compareViewMode = 'all';
+
+            function shortSequenceLabel(index, item) {
+                if (item && item.id && typeof window.getMoreResultsSeq === 'function') {
+                    const seq = window.getMoreResultsSeq(activeCompareDatasetId, item.id);
+                    if (seq) return `Seq. ${window.formatSeq(seq)}`;
+                }
+                if (activeCompareDatasetId === 'HO3D' && item && item.id) {
+                    const match = /^hold_(.+)_ho3d$/i.exec(item.id);
+                    if (match) return match[1];
+                }
+                return `Seq. ${window.formatSeq(index + 1)}`;
+            }
+
+            function updateCompareDatasetButtons() {
+                document.querySelectorAll('.comparison-dataset-toggle').forEach(button => {
+                    const isActive = button.dataset.dataset === activeCompareDatasetId;
+                    button.classList.toggle('is-active', isActive);
+                    button.setAttribute('aria-selected', String(isActive));
+                });
+            }
+
+            function switchCompareDataset(datasetId) {
+                const dataset = COMPARE_DATASETS.find(d => d.id === datasetId);
+                if (!dataset || dataset.id === activeCompareDatasetId) return;
+                activeCompareDatasetId = datasetId;
+                compareCases = dataset.cases;
+                currentPage = 0;
+                totalPages = Math.max(1, Math.ceil(compareCases.length / COMPARE_PAGE_SIZE));
+                updateCompareDatasetButtons();
+                renderComparisonTable();
+            }
+
+            function activeViewOptions() {
+                if (compareViewMode === 'all') return COMPARE_VIEW_OPTIONS.slice();
+                const match = COMPARE_VIEW_OPTIONS.find(option => option.view === compareViewMode);
+                return match ? [match] : COMPARE_VIEW_OPTIONS.slice();
+            }
+
+            function comparisonColumns() {
+                const selectedOptions = activeViewOptions();
+                return [
+                    { method: 'input', view: 'input' },
+                    ...COMPARE_METHODS.flatMap(method => selectedOptions.map(option => ({
+                        method: method.method,
+                        view: option.view,
+                        viewLabel: option.label
+                    })))
+                ];
+            }
+
+            function updateComparisonGrid() {
+                const selectedOptions = activeViewOptions();
+                const methodColumnCount = COMPARE_METHODS.length * selectedOptions.length;
+                const isSingleView = selectedOptions.length === 1;
+                const aspect = COMPARE_INPUT_ASPECTS[activeCompareDatasetId] || DEFAULT_COMPARE_INPUT_ASPECT;
+                const inputFr = aspect.ratio.toFixed(4);
+                table.style.setProperty('--compare-input-aspect', aspect.css);
+                table.style.setProperty('--comparison-grid-columns', `32px minmax(0, ${inputFr}fr) repeat(${methodColumnCount}, minmax(0, 1fr))`);
+                table.style.setProperty('--comparison-mobile-grid-columns', `24px minmax(144px, ${inputFr}fr) repeat(${methodColumnCount}, minmax(${isSingleView ? '112px' : '82px'}, 1fr))`);
+                table.classList.toggle('comparison-table--single-view', isSingleView);
+                table.classList.toggle('comparison-table--dual-view', !isSingleView);
+            }
+
+            function renderComparisonHeader() {
+                if (!header) return;
+                const selectedOptions = activeViewOptions();
+                const hasMultipleViews = selectedOptions.length > 1;
+                updateComparisonGrid();
+                header.innerHTML = '';
+
+                const spacer = document.createElement('div');
+                spacer.className = 'seq-label-spacer';
+                spacer.style.gridRow = hasMultipleViews ? '1 / 3' : '1';
+                header.appendChild(spacer);
+
+                const inputLabel = document.createElement('div');
+                inputLabel.className = 'method-label input-label';
+                inputLabel.textContent = 'Input video';
+                inputLabel.style.gridColumn = '2';
+                inputLabel.style.gridRow = '1';
+                header.appendChild(inputLabel);
+
+                if (hasMultipleViews) {
+                    const inputSpacer = document.createElement('div');
+                    inputSpacer.className = 'input-view-spacer';
+                    inputSpacer.style.gridColumn = '2';
+                    inputSpacer.style.gridRow = '2';
+                    header.appendChild(inputSpacer);
+                }
+
+                let gridColumn = 3;
+                COMPARE_METHODS.forEach(method => {
+                    const methodLabel = document.createElement('div');
+                    methodLabel.className = `method-label ${method.labelClass}`;
+                    methodLabel.textContent = method.label;
+                    methodLabel.style.gridColumn = `${gridColumn} / ${gridColumn + selectedOptions.length}`;
+                    methodLabel.style.gridRow = '1';
+                    header.appendChild(methodLabel);
+
+                    if (hasMultipleViews) {
+                        selectedOptions.forEach((option, optionIndex) => {
+                            const viewLabel = document.createElement('div');
+                            viewLabel.className = `view-label ${method.viewClass}`;
+                            viewLabel.textContent = option.label;
+                            viewLabel.style.gridColumn = String(gridColumn + optionIndex);
+                            viewLabel.style.gridRow = '2';
+                            header.appendChild(viewLabel);
+                        });
+                    }
+
+                    gridColumn += selectedOptions.length;
+                });
+            }
+
+            function trackGridColumns(method, columns) {
+                let firstIndex = -1;
+                let lastIndex = -1;
+                columns.forEach((column, columnIndex) => {
+                    if (column.method !== method) return;
+                    if (firstIndex === -1) firstIndex = columnIndex;
+                    lastIndex = columnIndex;
+                });
+                if (firstIndex === -1) return '';
+                return `${firstIndex + 2} / ${lastIndex + 3}`;
+            }
+
+            function updateViewToggleButtons() {
+                viewButtons.forEach(button => {
+                    const isActive = button.dataset.viewMode === compareViewMode;
+                    button.classList.toggle('is-active', isActive);
+                    button.setAttribute('aria-pressed', String(isActive));
+                });
+            }
+
+            function escapeHtml(value) {
+                return String(value)
+                    .replaceAll('&', '&amp;')
+                    .replaceAll('<', '&lt;')
+                    .replaceAll('>', '&gt;')
+                    .replaceAll('"', '&quot;');
+            }
+
+            function bindTrackStatus(badge, video, sequenceId, method) {
+                const tracking = window.COMPARE_TRACKING && window.COMPARE_TRACKING[sequenceId];
+                const methodData = tracking && tracking[method];
+                const total = tracking && Number(tracking.total);
+                if (!Array.isArray(methodData) || !Number.isFinite(total) || total <= 0) {
+                    badge.hidden = true;
+                    return;
+                }
+                const trackedSet = new Set(methodData);
+                const setStatus = (isTracked) => {
+                    badge.classList.toggle('track-status--tracked', isTracked);
+                    badge.classList.toggle('track-status--lost', !isTracked);
+                    badge.textContent = isTracked ? 'Tracked' : 'Lost';
+                };
+                const update = () => {
+                    const dur = Number(video.duration);
+                    if (!Number.isFinite(dur) || dur <= 0) return;
+                    const frame = Math.min(total - 1, Math.max(0, Math.floor((video.currentTime / dur) * total)));
+                    setStatus(trackedSet.has(frame));
+                };
+                video.addEventListener('loadedmetadata', update);
+                video.addEventListener('timeupdate', update);
+                video.addEventListener('seeked', update);
+                update();
+            }
+
+            function videoForColumn(column, item) {
+                const views = item && Array.isArray(item.methods && item.methods[column.method])
+                    ? item.methods[column.method]
+                    : [];
+                if (column.method === 'input') {
+                    const first = views[0] || {};
+                    return first.src || COMPARE_DUMMY_VIDEO;
+                }
+                const view = views.find(item => item.view === column.view);
+                return (view && view.src) || COMPARE_DUMMY_VIDEO;
+            }
+
+            function comparisonPlaybackRate() {
+                return COMPARE_PLAYBACK_RATES[activeCompareDatasetId] || 1;
+            }
+
+            function renderComparisonTable() {
+                pauseAndUnloadCurrentPage();
+                const columns = comparisonColumns();
+                renderComparisonHeader();
+                table.querySelectorAll('.comparison-row').forEach(row => row.remove());
+                const pageItems = compareCases.slice(currentPage * COMPARE_PAGE_SIZE, (currentPage + 1) * COMPARE_PAGE_SIZE);
+                pageItems.forEach((item, pageIdx) => {
+                    const idx = currentPage * COMPARE_PAGE_SIZE + pageIdx;
+                    const row = document.createElement('div');
+                    row.className = 'comparison-row';
+                    row.dataset.caseId = item.id || `sequence-${idx + 1}`;
+                    row.innerHTML = `<div class="seq-label">${escapeHtml(shortSequenceLabel(idx, item))}</div>`;
+
+                    columns.forEach(column => {
+                        const cell = document.createElement('div');
+                        cell.className = column.method === 'input' ? 'vid-cell vid-cell--input' : 'vid-cell';
+                        cell.dataset.method = column.method;
+                        cell.dataset.view = column.view;
+                        cell.innerHTML = '<video class="comp-video" muted playsinline preload="metadata"></video>';
+                        const video = cell.querySelector('video');
+                        video.src = videoForColumn(column, item);
+                        video.playbackRate = comparisonPlaybackRate();
+                        video.dataset.fallbackSrc = COMPARE_DUMMY_VIDEO;
+                        video.addEventListener('error', () => {
+                            if (video.src.endsWith(COMPARE_DUMMY_VIDEO)) return;
+                            video.src = COMPARE_DUMMY_VIDEO;
+                            video.load();
+                            video.playbackRate = comparisonPlaybackRate();
+                        }, { once: true });
+                        row.appendChild(cell);
+                    });
+
+                    const master = row.querySelector('.vid-cell[data-method="input"] video');
+                    COMPARE_METHODS.forEach(({ method }) => {
+                        const entries = item.methods && item.methods[method];
+                        const hasVideo = Array.isArray(entries) && entries.length > 0;
+                        const cols = trackGridColumns(method, columns);
+                        if (!cols) return;
+                        const badge = document.createElement('div');
+                        badge.className = 'track-status track-status--row track-status--tracked';
+                        badge.dataset.method = method;
+                        badge.style.gridColumn = cols;
+                        badge.textContent = 'Tracked';
+                        if (!hasVideo) badge.hidden = true;
+                        row.appendChild(badge);
+                        if (hasVideo && master) {
+                            bindTrackStatus(badge, master, item.id, method);
+                        }
+                    });
+
+                    table.appendChild(row);
+                });
+                bindCurrentPageRows();
+                updatePager();
+                startAll();
+            }
+
+            function comparisonRows() {
+                return Array.from(table.querySelectorAll('.comparison-row'));
+            }
+
+            function rowVideos(row) {
+                return Array.from(row.querySelectorAll('.comp-video'));
+            }
+
+            function masterVideo(row) {
+                const cell = row.querySelector('.vid-cell[data-method="input"]');
+                return cell ? cell.querySelector('video') : null;
+            }
+
+            function markRowAction(row, duration = 250) {
+                if (row._rowActionTimer) window.clearTimeout(row._rowActionTimer);
+                row.dataset.rowAction = 'true';
+                row._rowActionTimer = window.setTimeout(() => {
+                    delete row.dataset.rowAction;
+                    row.dataset.hasPlayed = 'true';
+                    row._rowActionTimer = null;
+                }, duration);
+            }
+
+            function markProgrammaticSync(row, duration = 300) {
+                if (row._programmaticSyncTimer) window.clearTimeout(row._programmaticSyncTimer);
+                row.dataset.programmaticSync = 'true';
+                row._programmaticSyncTimer = window.setTimeout(() => {
+                    delete row.dataset.programmaticSync;
+                    row._programmaticSyncTimer = null;
+                }, duration);
+            }
+
+            function playRow(row, reset = false) {
+                const videos = rowVideos(row);
+                markRowAction(row);
+                if (reset) {
+                    videos.forEach(video => { video.currentTime = 0; });
+                }
+                videos.forEach(video => video.play().catch(() => { }));
+            }
+
+            function pauseRow(row, sourceVideo) {
+                markRowAction(row);
+                rowVideos(row).forEach(video => {
+                    if (video !== sourceVideo) video.pause();
+                });
+            }
+
+            function scheduleRowReplay(row) {
+                if (row._replayTimer) window.clearTimeout(row._replayTimer);
+                row._replayTimer = window.setTimeout(() => {
+                    row._replayTimer = null;
+                    playRow(row, true);
+                }, 500);
+            }
+
+            function syncRow(row, sourceVideo) {
+                const t = sourceVideo.currentTime;
+                const videos = rowVideos(row);
+                const needsSync = videos.some(video => {
+                    if (video === sourceVideo) return false;
+                    return Math.abs(video.currentTime - t) > 0.15 || (!sourceVideo.paused && video.paused);
+                });
+                if (needsSync) markProgrammaticSync(row);
+                videos.forEach(video => {
+                    if (video === sourceVideo) return;
+                    if (Math.abs(video.currentTime - t) > 0.15) video.currentTime = t;
+                    if (!sourceVideo.paused && video.paused) video.play().catch(() => { });
+                });
+            }
+
+            function startAll() {
+                comparisonRows().forEach(row => {
+                    playRow(row);
+                });
+            }
+
+            function clearRowTimers(row) {
+                if (row._rowActionTimer) window.clearTimeout(row._rowActionTimer);
+                if (row._programmaticSyncTimer) window.clearTimeout(row._programmaticSyncTimer);
+                if (row._replayTimer) window.clearTimeout(row._replayTimer);
+                row._rowActionTimer = null;
+                row._programmaticSyncTimer = null;
+                row._replayTimer = null;
+            }
+
+            function pauseAndUnloadCurrentPage() {
+                comparisonRows().forEach(row => {
+                    clearRowTimers(row);
+                    rowVideos(row).forEach(video => {
+                        video.pause();
+                        video.removeAttribute('src');
+                        video.load();
+                    });
+                });
+            }
+
+            function bindCurrentPageRows() {
+                comparisonRows().forEach(row => {
+                    rowVideos(row).forEach(video => {
+                        video.addEventListener('play', () => {
+                            if (row.dataset.rowAction === 'true') return;
+                            if (row.dataset.hasPlayed === 'true' && video.currentTime <= 0.15) {
+                                playRow(row, true);
+                                return;
+                            }
+                            if (row.dataset.programmaticSync === 'true') return;
+                            playRow(row);
+                        });
+                        video.addEventListener('pause', () => {
+                            if (row.dataset.rowAction === 'true' || row.dataset.programmaticSync === 'true' || video.ended) return;
+                            pauseRow(row, video);
+                        });
+                        video.addEventListener('seeked', () => {
+                            if (row.dataset.rowAction === 'true' || row.dataset.programmaticSync === 'true') return;
+                            syncRow(row, video);
+                        });
+                        video.addEventListener('ended', () => {
+                            const cell = video.closest('.vid-cell');
+                            if (!cell || cell.dataset.method !== 'ours') return;
+                            scheduleRowReplay(row);
+                        });
+                    });
+                });
+
+                table.querySelectorAll('.vid-cell').forEach(cell => {
+                    const vid = cell.querySelector('video');
+                    if (!vid) return;
+                    cell.addEventListener('mouseenter', () => vid.setAttribute('controls', ''));
+                    cell.addEventListener('mouseleave', () => vid.removeAttribute('controls'));
+                });
+            }
+
+            function updatePager() {
+                if (pager) pager.hidden = totalPages <= 1;
+                if (pageCurrent) pageCurrent.textContent = String(currentPage + 1);
+                if (pageTotal) pageTotal.textContent = String(totalPages);
+                if (prevBtn) prevBtn.disabled = totalPages <= 1;
+                if (nextBtn) nextBtn.disabled = totalPages <= 1;
+            }
+
+            function goToPage(page) {
+                const nextPage = ((page % totalPages) + totalPages) % totalPages;
+                if (nextPage === currentPage) return;
+                currentPage = nextPage;
+                renderComparisonTable();
+            }
+
+            if (prevBtn) prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
+            if (nextBtn) nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
+
+            viewButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const mode = button.dataset.viewMode;
+                    if (!mode || mode === compareViewMode) return;
+                    if (mode !== 'all' && !COMPARE_VIEW_OPTIONS.some(option => option.view === mode)) return;
+                    compareViewMode = mode;
+                    updateViewToggleButtons();
+                    renderComparisonTable();
+                });
+            });
+
+            document.querySelectorAll('.comparison-dataset-toggle').forEach(button => {
+                button.addEventListener('click', () => switchCompareDataset(button.dataset.dataset));
+            });
+
+            updateCompareDatasetButtons();
+            updateViewToggleButtons();
+            renderComparisonTable();
+        })();
+
+        const MORE_RESULTS_FALLBACK_DATASETS = [
+            {
+                id: 'TASTE-Rob',
+                label: 'TASTE-Rob',
+                base: 'assets/ours_gallery/TasteRob',
+                items: ['594', '1654', '1856', '2999', '3075', '3088', '3129'].map(id => ({ id }))
+            },
+            {
+                id: 'Self-captured',
+                label: 'Self-captured',
+                base: 'assets/ours_gallery/In-the-wild',
+                items: []
+            }
+        ];
+        const MORE_RESULTS_MANIFEST = 'assets/ours_gallery/manifest.json';
+        const MORE_RESULTS_COLUMNS = [
+            { label: 'Input video', file: id => `${id}.mp4` },
+            { label: 'Front', file: () => 'front.mp4' },
+            { label: 'Contact map', file: () => 'front_heatmap.mp4' },
+            { label: 'Left', file: () => 'left.mp4' },
+            { label: 'Top', file: () => 'top.mp4' }
+        ];
+        const MORE_RESULTS_PAGE_SIZE = 4;
+        const stageCache = new Map();
+
+        function formatStageLabel(key) {
+            return key.replace(/^\d+-\d+_/, '').replace(/_/g, ' ');
+        }
+
+        function escapeHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        function stageToneClass(key) {
+            if (/interaction/.test(key)) return 'stage-badge--interaction';
+            if (/approach/.test(key)) return 'stage-badge--approaching';
+            if (/releas/.test(key)) return 'stage-badge--releasing';
+            if (/start_static/.test(key)) return 'stage-badge--start';
+            if (/end_static/.test(key)) return 'stage-badge--end';
+            return 'stage-badge--default';
+        }
+
+        function normalizeStageRanges(data) {
+            if (!data) return [];
+            return Object.entries(data)
+                .map(([key, value]) => ({
+                    key,
+                    label: formatStageLabel(key),
+                    toneClass: stageToneClass(key),
+                    start: Number(value.original_start),
+                    end: Number(value.original_end)
+                }))
+                .filter(stage => Number.isFinite(stage.start) && Number.isFinite(stage.end))
+                .sort((a, b) => a.start - b.start);
+        }
+
+        async function loadStageRanges(src) {
+            if (!src) return [];
+            if (stageCache.has(src)) return stageCache.get(src);
+
+            const embedded = window.MORE_RESULTS_STAGE_RANGES && window.MORE_RESULTS_STAGE_RANGES[src];
+            if (embedded) {
+                const promise = Promise.resolve(normalizeStageRanges(embedded));
+                stageCache.set(src, promise);
+                return promise;
+            }
+
+            if (window.location.protocol === 'file:') {
+                const promise = Promise.resolve([]);
+                stageCache.set(src, promise);
+                return promise;
+            }
+
+            const promise = fetch(src)
+                .then(res => res.ok ? res.json() : null)
+                .then(data => normalizeStageRanges(data))
+                .catch(() => []);
+            stageCache.set(src, promise);
+            return promise;
+        }
+
+        function ensureStageBadge(container) {
+            let badge = container.querySelector('.stage-badge');
+            if (!badge) {
+                badge = document.createElement('div');
+                badge.className = 'stage-badge';
+                badge.hidden = true;
+                container.appendChild(badge);
+            }
+            return badge;
+        }
+
+        async function bindStageBadge(video, stageSrc, fps = 30) {
+            const stages = await loadStageRanges(stageSrc);
+            if (!stages.length) return;
+            const badge = ensureStageBadge(video.parentElement);
+            const update = () => {
+                const frame = Math.floor(video.currentTime * fps);
+                const active = stages.find(stage => frame >= stage.start && frame <= stage.end);
+                badge.hidden = !active;
+                if (active) {
+                    badge.textContent = active.label;
+                    badge.className = `stage-badge ${active.toneClass}`;
+                }
+            };
+            video.addEventListener('timeupdate', update);
+            video.addEventListener('seeked', update);
+            video.addEventListener('loadedmetadata', update);
+            update();
+        }
+
+        function attachVideoHoverControls(root = document) {
+            return root;
+        }
+
+        function bindSyncedVideoRow(item) {
+            const videos = Array.from(item.querySelectorAll('.more-results-video'));
+            const master = videos[0];
+            const followers = videos.slice(1);
+            const scrubber = item.querySelector('.more-results-row-scrubber');
+            const scrubTrack = item.querySelector('.more-results-row-scrubber-track');
+            const scrubFill = item.querySelector('.more-results-row-scrubber-fill');
+            const scrubThumb = item.querySelector('.more-results-row-scrubber-thumb');
+            if (!master) return;
+            videos.forEach(video => {
+                video.loop = false;
+                video.removeAttribute('loop');
+            });
+            item._isScrubbing = false;
+            item._resumeAfterScrub = false;
+
+            const rowDuration = () => {
+                const duration = Number(master.duration);
+                return Number.isFinite(duration) && duration > 0 ? duration : 0;
+            };
+
+            const targetTimeFor = (video) => {
+                const duration = Number(video.duration);
+                if (Number.isFinite(duration) && duration > 0) {
+                    return Math.min(master.currentTime, Math.max(duration - 0.02, 0));
+                }
+                return master.currentTime;
+            };
+
+            const syncFollowers = (force = false, syncTime = true) => {
+                if (item._isScrubbing && !force) return;
+                followers.forEach(video => {
+                    const target = targetTimeFor(video);
+                    video.playbackRate = master.playbackRate;
+                    if (syncTime && (force || Math.abs(video.currentTime - target) > 0.04)) {
+                        try { video.currentTime = target; } catch (_) { }
+                    }
+                    if (master.paused) {
+                        if (!video.paused) video.pause();
+                    } else if (video.paused) {
+                        video.play().catch(() => { });
+                    }
+                });
+            };
+
+            const updateScrubberUi = (t, dur) => {
+                if (!scrubFill || !scrubThumb) return;
+                const pct = (Math.max(0, Math.min(1, t / dur)) * 100) + '%';
+                scrubFill.style.width = pct;
+                scrubThumb.style.left = pct;
+            };
+
+            const refreshScrubberFromMaster = () => {
+                if (item._isScrubbing) return;
+                const dur = rowDuration();
+                if (Number.isFinite(dur) && dur > 0) updateScrubberUi(master.currentTime, dur);
+            };
+
+            let lastMasterTime = 0;
+            let replayTimer = null;
+
+            const resetRowLabels = () => {
+                const badges = item.querySelectorAll('.stage-badge');
+                badges.forEach(badge => {
+                    badge.hidden = true;
+                    badge.textContent = '';
+                    badge.className = 'stage-badge';
+                });
+                master.dispatchEvent(new Event('timeupdate'));
+            };
+
+            const resetRowToStart = (shouldPlay, delayMs = 0) => {
+                if (replayTimer) window.clearTimeout(replayTimer);
+                replayTimer = null;
+                item._moreResultsReplayTimer = null;
+                item._isLoopResetting = true;
+                videos.forEach(video => video.pause());
+                videos.forEach(video => {
+                    try { video.currentTime = 0; } catch (_) { }
+                });
+                const dur = rowDuration();
+                if (dur > 0) updateScrubberUi(0, dur);
+                resetRowLabels();
+                lastMasterTime = 0;
+                if (shouldPlay) {
+                    replayTimer = window.setTimeout(() => {
+                        replayTimer = null;
+                        item._moreResultsReplayTimer = null;
+                        item._isLoopResetting = false;
+                        videos.forEach(video => video.play().catch(() => { }));
+                        syncFollowers(true, false);
+                        refreshScrubberFromMaster();
+                    }, delayMs);
+                    item._moreResultsReplayTimer = replayTimer;
+                    return;
+                }
+                item._isLoopResetting = false;
+            };
+            item._cancelMoreResultsReplay = () => {
+                if (replayTimer) window.clearTimeout(replayTimer);
+                replayTimer = null;
+                item._moreResultsReplayTimer = null;
+                item._isLoopResetting = false;
+            };
+
+            const handleMasterProgress = () => {
+                if (item._isScrubbing || item._isLoopResetting) return false;
+                lastMasterTime = master.currentTime;
+                return false;
+            };
+
+            // Coalesced master seek: only one in flight at a time, latest target wins.
+            let pendingTime = null;
+            let masterSeeking = false;
+            let finishScrubAfterSeek = false;
+            const flushMasterSeek = () => {
+                if (pendingTime === null || masterSeeking) return;
+                const t = pendingTime;
+                pendingTime = null;
+                masterSeeking = true;
+                master.currentTime = t;
+            };
+            const finishScrub = () => {
+                syncFollowers(true);
+                refreshScrubberFromMaster();
+                if (item._resumeAfterScrub) {
+                    videos.forEach(v => v.play().catch(() => { }));
+                }
+                item._resumeAfterScrub = false;
+            };
+            master.addEventListener('seeked', () => {
+                masterSeeking = false;
+                lastMasterTime = master.currentTime;
+                syncFollowers(true);
+                if (item._isScrubbing && pendingTime !== null) {
+                    if (pendingTime !== null) flushMasterSeek();
+                    return;
+                }
+                if (finishScrubAfterSeek) {
+                    finishScrubAfterSeek = false;
+                    finishScrub();
+                } else {
+                    refreshScrubberFromMaster();
+                }
+            });
+
+            if (scrubTrack) {
+                const seekTo = (clientX) => {
+                    const rect = scrubTrack.getBoundingClientRect();
+                    if (rect.width <= 0) return;
+                    const frac = Math.max(0, Math.min((clientX - rect.left) / rect.width, 1));
+                    const dur = rowDuration();
+                    if (!Number.isFinite(dur) || dur <= 0) return;
+                    const t = frac * dur;
+                    updateScrubberUi(t, dur);
+                    pendingTime = t;
+                    flushMasterSeek();
+                };
+                const startDrag = (clientX) => {
+                    item._isScrubbing = true;
+                    item._resumeAfterScrub = !master.paused;
+                    videos.forEach(v => v.pause());
+                    seekTo(clientX);
+                };
+                const endDrag = () => {
+                    if (!item._isScrubbing) return;
+                    item._isScrubbing = false;
+                    if (pendingTime !== null && !masterSeeking) {
+                        flushMasterSeek();
+                    }
+                    if (masterSeeking) {
+                        finishScrubAfterSeek = true;
+                    } else {
+                        finishScrub();
+                    }
+                };
+                const onMouseMove = (e) => { if (item._isScrubbing) seekTo(e.clientX); };
+                const onTouchMove = (e) => { if (item._isScrubbing) seekTo(e.touches[0].clientX); };
+                scrubTrack.addEventListener('mousedown', (e) => { startDrag(e.clientX); e.preventDefault(); });
+                scrubTrack.addEventListener('touchstart', (e) => { startDrag(e.touches[0].clientX); e.preventDefault(); }, { passive: false });
+                window.addEventListener('mousemove', onMouseMove);
+                window.addEventListener('mouseup', endDrag);
+                window.addEventListener('touchmove', onTouchMove);
+                window.addEventListener('touchend', endDrag);
+            }
+
+            master.addEventListener('play', () => { if (!item._isLoopResetting) syncFollowers(true); });
+            master.addEventListener('pause', () => { if (!item._isLoopResetting) syncFollowers(true); });
+            master.addEventListener('ratechange', () => { if (!item._isLoopResetting) syncFollowers(true); });
+            master.addEventListener('timeupdate', () => {
+                if (handleMasterProgress()) return;
+                refreshScrubberFromMaster();
+            });
+            master.addEventListener('ended', () => resetRowToStart(true, 500));
+            master.addEventListener('loadedmetadata', () => {
+                syncFollowers(true);
+                refreshScrubberFromMaster();
+            });
+            followers.forEach(video => {
+                video.addEventListener('loadedmetadata', () => syncFollowers(true));
+                video.addEventListener('play', () => { if (!item._isLoopResetting) syncFollowers(true, false); });
+            });
+            syncFollowers(true);
+            refreshScrubberFromMaster();
+        }
+
+        function bindVisibleRowPlayback(item) {
+            const videos = Array.from(item.querySelectorAll('.more-results-video'));
+            const master = videos[0];
+            if (!master) return;
+
+            const playRow = () => {
+                if (item._isScrubbing || item._isLoopResetting) return;
+                master.play().catch(() => { });
+            };
+            const pauseRow = () => {
+                if (item._cancelMoreResultsReplay) item._cancelMoreResultsReplay();
+                videos.forEach(video => video.pause());
+            };
+
+            if (!('IntersectionObserver' in window)) {
+                playRow();
+                return;
+            }
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        playRow();
+                    } else {
+                        pauseRow();
+                    }
+                });
+            }, { rootMargin: '300px 0px', threshold: 0.05 });
+
+            observer.observe(item);
+            item._visibilityObserver = observer;
+        }
+
+        function removeMoreResultsCase(item, grid) {
+            if (!item || item.dataset.removed === 'true') return;
+            item.dataset.removed = 'true';
+            item.querySelectorAll('video').forEach(video => video.pause());
+            item.remove();
+        }
+
+        function bindMissingVideoFallback(item, grid) {
+            item.querySelectorAll('.more-results-video').forEach(video => {
+                video.addEventListener('error', () => removeMoreResultsCase(item, grid), { once: true });
+            });
+        }
+
+        function bindInputVideoAspect(item) {
+            const row = item.querySelector('.more-results-row');
+            const inputVideo = item.querySelector('.more-results-cell:first-child video');
+            const columnHeader = document.querySelector('#more-results .more-results-column-header');
+            if (!row || !inputVideo) return;
+
+            const updateAspect = () => {
+                const width = inputVideo.videoWidth;
+                const height = inputVideo.videoHeight;
+                if (!width || !height) return;
+                const aspect = width / height;
+                const resultColumns = `minmax(0, ${aspect}fr) repeat(4, minmax(0, 1fr))`;
+                inputVideo.style.setProperty('--input-video-aspect', `${width} / ${height}`);
+                row.style.gridTemplateColumns = resultColumns;
+                if (columnHeader) {
+                    columnHeader.style.gridTemplateColumns = `30px ${resultColumns}`;
+                }
+            };
+
+            inputVideo.addEventListener('loadedmetadata', updateAspect, { once: true });
+            updateAspect();
+        }
+
+        function normalizeMoreResultsManifest(data) {
+            if (Array.isArray(data)) {
+                return [
+                    {
+                        id: 'TASTE-Rob',
+                        label: 'TASTE-Rob',
+                        base: 'assets/ours_gallery',
+                        items: data
+                            .map(entry => typeof entry === 'string' ? { id: entry } : entry)
+                            .filter(entry => entry && entry.id)
+                    },
+                    MORE_RESULTS_FALLBACK_DATASETS[1]
+                ];
+            }
+
+            if (!data || !Array.isArray(data.datasets)) return MORE_RESULTS_FALLBACK_DATASETS;
+
+            return data.datasets.map(dataset => ({
+                id: dataset.id,
+                label: dataset.label || dataset.id,
+                base: dataset.base || `assets/ours_gallery/${dataset.id}`,
+                items: (dataset.items || [])
+                    .map(entry => typeof entry === 'string' ? { id: entry } : entry)
+                    .filter(entry => entry && entry.id)
+            })).filter(dataset => dataset.id && dataset.base);
+        }
+
+        async function loadMoreResultsDatasets() {
+            if (window.MORE_RESULTS_MANIFEST_DATA) {
+                const datasets = normalizeMoreResultsManifest(window.MORE_RESULTS_MANIFEST_DATA);
+                return datasets.length ? datasets : MORE_RESULTS_FALLBACK_DATASETS;
+            }
+
+            if (window.location.protocol === 'file:') {
+                return MORE_RESULTS_FALLBACK_DATASETS;
+            }
+
+            try {
+                const res = await fetch(`${MORE_RESULTS_MANIFEST}?v=${Date.now()}`);
+                if (!res.ok) throw new Error(`Manifest status ${res.status}`);
+                const data = await res.json();
+                const datasets = normalizeMoreResultsManifest(data);
+                return datasets.length ? datasets : MORE_RESULTS_FALLBACK_DATASETS;
+            } catch (_) {
+                return MORE_RESULTS_FALLBACK_DATASETS;
+            }
+        }
+
+        let moreResultsDatasets = [];
+        let activeMoreResultsDataset = 'Self-captured';
+        let activeMoreResultsPage = 0;
+        const MORE_RESULTS_FILTER_GROUPS = ['camera', 'motion', 'contact'];
+        const moreResultsFilterMode = {
+            camera: 'all',
+            motion: 'all',
+            contact: 'all'
+        };
+
+        function getMoreResultsAnnotation(datasetId, itemId) {
+            const all = window.INPUT_VIDEO_ANNOTATIONS;
+            if (!all) return null;
+            const ds = all[datasetId];
+            return ds ? ds[itemId] : null;
+        }
+
+        function moreResultsFiltersActive() {
+            return MORE_RESULTS_FILTER_GROUPS.some(group => moreResultsFilterMode[group] !== 'all');
+        }
+
+        function itemPassesMoreResultsFilters(datasetId, item) {
+            if (!moreResultsFiltersActive()) return true;
+            const ann = getMoreResultsAnnotation(datasetId, item.id);
+            if (!ann) return false;
+            const { camera, motion, contact } = moreResultsFilterMode;
+            if (camera !== 'all' && ann.camera !== camera) return false;
+            if (contact !== 'all' && ann.contact !== contact) return false;
+            if (motion === 'translation' && !(ann.translation && !ann.rotation)) return false;
+            return true;
+        }
+
+        function getFilteredMoreResultsItems(dataset) {
+            if (!dataset || !Array.isArray(dataset.items)) return [];
+            return dataset.items.filter(item => itemPassesMoreResultsFilters(dataset.id, item));
+        }
+
+        function renderMoreResultsDataset(datasetId = activeMoreResultsDataset) {
+            const grid = document.getElementById('moreResultsGrid');
+            if (!grid) return;
+            pauseAndUnloadMoreResults(grid);
+            grid.innerHTML = '';
+            const dataset = moreResultsDatasets.find(item => item.id === datasetId) || moreResultsDatasets[0];
+            if (!dataset) return;
+            if (dataset.id !== activeMoreResultsDataset) activeMoreResultsPage = 0;
+            activeMoreResultsDataset = dataset.id;
+
+            document.querySelectorAll('#more-results .dataset-toggle').forEach(button => {
+                const isActive = button.dataset.dataset === dataset.id;
+                button.classList.toggle('is-active', isActive);
+                button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            const filteredItems = getFilteredMoreResultsItems(dataset);
+
+            if (!filteredItems.length) {
+                activeMoreResultsPage = 0;
+                const empty = document.createElement('p');
+                empty.className = 'more-results-empty';
+                empty.textContent = !dataset.items.length
+                    ? 'Results will be added here.'
+                    : 'No sequences match the selected filters.';
+                grid.appendChild(empty);
+                updateMoreResultsDescription(dataset, filteredItems);
+                updateMoreResultsPager(filteredItems);
+                updateMoreResultsMatchCount(dataset, filteredItems);
+                return;
+            }
+
+            const totalPages = Math.max(1, Math.ceil(filteredItems.length / MORE_RESULTS_PAGE_SIZE));
+            activeMoreResultsPage = Math.max(0, Math.min(totalPages - 1, activeMoreResultsPage));
+            const pageItems = filteredItems.slice(
+                activeMoreResultsPage * MORE_RESULTS_PAGE_SIZE,
+                (activeMoreResultsPage + 1) * MORE_RESULTS_PAGE_SIZE
+            );
+
+            pageItems.forEach((entry, pageIndex) => {
+                const videoId = entry.id;
+                const seqIndex = getMoreResultsSeq(dataset.id, videoId);
+                const seqLabel = seqIndex != null
+                    ? `Seq. ${formatSeq(seqIndex)}`
+                    : `Seq. ${formatSeq(activeMoreResultsPage * MORE_RESULTS_PAGE_SIZE + pageIndex + 1)}`;
+                const base = `${dataset.base}/${videoId}`;
+                const stageSrc = `${base}/stage_frame_ranges.json`;
+                const item = document.createElement('div');
+                item.className = 'more-results-case';
+                item.dataset.seqIndex = seqIndex != null ? String(seqIndex) : '';
+                item.innerHTML = `
+                    <div class="more-results-seq">${seqLabel}</div>
+                    <div class="more-results-row">
+                        ${MORE_RESULTS_COLUMNS.map(col => `
+                            <div class="more-results-cell">
+                                <video class="more-results-video" src="${base}/${col.file(videoId)}" muted playsinline loop preload="metadata"></video>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="more-results-row-scrubber" role="slider" aria-label="Sequence playback progress" tabindex="0">
+                        <div class="more-results-row-scrubber-track">
+                            <div class="more-results-row-scrubber-fill"></div>
+                            <div class="more-results-row-scrubber-thumb"></div>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(item);
+                const inputVideo = item.querySelector('.more-results-cell:first-child video');
+                bindInputVideoAspect(item);
+                if (inputVideo) bindStageBadge(inputVideo, stageSrc, 30);
+                bindSyncedVideoRow(item);
+                bindVisibleRowPlayback(item);
+                bindMissingVideoFallback(item, grid);
+            });
+            attachVideoHoverControls(grid);
+            updateMoreResultsDescription(dataset, filteredItems);
+            updateMoreResultsPager(filteredItems);
+            updateMoreResultsMatchCount(dataset, filteredItems);
+        }
+
+        function pauseAndUnloadMoreResults(grid) {
+            grid.querySelectorAll('.more-results-case').forEach(item => {
+                if (item._visibilityObserver) item._visibilityObserver.disconnect();
+                if (item._cancelMoreResultsReplay) item._cancelMoreResultsReplay();
+            });
+            grid.querySelectorAll('video').forEach(video => {
+                video.pause();
+                video.removeAttribute('src');
+                video.load();
+            });
+        }
+
+        function updateMoreResultsPager(filteredItems) {
+            const pager = document.getElementById('moreResultsPager');
+            const prevBtn = document.getElementById('moreResultsPrev');
+            const nextBtn = document.getElementById('moreResultsNext');
+            const current = document.getElementById('moreResultsPageCurrent');
+            const total = document.getElementById('moreResultsPageTotal');
+            const count = Array.isArray(filteredItems) ? filteredItems.length : 0;
+            const totalPages = Math.max(1, Math.ceil(count / MORE_RESULTS_PAGE_SIZE));
+            if (pager) pager.hidden = totalPages <= 1;
+            if (current) current.textContent = String(activeMoreResultsPage + 1);
+            if (total) total.textContent = String(totalPages);
+            if (prevBtn) prevBtn.disabled = totalPages <= 1;
+            if (nextBtn) nextBtn.disabled = totalPages <= 1;
+        }
+
+        function updateMoreResultsDescription(dataset, filteredItems) {
+            const desc = document.getElementById('moreResultsDesc');
+            if (!desc) return;
+            const filteredCount = Array.isArray(filteredItems) ? filteredItems.length : 0;
+            const totalCount = dataset && Array.isArray(dataset.items) ? dataset.items.length : 0;
+            const label = dataset && dataset.label ? dataset.label : 'the selected set';
+            const noun = filteredCount === 1 ? 'sequence' : 'sequences';
+            const summary = moreResultsFiltersActive()
+                ? `Showing ${filteredCount} of ${totalCount} ${noun} from ${label} matching the selected filters.`
+                : `Showing ${filteredCount} qualitative ${noun} from ${label}.`;
+            desc.textContent = summary;
+        }
+
+        function updateMoreResultsMatchCount(dataset, filteredItems) {
+            const el = document.getElementById('moreResultsMatchCount');
+            if (!el) return;
+            if (!moreResultsFiltersActive()) {
+                el.textContent = '';
+                return;
+            }
+            const totalCount = dataset && Array.isArray(dataset.items) ? dataset.items.length : 0;
+            el.textContent = `${filteredItems.length} / ${totalCount} match`;
+        }
+
+        function goToMoreResultsPage(delta) {
+            const dataset = moreResultsDatasets.find(item => item.id === activeMoreResultsDataset) || moreResultsDatasets[0];
+            if (!dataset) return;
+            const filteredItems = getFilteredMoreResultsItems(dataset);
+            if (!filteredItems.length) return;
+            const totalPages = Math.max(1, Math.ceil(filteredItems.length / MORE_RESULTS_PAGE_SIZE));
+            const nextPage = ((activeMoreResultsPage + delta) % totalPages + totalPages) % totalPages;
+            if (nextPage === activeMoreResultsPage) return;
+            activeMoreResultsPage = nextPage;
+            renderMoreResultsDataset(dataset.id);
+        }
+
+        async function buildMoreResultsGallery() {
+            // Attach all handlers first so they work regardless of load/render errors
+            document.querySelectorAll('#more-results .dataset-toggle').forEach(button => {
+                button.addEventListener('click', () => renderMoreResultsDataset(button.dataset.dataset));
+            });
+            const prevBtn = document.getElementById('moreResultsPrev');
+            const nextBtn = document.getElementById('moreResultsNext');
+            if (prevBtn) prevBtn.addEventListener('click', () => goToMoreResultsPage(-1));
+            if (nextBtn) nextBtn.addEventListener('click', () => goToMoreResultsPage(1));
+
+            function syncFilterChipStates() {
+                document.querySelectorAll('#moreResultsFilters .filter-chip').forEach(chip => {
+                    const group = chip.dataset.group;
+                    const value = chip.dataset.value;
+                    if (!group || !value) return;
+                    const isActive = moreResultsFilterMode[group] === value;
+                    chip.classList.toggle('is-active', isActive);
+                    chip.setAttribute('aria-pressed', String(isActive));
+                });
+            }
+            const filterRoot = document.getElementById('moreResultsFilters');
+            if (filterRoot) {
+                filterRoot.addEventListener('click', (ev) => {
+                    const chip = ev.target.closest('.filter-chip');
+                    if (!chip || !filterRoot.contains(chip)) return;
+                    const group = chip.dataset.group;
+                    const value = chip.dataset.value;
+                    if (!group || !value || !(group in moreResultsFilterMode)) return;
+                    if (moreResultsFilterMode[group] === value) return;
+                    moreResultsFilterMode[group] = value;
+                    syncFilterChipStates();
+                    activeMoreResultsPage = 0;
+                    renderMoreResultsDataset(activeMoreResultsDataset);
+                });
+            }
+            const clearBtn = document.getElementById('moreResultsFilterClear');
+            if (clearBtn) {
+                clearBtn.addEventListener('click', () => {
+                    MORE_RESULTS_FILTER_GROUPS.forEach(group => {
+                        moreResultsFilterMode[group] = 'all';
+                    });
+                    syncFilterChipStates();
+                    activeMoreResultsPage = 0;
+                    renderMoreResultsDataset(activeMoreResultsDataset);
+                });
+            }
+
+            moreResultsDatasets = await loadMoreResultsDatasets();
+            rebuildMoreResultsSeqIndex(moreResultsDatasets);
+            renderMoreResultsDataset(activeMoreResultsDataset);
+            document.dispatchEvent(new CustomEvent('more-results-seq-ready'));
+        }
+
+        buildMoreResultsGallery();
+        attachVideoHoverControls();
+    </script>
+    <!-- GLB data URLs embedded as base64 – works on file:// -->
+    <script src="js/our_results_glbs.js"></script>
+    <script src="js/bimanual_manifest.js"></script>
+    <script src="js/bimanual_glbs.js"></script>
+    <script src="js/choir_camera_viewer_loader.js"></script>
+    <script>
+        (function () {
+            const OUR_RESULTS_MANIFEST = 'assets/ours_interactive/manifest.json';
+            const OUR_RESULTS_ROOT = 'assets/ours_interactive';
+            const OUR_RESULTS_FALLBACK_CASES = [
+                {
+                    id: 'IMG_5142',
+                    video: 'IMG_5142.mp4',
+                    glb: 'glb/sequence.glb',
+                    stage: null,
+                    caption: ''
+                },
+                {
+                    id: '3510',
+                    video: '3510.mp4',
+                    glb: 'glb/sequence.glb',
+                    stage: null,
+                    caption: ''
+                }
+            ];
+            const casesRoot = document.getElementById('ourResultsCases');
+            const counter = document.getElementById('ourResultsCurrent');
+            const total = document.getElementById('ourResultsTotal');
+            const prevButton = document.getElementById('ourResultsPrev');
+            const nextButton = document.getElementById('ourResultsNext');
+            let cases = [];
+            let current = 0;
+
+            async function loadOurResultsCases() {
+                if (Array.isArray(window.OUR_RESULTS_MANIFEST_DATA) && window.OUR_RESULTS_MANIFEST_DATA.length) {
+                    return window.OUR_RESULTS_MANIFEST_DATA;
+                }
+
+                if (window.location.protocol === 'file:') {
+                    return OUR_RESULTS_FALLBACK_CASES;
+                }
+
+                try {
+                    const res = await fetch(OUR_RESULTS_MANIFEST);
+                    if (!res.ok) throw new Error(`Manifest status ${res.status}`);
+                    const data = await res.json();
+                    return data.length ? data : OUR_RESULTS_FALLBACK_CASES;
+                } catch (_) {
+                    return OUR_RESULTS_FALLBACK_CASES;
+                }
+            }
+
+            function buildOurResultsCases(entries) {
+                if (!casesRoot) return;
+                casesRoot.innerHTML = entries.map((entry, index) => {
+                    const base = `${OUR_RESULTS_ROOT}/${entry.id}`;
+                    const stageSrc = entry.stage ? `${base}/${entry.stage}` : '';
+                    const caption = entry.caption || '';
+                    const intrinsics = entry.intrinsics || null;
+                    const intrinsicsAttr = intrinsics
+                        ? `data-fx="${intrinsics.fx}" data-fy="${intrinsics.fy}" data-cx="${intrinsics.cx}" data-cy="${intrinsics.cy}"`
+                        : '';
+                    const imageWidth = intrinsics && Number.isFinite(Number(intrinsics.cx))
+                        ? Number(intrinsics.cx) * 2
+                        : 1920;
+                    const imageHeight = intrinsics && Number.isFinite(Number(intrinsics.cy))
+                        ? Number(intrinsics.cy) * 2
+                        : 1080;
+                    return `
+                        <div class="our-results-case${index === 0 ? ' is-active' : ''}" data-case="${index}"
+                            data-video-id="${entry.id}" data-assets-root="${OUR_RESULTS_ROOT}" data-fps="30"
+                            data-stage-src="${stageSrc}">
+                            <div class="our-results-grid">
+                                <div class="our-results-col">
+                                    <div class="our-results-label">Input Video</div>
+                                    <div class="our-results-media">
+                                        <video class="our-results-video" src="${base}/${entry.video}" loop muted
+                                            playsinline ${index === 0 ? 'autoplay' : ''}></video>
+                                    </div>
+                                </div>
+                                <div class="our-results-col">
+                                    <div class="our-results-label">Reconstructed Mesh</div>
+                                    <div class="our-results-media">
+                                        <div id="ourMeshViewer${index}" class="choir-camera-viewer"
+                                            data-video-id="${entry.id}" data-glb-src="${base}/${entry.glb}"
+                                            data-mesh-color="#6f8faa" data-hand-color="#e7b79f"
+                                            data-object-color="#6f8faa" data-image-width="${imageWidth}"
+                                            data-image-height="${imageHeight}" ${intrinsicsAttr}>
+                                            <video class="camera-plane-video" src="${base}/${entry.video}" muted playsinline
+                                                loop preload="metadata" aria-hidden="true"></video>
+                                            <canvas class="choir-camera-canvas" aria-label="3D reconstruction aligned to input camera"></canvas>
+                                            <div class="interaction-hint" aria-hidden="true">
+                                                <svg class="hint-arrow hint-arrow--up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M12 19V5M12 5L5 12M12 5L19 12"/>
+                                                </svg>
+                                                <svg class="hint-arrow hint-arrow--left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M19 12H5M5 12L12 19M5 12L12 5"/>
+                                                </svg>
+                                                <img src="assets/cursor-hand-icon.svg" alt="" class="hint-hand">
+                                                <svg class="hint-arrow hint-arrow--right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M5 12H19M19 12L12 19M19 12L12 5"/>
+                                                </svg>
+                                                <svg class="hint-arrow hint-arrow--down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M12 5V19M12 19L5 12M12 19L19 12"/>
+                                                </svg>
+                                            </div>
+                                            <div class="drag-explore-hint" aria-hidden="true">Drag to explore 3D</div>
+                                            <button class="mesh-reset-button" type="button"
+                                                data-viewer-id="ourMeshViewer${index}" aria-label="Reset 3D view">
+                                                Reset
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="our-results-col">
+                                    <div class="our-results-label">Rest Pose Contact</div>
+                                    <div class="our-results-media our-results-media--square">
+                                        <video class="our-results-heatmap-video" src="${base}/rest_palm_heatmap.mp4"
+                                            loop muted playsinline preload="metadata"></video>
+                                    </div>
+                                </div>
+                                <div class="our-results-scrubber">
+                                    <div class="our-results-scrubber-track">
+                                        <div class="our-results-scrubber-fill"></div>
+                                        <div class="our-results-scrubber-thumb"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            ${caption ? `
+                            <div class="our-results-caption-block">
+                                <div class="our-results-caption-label">Case Highlights</div>
+                                <p class="our-results-caption">${escapeHtml(caption)}</p>
+                            </div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+                cases = Array.from(document.querySelectorAll('.our-results-case'));
+                total.textContent = cases.length;
+                counter.textContent = cases.length ? 1 : 0;
+            }
+
+            async function initViewers() {
+                if (window.CHOIR_CAMERA_VIEWER_READY) {
+                    await window.CHOIR_CAMERA_VIEWER_READY;
+                }
+                document.querySelectorAll('.choir-camera-viewer').forEach((viewerEl, i) => {
+                    const caseEl = viewerEl.closest('.our-results-case');
+                    const videoId = caseEl && caseEl.dataset.videoId;
+                    const embeddedGlbs = typeof OUR_RESULTS_GLBS !== 'undefined' ? OUR_RESULTS_GLBS : null;
+                    const embeddedDataUrl = Array.isArray(embeddedGlbs)
+                        ? embeddedGlbs[i]
+                        : embeddedGlbs && videoId ? embeddedGlbs[videoId] : null;
+                    const src = embeddedDataUrl || viewerEl.dataset.glbSrc;
+                    if (!src) return;
+                    viewerEl.dataset.glbUrl = src;
+                });
+                ensureCaseViewer(cases[current]);
+            }
+
+            function ensureCaseViewer(caseEl) {
+                if (!caseEl || !window.createChoirCameraViewer) return null;
+                const viewerEl = caseEl.querySelector('.choir-camera-viewer');
+                if (!viewerEl) return null;
+                return window.createChoirCameraViewer(viewerEl);
+            }
+
+            function resetMeshViewer(viewer) {
+                if (!viewer) return;
+                if (viewer.choirViewer && viewer.choirViewer.resetView) {
+                    viewer.choirViewer.resetView();
+                }
+            }
+
+            function initMeshResetButtons() {
+                document.querySelectorAll('.mesh-reset-button').forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        resetMeshViewer(document.getElementById(button.dataset.viewerId));
+                    });
+                });
+            }
+
+            function initCameraPlaneVisibility() {
+                document.querySelectorAll('.choir-camera-viewer').forEach(viewer => {
+                    const caseEl = viewer.closest('.our-results-case');
+                    const cameraPlane = caseEl && caseEl.querySelector('.camera-plane-video');
+
+                    const hidePlane = () => {
+                        viewer.classList.add('is-dragged');
+                        if (viewer.choirViewer && viewer.choirViewer.hidePlane) {
+                            viewer.choirViewer.hidePlane();
+                        } else if (cameraPlane) {
+                            cameraPlane.classList.add('is-hidden');
+                        }
+                    };
+                    const canvas = viewer.querySelector('.choir-camera-canvas') || viewer;
+                    canvas.addEventListener('pointerdown', hidePlane);
+                    canvas.addEventListener('wheel', hidePlane, { passive: true });
+                    canvas.addEventListener('touchstart', hidePlane, { passive: true });
+                });
+            }
+
+            function applyCameraPlaneIntrinsics(video) {
+                const fx = Number(video.dataset.fx);
+                const fy = Number(video.dataset.fy);
+                const cx = Number(video.dataset.cx);
+                const cy = Number(video.dataset.cy);
+                const width = cx * 2;
+                const height = cy * 2;
+                if (![fx, fy, cx, cy, width, height].every(value => Number.isFinite(value) && value > 0)) {
+                    video.style.removeProperty('--plane-offset-x');
+                    video.style.removeProperty('--plane-offset-y');
+                    return;
+                }
+
+                const centeredFx = Math.max(fx, 1);
+                const centeredFy = Math.max(fy, 1);
+                const offsetX = (width / 2 - cx) / centeredFx;
+                const offsetY = (cy - height / 2) / centeredFy;
+                video.style.setProperty('--plane-offset-x', `${(offsetX * 100).toFixed(3)}%`);
+                video.style.setProperty('--plane-offset-y', `${(offsetY * 100).toFixed(3)}%`);
+
+            }
+
+            function initCameraPlanes() {
+                document.querySelectorAll('.camera-plane-video').forEach(video => {
+                    video.addEventListener('loadedmetadata', () => applyCameraPlaneIntrinsics(video), { once: true });
+                    applyCameraPlaneIntrinsics(video);
+                });
+            }
+
+            function syncReconstructionToVideo(caseEl) {
+                const video = caseEl.querySelector('.our-results-video');
+                const viewerEl = caseEl.querySelector('.choir-camera-viewer');
+                const cameraPlane = caseEl.querySelector('.camera-plane-video');
+                const heatmapVideo = caseEl.querySelector('.our-results-heatmap-video');
+                const scrubTrack = caseEl.querySelector('.our-results-scrubber-track');
+                const scrubFill = caseEl.querySelector('.our-results-scrubber-fill');
+                const scrubThumb = caseEl.querySelector('.our-results-scrubber-thumb');
+                if (!video || !viewerEl) return;
+
+                bindStageBadge(video, caseEl.dataset.stageSrc, Number(caseEl.dataset.fps || 30));
+
+                let scrubDragging = false;
+                let playbackFrame = null;
+
+                const updateScrubber = (t, dur) => {
+                    if (!scrubFill || !scrubThumb) return;
+                    const pct = (t / dur) * 100 + '%';
+                    scrubFill.style.width = pct;
+                    scrubThumb.style.left = pct;
+                };
+
+                const sync = (syncPlaneTime = true, timeOverride = null) => {
+                    if (!caseEl.classList.contains('is-active')) return;
+                    // Skip entirely while scrubbing — seekTo drives everything directly
+                    if (scrubDragging) return;
+                    const currentTime = Number.isFinite(timeOverride) ? timeOverride : video.currentTime;
+                    if (viewerEl.choirViewer && viewerEl.choirViewer.setTime) {
+                        viewerEl.choirViewer.setTime(currentTime);
+                    }
+                    if (cameraPlane) {
+                        const planeDuration = Number(cameraPlane.duration);
+                        const target = Number.isFinite(planeDuration) && planeDuration > 0
+                            ? Math.min(currentTime, Math.max(planeDuration - 0.02, 0))
+                            : currentTime;
+                        if (syncPlaneTime && Math.abs(cameraPlane.currentTime - target) > 0.04) {
+                            try { cameraPlane.currentTime = target; } catch (_) { }
+                        }
+                        if (video.paused) {
+                            if (!cameraPlane.paused) cameraPlane.pause();
+                        } else if (cameraPlane.paused) {
+                            cameraPlane.play().catch(() => { });
+                        }
+                    }
+                    if (heatmapVideo) {
+                        const heatDuration = Number(heatmapVideo.duration);
+                        const target = Number.isFinite(heatDuration) && heatDuration > 0
+                            ? Math.min(currentTime, Math.max(heatDuration - 0.02, 0))
+                            : currentTime;
+                        if (syncPlaneTime && Math.abs(heatmapVideo.currentTime - target) > 0.04) {
+                            try { heatmapVideo.currentTime = target; } catch (_) { }
+                        }
+                        if (video.paused) {
+                            if (!heatmapVideo.paused) heatmapVideo.pause();
+                        } else if (heatmapVideo.paused) {
+                            heatmapVideo.play().catch(() => { });
+                        }
+                    }
+                    const dur = video.duration;
+                    if (Number.isFinite(dur) && dur > 0) updateScrubber(currentTime, dur);
+                };
+
+                const stopPlaybackFrame = () => {
+                    if (playbackFrame !== null) {
+                        if (playbackFrame.type === 'video' && video.cancelVideoFrameCallback) {
+                            video.cancelVideoFrameCallback(playbackFrame.id);
+                        } else {
+                            cancelAnimationFrame(playbackFrame.id);
+                        }
+                        playbackFrame = null;
+                    }
+                };
+
+                const schedulePlaybackFrame = () => {
+                    if (playbackFrame !== null || video.paused || video.ended || !caseEl.classList.contains('is-active')) return;
+                    if (video.requestVideoFrameCallback) {
+                        playbackFrame = {
+                            type: 'video',
+                            id: video.requestVideoFrameCallback(tickVideoFrame)
+                        };
+                    } else {
+                        playbackFrame = {
+                            type: 'animation',
+                            id: requestAnimationFrame(tickAnimationFrame)
+                        };
+                    }
+                };
+
+                const tickVideoFrame = (_, metadata) => {
+                    playbackFrame = null;
+                    const mediaTime = metadata && Number.isFinite(metadata.mediaTime) ? metadata.mediaTime : null;
+                    sync(false, mediaTime);
+                    schedulePlaybackFrame();
+                };
+
+                const tickAnimationFrame = () => {
+                    playbackFrame = null;
+                    sync(false);
+                    schedulePlaybackFrame();
+                };
+
+                const startPlaybackFrame = () => {
+                    schedulePlaybackFrame();
+                };
+
+                video.addEventListener('play', () => {
+                    sync(true);
+                    startPlaybackFrame();
+                });
+                video.addEventListener('pause', () => {
+                    stopPlaybackFrame();
+                    sync(false);
+                    if (cameraPlane) cameraPlane.pause();
+                    if (heatmapVideo) heatmapVideo.pause();
+                });
+                video.addEventListener('seeked', () => sync(true));
+                video.addEventListener('timeupdate', () => sync(false));
+                if (cameraPlane) cameraPlane.addEventListener('loadedmetadata', () => sync(true));
+                if (heatmapVideo) heatmapVideo.addEventListener('loadedmetadata', () => sync(true));
+                sync(true);
+                if (!video.paused && caseEl.classList.contains('is-active')) startPlaybackFrame();
+
+                if (scrubTrack) {
+                    let wasPlaying = false;
+                    let pendingTime = null;
+                    let videoSeeking = false;
+                    let finishScrubAfterSeek = false;
+
+                    // Apply pendingTime to the video, but only when no seek is in flight.
+                    // While a seek is pending, the browser ignores subsequent currentTime
+                    // sets — they'd just queue and add lag. We coalesce them instead.
+                    const flushVideoSeek = () => {
+                        if (pendingTime === null || videoSeeking) return;
+                        const t = pendingTime;
+                        pendingTime = null;
+                        videoSeeking = true;
+                        video.currentTime = t;
+                    };
+                    const finishScrub = () => {
+                        sync(true);
+                        if (wasPlaying) video.play().catch(() => {});
+                        wasPlaying = false;
+                    };
+                    video.addEventListener('seeked', () => {
+                        videoSeeking = false;
+                        if (scrubDragging && pendingTime !== null) {
+                            flushVideoSeek();
+                            return;
+                        }
+                        if (finishScrubAfterSeek) {
+                            finishScrubAfterSeek = false;
+                            finishScrub();
+                        }
+                    });
+
+                    const seekTo = (clientX) => {
+                        const rect = scrubTrack.getBoundingClientRect();
+                        const frac = Math.max(0, Math.min((clientX - rect.left) / rect.width, 1));
+                        const dur = video.duration;
+                        if (!Number.isFinite(dur) || dur <= 0) return;
+                        const t = frac * dur;
+                        // Instant feedback: scrubber thumb + 3D mesh update every move.
+                        updateScrubber(t, dur);
+                        if (viewerEl.choirViewer && viewerEl.choirViewer.setTime) {
+                            viewerEl.choirViewer.setTime(t);
+                        }
+                        if (cameraPlane) {
+                            const planeDuration = Number(cameraPlane.duration);
+                            const planeTime = Number.isFinite(planeDuration) && planeDuration > 0
+                                ? Math.min(t, Math.max(planeDuration - 0.02, 0))
+                                : t;
+                            if (Math.abs(cameraPlane.currentTime - planeTime) > 0.04) {
+                                try { cameraPlane.currentTime = planeTime; } catch (_) { }
+                            }
+                        }
+                        if (heatmapVideo) {
+                            const heatDuration = Number(heatmapVideo.duration);
+                            const heatTime = Number.isFinite(heatDuration) && heatDuration > 0
+                                ? Math.min(t, Math.max(heatDuration - 0.02, 0))
+                                : t;
+                            if (Math.abs(heatmapVideo.currentTime - heatTime) > 0.04) {
+                                try { heatmapVideo.currentTime = heatTime; } catch (_) { }
+                            }
+                        }
+                        // Coalesce video seeks to one in flight at a time.
+                        pendingTime = t;
+                        flushVideoSeek();
+                    };
+                    const startDrag = (clientX) => {
+                        scrubDragging = true;
+                        wasPlaying = !video.paused;
+                        video.pause();
+                        if (cameraPlane) cameraPlane.pause();
+                        if (heatmapVideo) heatmapVideo.pause();
+                        seekTo(clientX);
+                    };
+                    const endDrag = () => {
+                        if (!scrubDragging) return;
+                        scrubDragging = false;
+                        // Make sure the final position is applied
+                        if (pendingTime !== null && !videoSeeking) flushVideoSeek();
+                        if (videoSeeking) {
+                            finishScrubAfterSeek = true;
+                        } else {
+                            finishScrub();
+                        }
+                    };
+                    scrubTrack.addEventListener('mousedown', (e) => {
+                        startDrag(e.clientX); e.preventDefault();
+                    });
+                    window.addEventListener('mousemove', (e) => { if (scrubDragging) seekTo(e.clientX); });
+                    window.addEventListener('mouseup', endDrag);
+                    scrubTrack.addEventListener('touchstart', (e) => {
+                        startDrag(e.touches[0].clientX); e.preventDefault();
+                    }, { passive: false });
+                    window.addEventListener('touchmove', (e) => { if (scrubDragging) seekTo(e.touches[0].clientX); });
+                    window.addEventListener('touchend', endDrag);
+                }
+            }
+
+            function showCase(idx) {
+                if (!cases.length) return;
+                cases[current].classList.remove('is-active');
+                const oldVid = cases[current].querySelector('.our-results-video');
+                if (oldVid) { oldVid.pause(); oldVid.currentTime = 0; }
+                const oldPlane = cases[current].querySelector('.camera-plane-video');
+                if (oldPlane) { oldPlane.pause(); oldPlane.currentTime = 0; }
+                const oldHeat = cases[current].querySelector('.our-results-heatmap-video');
+                if (oldHeat) { oldHeat.pause(); oldHeat.currentTime = 0; }
+
+                current = (idx + cases.length) % cases.length;
+                cases[current].classList.add('is-active');
+                counter.textContent = current + 1;
+
+                const newVid = cases[current].querySelector('.our-results-video');
+                if (newVid) newVid.play().catch(() => { });
+                const newViewer = cases[current].querySelector('.choir-camera-viewer');
+                if (newViewer) newViewer.classList.remove('is-dragged');
+                const viewerInstance = ensureCaseViewer(cases[current]);
+                if (newViewer && viewerInstance) {
+                    viewerInstance.resetView();
+                    viewerInstance.setTime(newVid ? newVid.currentTime : 0);
+                }
+                const newPlane = cases[current].querySelector('.camera-plane-video');
+                if (newPlane) {
+                    try { newPlane.currentTime = newVid ? newVid.currentTime : 0; } catch (_) { }
+                    newPlane.play().catch(() => { });
+                }
+                const newHeat = cases[current].querySelector('.our-results-heatmap-video');
+                if (newHeat) {
+                    try { newHeat.currentTime = newVid ? newVid.currentTime : 0; } catch (_) { }
+                    newHeat.play().catch(() => { });
+                }
+            }
+
+            async function initOurResultsCarousel() {
+                buildOurResultsCases(await loadOurResultsCases());
+                await initViewers();
+                initMeshResetButtons();
+                initCameraPlaneVisibility();
+                initCameraPlanes();
+                cases.forEach(caseEl => syncReconstructionToVideo(caseEl));
+                attachVideoHoverControls(casesRoot);
+                const firstVid = cases[0] && cases[0].querySelector('.our-results-video');
+                if (firstVid) firstVid.play().catch(() => { });
+            }
+
+            prevButton.addEventListener('click', () => showCase(current - 1));
+            nextButton.addEventListener('click', () => showCase(current + 1));
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') showCase(current - 1);
+                if (e.key === 'ArrowRight') showCase(current + 1);
+            });
+
+            initOurResultsCarousel();
+        })();
+    </script>
+    <script>
+        (function () {
+            const BIMANUAL_ROOT = 'assets/ours_bimanual_interactive';
+            const casesEl = document.getElementById('challengingCasesList');
+            if (!casesEl) return;
+            const manifest = window.BIMANUAL_MANIFEST_DATA || [];
+            if (!manifest.length) {
+                casesEl.innerHTML = '<p class="section-desc" style="text-align:center;padding:1rem 0">Challenging case demos coming soon.</p>';
+                return;
+            }
+
+            function esc(v) {
+                return String(v || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+            }
+
+            casesEl.innerHTML = manifest.map((entry, index) => {
+                const base = `${BIMANUAL_ROOT}/${entry.id}`;
+                const intr = entry.intrinsics || null;
+                const intrAttr = intr ? `data-fx="${intr.fx}" data-fy="${intr.fy}" data-cx="${intr.cx}" data-cy="${intr.cy}"` : '';
+                const imgW = intr ? intr.cx * 2 : 1920;
+                const imgH = intr ? intr.cy * 2 : 1080;
+                const caption = entry.caption || '';
+                return `<div class="bimanual-case" data-case="${index}" data-video-id="${esc(entry.id)}">${caption ? `<div class="bimanual-case-header"><span class="bimanual-case-badge">${esc(caption)}</span></div>` : ''}<div class="our-results-grid our-results-grid--bimanual"><div class="our-results-col"><div class="our-results-label">Input Video</div><div class="our-results-media"><video class="our-results-video" src="${base}/${esc(entry.video)}" loop muted playsinline preload="metadata"></video></div></div><div class="our-results-col"><div class="our-results-label">Reconstructed Mesh</div><div class="our-results-media"><div id="bimanualViewer${index}" class="choir-camera-viewer" data-video-id="${esc(entry.id)}" data-glb-src="${base}/${esc(entry.glb)}" data-hand-color="#e7b79f" data-object-color="#6f8faa" data-image-width="${imgW}" data-image-height="${imgH}" ${intrAttr}><video class="camera-plane-video" src="${base}/${esc(entry.video)}" muted playsinline loop preload="metadata" aria-hidden="true"></video><canvas class="choir-camera-canvas" aria-label="3D reconstruction"></canvas><div class="drag-explore-hint" aria-hidden="true">Drag to explore 3D</div><button class="mesh-reset-button" type="button" data-viewer-id="bimanualViewer${index}" aria-label="Reset 3D view">Reset</button></div></div></div><div class="our-results-col"><div class="our-results-label">Contact</div><div class="our-results-media our-results-media--square bimanual-heatmap-media"><video class="bimanual-heatmap-video" data-hand="left" src="${base}/left_rest_palm_heatmap.mp4" loop muted playsinline preload="metadata"></video></div><div class="our-results-media our-results-media--square bimanual-heatmap-media"><video class="bimanual-heatmap-video" data-hand="right" src="${base}/right_rest_palm_heatmap.mp4" loop muted playsinline preload="metadata"></video></div></div><div class="our-results-scrubber"><div class="our-results-scrubber-track"><div class="our-results-scrubber-fill"></div><div class="our-results-scrubber-thumb"></div></div></div></div></div>`;
+            }).join('<div class="bimanual-divider"></div>');
+
+            function syncBimanualCase(caseEl) {
+                const video = caseEl.querySelector('.our-results-video');
+                const viewerEl = caseEl.querySelector('.choir-camera-viewer');
+                const cameraPlane = caseEl.querySelector('.camera-plane-video');
+                const heatmaps = Array.from(caseEl.querySelectorAll('.bimanual-heatmap-video'));
+                const scrubTrack = caseEl.querySelector('.our-results-scrubber-track');
+                const scrubFill = caseEl.querySelector('.our-results-scrubber-fill');
+                const scrubThumb = caseEl.querySelector('.our-results-scrubber-thumb');
+                if (!video || !viewerEl) return;
+                let scrubDragging = false, playbackFrame = null;
+
+                const followers = [cameraPlane, ...heatmaps].filter(Boolean);
+
+                const updateScrubber = (t, dur) => {
+                    if (!scrubFill || !scrubThumb) return;
+                    const pct = (t / dur) * 100 + '%';
+                    scrubFill.style.width = pct;
+                    scrubThumb.style.left = pct;
+                };
+                const syncFollower = (follower, t) => {
+                    const fd = Number(follower.duration);
+                    const ft = Number.isFinite(fd) && fd > 0 ? Math.min(t, Math.max(fd - 0.02, 0)) : t;
+                    if (Math.abs(follower.currentTime - ft) > 0.04) try { follower.currentTime = ft; } catch (_) {}
+                    if (video.paused) { if (!follower.paused) follower.pause(); }
+                    else if (follower.paused) follower.play().catch(() => {});
+                };
+                const sync = (syncTime = true, tOverride = null) => {
+                    if (scrubDragging) return;
+                    const t = Number.isFinite(tOverride) ? tOverride : video.currentTime;
+                    if (viewerEl.choirViewer && viewerEl.choirViewer.setTime) viewerEl.choirViewer.setTime(t);
+                    if (syncTime) followers.forEach(f => syncFollower(f, t));
+                    const dur = video.duration;
+                    if (Number.isFinite(dur) && dur > 0) updateScrubber(t, dur);
+                };
+                const stopFrame = () => {
+                    if (!playbackFrame) return;
+                    if (playbackFrame.type === 'video' && video.cancelVideoFrameCallback) video.cancelVideoFrameCallback(playbackFrame.id);
+                    else cancelAnimationFrame(playbackFrame.id);
+                    playbackFrame = null;
+                };
+                const scheduleFrame = () => {
+                    if (playbackFrame || video.paused || video.ended) return;
+                    if (video.requestVideoFrameCallback) {
+                        playbackFrame = { type: 'video', id: video.requestVideoFrameCallback((_, meta) => { playbackFrame = null; sync(false, meta && Number.isFinite(meta.mediaTime) ? meta.mediaTime : null); scheduleFrame(); }) };
+                    } else {
+                        playbackFrame = { type: 'animation', id: requestAnimationFrame(() => { playbackFrame = null; sync(false); scheduleFrame(); }) };
+                    }
+                };
+                video.addEventListener('play', () => { sync(true); scheduleFrame(); });
+                video.addEventListener('pause', () => { stopFrame(); sync(false); followers.forEach(f => f.pause()); });
+                video.addEventListener('timeupdate', () => sync(false));
+                followers.forEach(f => f.addEventListener('loadedmetadata', () => sync(true)));
+                sync(true);
+
+                if (!scrubTrack) return;
+                let wasPlaying = false, pendingTime = null, videoSeeking = false, finishAfterSeek = false;
+                const flushSeek = () => {
+                    if (pendingTime === null || videoSeeking) return;
+                    const t = pendingTime; pendingTime = null; videoSeeking = true; video.currentTime = t;
+                };
+                const finishScrub = () => { sync(true); if (wasPlaying) video.play().catch(() => {}); wasPlaying = false; };
+                video.addEventListener('seeked', () => {
+                    videoSeeking = false;
+                    if (scrubDragging && pendingTime !== null) { flushSeek(); return; }
+                    if (finishAfterSeek) { finishAfterSeek = false; finishScrub(); return; }
+                    sync(true);
+                });
+                const seekTo = (clientX) => {
+                    const rect = scrubTrack.getBoundingClientRect();
+                    const frac = Math.max(0, Math.min((clientX - rect.left) / rect.width, 1));
+                    const dur = video.duration;
+                    if (!Number.isFinite(dur) || dur <= 0) return;
+                    const t = frac * dur;
+                    updateScrubber(t, dur);
+                    if (viewerEl.choirViewer && viewerEl.choirViewer.setTime) viewerEl.choirViewer.setTime(t);
+                    followers.forEach(f => {
+                        const fd = Number(f.duration);
+                        const ft = Number.isFinite(fd) && fd > 0 ? Math.min(t, Math.max(fd - 0.02, 0)) : t;
+                        if (Math.abs(f.currentTime - ft) > 0.04) try { f.currentTime = ft; } catch (_) {}
+                    });
+                    pendingTime = t; flushSeek();
+                };
+                const startDrag = (cx) => { scrubDragging = true; wasPlaying = !video.paused; video.pause(); followers.forEach(f => f.pause()); seekTo(cx); };
+                const endDrag = () => {
+                    if (!scrubDragging) return; scrubDragging = false;
+                    if (pendingTime !== null && !videoSeeking) flushSeek();
+                    if (videoSeeking) finishAfterSeek = true; else finishScrub();
+                };
+                scrubTrack.addEventListener('mousedown', (e) => { startDrag(e.clientX); e.preventDefault(); });
+                window.addEventListener('mousemove', (e) => { if (scrubDragging) seekTo(e.clientX); });
+                window.addEventListener('mouseup', endDrag);
+                scrubTrack.addEventListener('touchstart', (e) => { startDrag(e.touches[0].clientX); e.preventDefault(); }, { passive: false });
+                window.addEventListener('touchmove', (e) => { if (scrubDragging) seekTo(e.touches[0].clientX); });
+                window.addEventListener('touchend', endDrag);
+            }
+
+            async function initBimanualSection() {
+                if (window.CHOIR_CAMERA_VIEWER_READY) await window.CHOIR_CAMERA_VIEWER_READY;
+                casesEl.querySelectorAll('.choir-camera-viewer').forEach(viewerEl => {
+                    const videoId = viewerEl.dataset.videoId;
+                    const src = (window.BIMANUAL_GLBS && window.BIMANUAL_GLBS[videoId]) || viewerEl.dataset.glbSrc;
+                    if (src) viewerEl.dataset.glbUrl = src;
+                });
+                casesEl.querySelectorAll('.choir-camera-viewer').forEach(viewerEl => {
+                    if (window.createChoirCameraViewer) window.createChoirCameraViewer(viewerEl);
+                });
+                casesEl.querySelectorAll('.mesh-reset-button').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault(); e.stopPropagation();
+                        const v = document.getElementById(btn.dataset.viewerId);
+                        if (v && v.choirViewer && v.choirViewer.resetView) v.choirViewer.resetView();
+                    });
+                });
+                casesEl.querySelectorAll('.choir-camera-viewer').forEach(viewerEl => {
+                    const hidePlane = () => {
+                        viewerEl.classList.add('is-dragged');
+                        if (viewerEl.choirViewer && viewerEl.choirViewer.hidePlane) viewerEl.choirViewer.hidePlane();
+                    };
+                    const canvas = viewerEl.querySelector('.choir-camera-canvas') || viewerEl;
+                    canvas.addEventListener('pointerdown', hidePlane);
+                    canvas.addEventListener('wheel', hidePlane, { passive: true });
+                    canvas.addEventListener('touchstart', hidePlane, { passive: true });
+                });
+                casesEl.querySelectorAll('.bimanual-case').forEach(caseEl => syncBimanualCase(caseEl));
+                casesEl.querySelectorAll('.our-results-video, .bimanual-heatmap-video').forEach(v => v.play().catch(() => {}));
+            }
+
+            initBimanualSection();
+        })();
+    </script>
+</body>
+
+</html>

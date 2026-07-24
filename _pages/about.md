@@ -17,6 +17,7 @@ I am a fourth-year Ph.D. student at the CSE Department, the Chinese University o
 # News
 
 <div class="news-scroll" markdown="1">
+- *2026.07*: &nbsp; CHOIR is accepted to SIGGRAPH 2026.
 - *2026.02*: &nbsp; LaS-Comp is accepted to CVPR 2026.
 - *2026.01*: &nbsp; One paper is accepted to IJCV.
 - *2026.01*: &nbsp; One paper is accepted to ICLR 2026.
@@ -27,6 +28,20 @@ I am a fourth-year Ph.D. student at the CSE Department, the Chinese University o
 # Publications
 
 **2026**
+<!-- ######################################################### -->
+<div class='paper-box'><div class='paper-box-image'><img src='collections/2026_CHOIR/assets/images/teaser.png' alt="CHOIR teaser" width="100%"></div>
+<div class='paper-box-text' markdown="1">
+
+**CHOIR: Contact-aware 4D Hand-Object Interaction Reconstruction**
+
+*ACM Transactions on Graphics (**ACM TOG**), **SIGGRAPH**, 2026*
+
+**Hao Xu**, Yilin Liu, Yinqiao Wang, Chi-Wing Fu, Niloy J. Mitra
+
+[Project Page](collections/2026_CHOIR/index.html) \| [Paper](collections/2026_CHOIR/CHOIR.pdf) \| [BibTex](collections/2026_CHOIR/CHOIR.md)
+</div>
+</div>
+
 <!-- ######################################################### -->
 <div class='paper-box'><div class='paper-box-image'><img src='collections/2026_LaS-Comp/Las-Comp.png' alt="sym" width="100%"></div>
 <div class='paper-box-text' markdown="1">
