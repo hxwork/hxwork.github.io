@@ -1,0 +1,718 @@
+{
+  "datasets": [
+    {
+      "id": "Self-captured",
+      "label": "Self-captured",
+      "base": "assets/ours_gallery/In-the-wild",
+      "items": [
+        {
+          "id": "IMG_5050",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 73,
+          "caption": "The right hand is picking up a bottle of juice."
+        },
+        {
+          "id": "IMG_5132",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 74,
+          "caption": "The right hand picks up the glass bottle."
+        },
+        {
+          "id": "IMG_5136",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 75,
+          "caption": "The right hand picks up a black watch from the desk."
+        },
+        {
+          "id": "IMG_5140",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 76,
+          "caption": "The right hand is picking up a protein bar."
+        },
+        {
+          "id": "IMG_5141",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 77,
+          "caption": "The right hand is picking up a protein bar."
+        },
+        {
+          "id": "IMG_5143",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 78,
+          "caption": "The right hand picks up the white object from the wooden desk."
+        },
+        {
+          "id": "IMG_5144",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 79,
+          "caption": "The right hand picks up the white figurine from the wooden desk."
+        },
+        {
+          "id": "IMG_5145",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 80,
+          "caption": "The right hand picks up the red mug."
+        },
+        {
+          "id": "IMG_5148",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 81,
+          "caption": "The right hand is picking up a glass bottle."
+        },
+        {
+          "id": "IMG_5149",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 82,
+          "caption": "The right hand picks up the glass bottle."
+        },
+        {
+          "id": "IMG_5167",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 83,
+          "caption": "The right hand picks up a bottle of beer from the counter."
+        },
+        {
+          "id": "IMG_5169",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 84,
+          "caption": "The right hand picks up the yellow sponge."
+        },
+        {
+          "id": "IMG_5170",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 85,
+          "caption": "The left hand picks up the black mug."
+        },
+        {
+          "id": "IMG_5171",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 86,
+          "caption": "The left hand is picking up a bottle of Peroni beer."
+        },
+        {
+          "id": "IMG_5174",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 87,
+          "caption": "The left hand picks up a packet of Weetabix from the white bin."
+        },
+        {
+          "id": "IMG_5183",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 88,
+          "caption": "The left hand is picking up a purple billiard ball from the tray."
+        },
+        {
+          "id": "IMG_5186",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 89,
+          "caption": "The right hand is grasping a white hanger."
+        },
+        {
+          "id": "IMG_5188",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 90,
+          "caption": "The right hand picks up a wine glass."
+        },
+        {
+          "id": "IMG_5197",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 91,
+          "caption": "The right hand is picking up the computer mouse."
+        },
+        {
+          "id": "IMG_5205",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 92,
+          "caption": "The left hand is picking up a bag of Galaxy chocolate from the black wire basket."
+        },
+        {
+          "id": "IMG_5212",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 93,
+          "caption": "The right hand picks up a black cup from the drip tray of the coffee machine."
+        },
+        {
+          "id": "IMG_5217",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 94,
+          "caption": "The right hand picks up the glass."
+        },
+        {
+          "id": "IMG_5218",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 95,
+          "caption": "The right hand picks up a glass bottle from the counter."
+        },
+        {
+          "id": "IMG_5219",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 96,
+          "caption": "The right hand picks up a tall glass from the counter."
+        },
+        {
+          "id": "IMG_5221",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 97,
+          "caption": "The left hand picks up a clear glass from the counter."
+        },
+        {
+          "id": "IMG_5224",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 98,
+          "caption": "The right hand is picking up a bag of Pipers Sweet Chilli crisps from a wooden shelf."
+        },
+        {
+          "id": "IMG_5228",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 99,
+          "caption": "The right hand is picking up the spray bottle."
+        },
+        {
+          "id": "IMG_5229",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 100,
+          "caption": "The right hand picks up the roll of red tape."
+        },
+        {
+          "id": "IMG_5232",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 101,
+          "caption": "The right hand picks up the scissors."
+        },
+        {
+          "id": "IMG_5233",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 102,
+          "caption": "The right hand picks up a book from the shelf."
+        }
+      ]
+    },
+    {
+      "id": "TASTE-Rob",
+      "label": "TASTE-Rob",
+      "base": "assets/ours_gallery/TasteRob",
+      "items": [
+        {
+          "id": "41681",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 48,
+          "caption": "The left hand uses a spatula to pick up a potato from the red pot."
+        },
+        {
+          "id": "42613",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 50,
+          "caption": "The left hand picks up the spatula."
+        },
+        {
+          "id": "42891",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 51,
+          "caption": "The left hand picks up a spatula."
+        },
+        {
+          "id": "37557",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 41,
+          "caption": "The left hand is picking up a white tube from the table."
+        },
+        {
+          "id": "37612",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 42,
+          "caption": "The right hand picks up a pink bottle from the table."
+        },
+        {
+          "id": "86176",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 69,
+          "caption": "The right hand is picking up the blue and white teapot."
+        },
+        {
+          "id": "87714",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 70,
+          "caption": "The right hand is picking up the white teapot."
+        },
+        {
+          "id": "94915",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 71,
+          "caption": "The right hand is picking up the small frying pan."
+        },
+        {
+          "id": "107407",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 72,
+          "caption": "The left hand is lifting a black pan."
+        },
+        {
+          "id": "594",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 0,
+          "caption": "The left hand picks up the purple cap."
+        },
+        {
+          "id": "1654",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 1,
+          "caption": "The right hand picks up a small pink object."
+        },
+        {
+          "id": "1856",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 2,
+          "caption": "The right hand picks up a small white object from the desk."
+        },
+        {
+          "id": "2999",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 3,
+          "caption": "The right hand is picking up a purple calculator."
+        },
+        {
+          "id": "3075",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 4,
+          "caption": "The left hand is picking up the blue calculator."
+        },
+        {
+          "id": "3088",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 5,
+          "caption": "The right hand picks up the green cup."
+        },
+        {
+          "id": "3129",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 6,
+          "caption": "The right hand picks up the dark green thermos."
+        },
+        {
+          "id": "3470",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 7,
+          "caption": "The right hand picks up the white bottle."
+        },
+        {
+          "id": "4314",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 8,
+          "caption": "The left hand picks up a black watch."
+        },
+        {
+          "id": "4606",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 9,
+          "caption": "The left hand picks up the pink scissors."
+        },
+        {
+          "id": "5040",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 10,
+          "caption": "The right hand is picking up the smartphone."
+        },
+        {
+          "id": "5147",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 11,
+          "caption": "The right hand is picking up a white remote control."
+        },
+        {
+          "id": "5850",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 12,
+          "caption": "The left hand picks up the white tube."
+        },
+        {
+          "id": "7866",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 13,
+          "caption": "The right hand picks up a white object from the open book."
+        },
+        {
+          "id": "8141",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 14,
+          "caption": "The left hand picks up the red watch from the open book."
+        },
+        {
+          "id": "8295",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 15,
+          "caption": "The right hand is picking up a white smartphone from an open drawer."
+        },
+        {
+          "id": "9460",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 16,
+          "caption": "The right hand is picking up a white bowl."
+        },
+        {
+          "id": "11272",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 17,
+          "caption": "The right hand picks up the jar."
+        },
+        {
+          "id": "11640",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 18,
+          "caption": "The right hand is picking up a green plastic tool."
+        },
+        {
+          "id": "11996",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 19,
+          "caption": "The right hand picks up a white bowl."
+        },
+        {
+          "id": "12966",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 20,
+          "caption": "The right hand is picking up a small white bowl."
+        },
+        {
+          "id": "15880",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 21,
+          "caption": "The left hand picks up a small white bowl."
+        },
+        {
+          "id": "15951",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 22,
+          "caption": "The left hand picks up a white bowl."
+        },
+        {
+          "id": "16504",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 23,
+          "caption": "The right hand is picking up a white spoon."
+        },
+        {
+          "id": "16546",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 24,
+          "caption": "The right hand picks up the wooden spatula."
+        },
+        {
+          "id": "16584",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 25,
+          "caption": "The right hand picks up the blue whisk."
+        },
+        {
+          "id": "18461",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 26,
+          "caption": "The right hand picks up a spoon from a red bowl."
+        },
+        {
+          "id": "21276",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 27,
+          "caption": "The left hand picks up the carrot."
+        },
+        {
+          "id": "24232",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 28,
+          "caption": "The left hand picks up a tomato from a plastic bag."
+        },
+        {
+          "id": "24506",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 29,
+          "caption": "The right hand picks up the tomato from the white plate and places it into the blue patterned bowl."
+        },
+        {
+          "id": "24736",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 30,
+          "caption": "The left hand picks up a potato from a blue and white bowl and places it into a white bowl with apple patterns."
+        },
+        {
+          "id": "24752",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 31,
+          "caption": "The right hand picks up a potato."
+        },
+        {
+          "id": "24817",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 32,
+          "caption": "The right hand picks up a potato from a plastic container."
+        },
+        {
+          "id": "25012",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 33,
+          "caption": "The left hand is picking up a garlic from the small white bowl."
+        },
+        {
+          "id": "25962",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 34,
+          "caption": "The left hand is placing a piece of broccoli into the pan."
+        },
+        {
+          "id": "26832",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 35,
+          "caption": "The right hand picks up the piece of food from the pan."
+        },
+        {
+          "id": "26971",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 36,
+          "caption": "The right hand picks up a carrot."
+        },
+        {
+          "id": "29687",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 37,
+          "caption": "The right hand picks up a tomato from the table and places it on the black pan."
+        },
+        {
+          "id": "34192",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 38,
+          "caption": "The right hand is picking up a wooden spatula to place the food into the frying pan."
+        },
+        {
+          "id": "34439",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 39,
+          "caption": "The right hand picks up the wooden spatula to place the carrot into the frying pan."
+        },
+        {
+          "id": "35114",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 40,
+          "caption": "The right hand picks up a small pink bottle."
+        },
+        {
+          "id": "39252",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 44,
+          "caption": "The left hand uses a spatula to scoop an egg from the pan and place it into a bowl."
+        },
+        {
+          "id": "39754",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 45,
+          "caption": "The left hand uses a spatula to pick up a piece of food from a red pot."
+        },
+        {
+          "id": "40069",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 46,
+          "caption": "The left hand picks up a spatula."
+        },
+        {
+          "id": "41410",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 47,
+          "caption": "The left hand uses a spatula to place a piece of food into the pot."
+        },
+        {
+          "id": "52145",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 52,
+          "caption": "The right hand is picking up a blue brush from the pink basket."
+        },
+        {
+          "id": "77256",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 53,
+          "caption": "The right hand picks up the pink cup."
+        },
+        {
+          "id": "79255",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 55,
+          "caption": "The left hand picks up the pink mug."
+        },
+        {
+          "id": "80155",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 56,
+          "caption": "The left hand is picking up the white teapot."
+        },
+        {
+          "id": "80276",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 57,
+          "caption": "The right hand picks up the white teapot."
+        },
+        {
+          "id": "81088",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 58,
+          "caption": "The right hand picks up the pink teapot."
+        },
+        {
+          "id": "81244",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 59,
+          "caption": "The right hand is picking up the pink teapot."
+        },
+        {
+          "id": "81471",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 60,
+          "caption": "The right hand picks up the white teapot."
+        },
+        {
+          "id": "81504",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 61,
+          "caption": "The right hand is picking up the pink thermos."
+        },
+        {
+          "id": "82546",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 62,
+          "caption": "The right hand picks up the pink teapot."
+        },
+        {
+          "id": "83133",
+          "object_color": "#8E44AD",
+          "object_palette_index": 3,
+          "object_global_color_index": 63,
+          "caption": "The right hand is picking up the pink watering can."
+        },
+        {
+          "id": "83139",
+          "object_color": "#2BB3A3",
+          "object_palette_index": 4,
+          "object_global_color_index": 64,
+          "caption": "The right hand is picking up the pink teapot."
+        },
+        {
+          "id": "84240",
+          "object_color": "#2F3A4A",
+          "object_palette_index": 5,
+          "object_global_color_index": 65,
+          "caption": "The left hand picks up the white teapot."
+        },
+        {
+          "id": "84344",
+          "object_color": "#F28C38",
+          "object_palette_index": 0,
+          "object_global_color_index": 66,
+          "caption": "The right hand is picking up the white teapot."
+        },
+        {
+          "id": "84499",
+          "object_color": "#E85D75",
+          "object_palette_index": 1,
+          "object_global_color_index": 67,
+          "caption": "The right hand picks up the pink teapot."
+        },
+        {
+          "id": "85108",
+          "object_color": "#F2B705",
+          "object_palette_index": 2,
+          "object_global_color_index": 68,
+          "caption": "The right hand is picking up the white teapot."
+        }
+      ]
+    }
+  ]
+}
