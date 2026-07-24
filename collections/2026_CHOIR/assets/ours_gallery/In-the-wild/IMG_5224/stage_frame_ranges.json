@@ -1,0 +1,32 @@
+{
+    "0-1_start_static": {
+        "sampled_start": 0,
+        "sampled_end": 1,
+        "original_start": 0,
+        "original_end": 4
+    },
+    "1-2_approaching": {
+        "sampled_start": 1,
+        "sampled_end": 1,
+        "original_start": 4,
+        "original_end": 4
+    },
+    "2-3_interaction": {
+        "sampled_start": 0,
+        "sampled_end": 64,
+        "original_start": 0,
+        "original_end": 256
+    },
+    "3-4_releasing": {
+        "sampled_start": 64,
+        "sampled_end": 64,
+        "original_start": 256,
+        "original_end": 256
+    },
+    "4-5_end_static": {
+        "sampled_start": 64,
+        "sampled_end": 64,
+        "original_start": 256,
+        "original_end": 256
+    }
+}

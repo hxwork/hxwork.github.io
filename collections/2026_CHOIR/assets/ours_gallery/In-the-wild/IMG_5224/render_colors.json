@@ -1,0 +1,17 @@
+{
+  "video_id": "IMG_5224",
+  "method": "ours_TasteRob",
+  "hand_color": "#4A83D8",
+  "background_color": "#FFFFFF",
+  "object_color": "#F2B705",
+  "object_palette_index": 2,
+  "object_global_color_index": 98,
+  "object_palette": [
+    "#F28C38",
+    "#E85D75",
+    "#F2B705",
+    "#8E44AD",
+    "#2BB3A3",
+    "#2F3A4A"
+  ]
+}
