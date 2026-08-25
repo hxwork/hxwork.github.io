@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>CHOIR: Contact-aware 4D Hand-Object Interaction Reconstruction</title>
+    <title>Open-CHOIR: Open-World Contact-Aware 4D Hand–Object Interaction Reconstruction</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
         <!-- HERO CARD -->
         <header class="hero">
             <div class="hero-card">
-                <h1>CHOIR: Contact-aware 4D Hand-Object Interaction Reconstruction</h1>
+                <h1>Open-CHOIR: Open-World Contact-Aware 4D Hand–Object Interaction Reconstruction</h1>
                 <p class="authors">
                     <span class="author">Hao Xu<sup>1</sup></span>
                     <span class="author">Yilin Liu<sup>2</sup></span>
@@ -36,18 +36,18 @@
         <main>
             <section id="overview" class="section overview-section">
                 <figure class="teaser-figure">
-                    <img src="assets/images/teaser.png" alt="CHOIR teaser results">
+                    <img src="assets/images/teaser.png" alt="Open-CHOIR teaser results">
                 </figure>
                 <div class="abstract-block">
                     <p>
                         We ask whether everyday open-world monocular videos can be turned into reusable 4D
                         interaction primitives: articulated hand motion, object shape with 6D pose over time, and
-                        the when/where of contact. We present CHOIR, a Contact-aware HOI Reconstruction framework
-                        that uses contact as an explicit coupling signal between hands and objects. CHOIR initializes
+                        the when/where of contact. We present Open-CHOIR, an open-world, contact-aware HOI reconstruction framework
+                        that uses contact as an explicit coupling signal between hands and objects. Open-CHOIR initializes
                         a coarse 4D HOI sequence from open-world visual priors, rectifies hand-object placement with
                         a <em>generative HOI spatial rectification</em> module, and refines the result through
                         contact-aware joint optimization. Experiments on controlled and challenging videos show that
-                        CHOIR improves object reconstruction, physical plausibility, and temporal consistency over
+                        Open-CHOIR improves object reconstruction, physical plausibility, and temporal consistency over
                         state-of-the-art methods.
                     </p>
                 </div>
@@ -268,7 +268,7 @@
             const COMPARE_METHODS = [
                 { method: 'HOLD', label: 'HOLD', labelClass: 'hold-label', viewClass: 'hold-view-label' },
                 { method: 'MagicHOI', label: 'MagicHOI', labelClass: 'magichoi-label', viewClass: 'magichoi-view-label' },
-                { method: 'ours', label: 'CHOIR (ours)', labelClass: 'ours-label', viewClass: 'ours-view-label' }
+                { method: 'ours', label: 'Open-CHOIR (ours)', labelClass: 'ours-label', viewClass: 'ours-view-label' }
             ];
             const fallbackCases = ['sequence_1', 'sequence_2', 'sequence_3', 'sequence_4'].map((id, idx) => ({
                 id,
