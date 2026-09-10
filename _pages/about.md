@@ -17,7 +17,7 @@ I am a fourth-year Ph.D. student at the CSE Department, the Chinese University o
 # News
 
 <div class="news-scroll" markdown="1">
-- *2026.08*: &nbsp; Open-CHOIR is conditionally accepted to SIGGRAPH Asia 2026.
+- *2026.08*: &nbsp; Open-CHOIR is accepted to SIGGRAPH Asia 2026.
 - *2026.08*: &nbsp; ATOM is accepted to UIST 2026.
 - *2026.02*: &nbsp; LaS-Comp is accepted to CVPR 2026.
 - *2026.01*: &nbsp; One paper is accepted to IJCV.
@@ -35,7 +35,7 @@ I am a fourth-year Ph.D. student at the CSE Department, the Chinese University o
 
 **Open-CHOIR: Open-World Contact-Aware 4D Hand–Object Interaction Reconstruction**
 
-*ACM Transactions on Graphics (**ACM TOG**), **SIGGRAPH Asia**, 2026 (conditionally accepted)*
+*ACM Transactions on Graphics (**ACM TOG**), **SIGGRAPH Asia**, 2026*
 
 **Hao Xu**, Yilin Liu, Yinqiao Wang, Chi-Wing Fu, Niloy J. Mitra
 
