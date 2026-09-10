@@ -39,7 +39,7 @@ I am a fourth-year Ph.D. student at the CSE Department, the Chinese University o
 
 **Hao Xu**, Yilin Liu, Yinqiao Wang, Chi-Wing Fu, Niloy J. Mitra
 
-[Project Page](collections/2026_CHOIR/index.html) \| [Paper](https://arxiv.org/abs/2605.20992) \| [BibTex](collections/2026_CHOIR/CHOIR.md)
+[Project Page](collections/2026_CHOIR/index.html) \| [Paper](https://arxiv.org/abs/2605.20992) \| [Code](https://github.com/hxwork/CHOIR) \| [BibTex](collections/2026_CHOIR/CHOIR.md)
 </div>
 </div>
 

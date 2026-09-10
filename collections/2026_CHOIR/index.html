@@ -3,21 +3,39 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Open-CHOIR: Open-World Contact-Aware 4D Hand–Object Interaction Reconstruction</title>
+    <title>Open-CHOIR: Contact-aware 4D Hand-Object Interaction Reconstruction</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Open-CHOIR: an Open-world Contact-aware Hand-Object Interaction Reconstruction framework that turns monocular RGB videos into reusable 4D interaction primitives.">
+    <meta name="color-scheme" content="light">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="page">
+    <nav class="site-nav" aria-label="Section navigation">
+        <div class="site-nav__left">
+            <a class="site-nav__home" href="https://geometry.cs.ucl.ac.uk/" target="_blank" rel="noopener noreferrer">Smart Geometry Group</a>
+            <a class="site-nav__brand" href="#top">Open-CHOIR</a>
+        </div>
+        <ul class="site-nav__links">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#our-results">Examples</a></li>
+            <li><a href="#results">Comparison</a></li>
+            <li><a href="#more-results">More Results</a></li>
+            <li><a href="#challenging-cases">Bimanual</a></li>
+            <li><a href="#bibtex">BibTeX</a></li>
+        </ul>
+    </nav>
+    <div class="page" id="top">
 
         <!-- HERO CARD -->
         <header class="hero">
             <div class="hero-card">
-                <h1>Open-CHOIR: Open-World Contact-Aware 4D Hand–Object Interaction Reconstruction</h1>
+                <p class="venue">SIGGRAPH Asia 2026</p>
+                <h1>Open-CHOIR</h1>
+                <p class="subtitle">Contact-aware 4D Hand-Object Interaction Reconstruction</p>
                 <p class="authors">
                     <span class="author">Hao Xu<sup>1</sup></span>
                     <span class="author">Yilin Liu<sup>2</sup></span>
@@ -30,6 +48,11 @@
                     <span><sup>2</sup>University College London</span>
                     <span><sup>3</sup>Adobe Research</span>
                 </p>
+                <nav class="hero-links" aria-label="Paper resources">
+                    <a class="btn" href="https://arxiv.org/abs/2605.20992" target="_blank" rel="noopener noreferrer">Paper</a>
+                    <a class="btn btn-ghost" href="#bibtex">BibTeX</a>
+                    <a class="btn btn-ghost" href="https://github.com/hxwork/CHOIR" target="_blank" rel="noopener noreferrer">Code</a>
+                </nav>
             </div>
         </header>
 
@@ -42,15 +65,34 @@
                     <p>
                         We ask whether everyday open-world monocular videos can be turned into reusable 4D
                         interaction primitives: articulated hand motion, object shape with 6D pose over time, and
-                        the when/where of contact. We present Open-CHOIR, an open-world, contact-aware HOI reconstruction framework
-                        that uses contact as an explicit coupling signal between hands and objects. Open-CHOIR initializes
-                        a coarse 4D HOI sequence from open-world visual priors, rectifies hand-object placement with
-                        a <em>generative HOI spatial rectification</em> module, and refines the result through
-                        contact-aware joint optimization. Experiments on controlled and challenging videos show that
-                        Open-CHOIR improves object reconstruction, physical plausibility, and temporal consistency over
-                        state-of-the-art methods.
+                        the when/where of contact. Such a capability would enable scalable mining of real
+                        interactions and, beyond reconstruction, support scene-aware synthesis and planning. However,
+                        reconstructing hand-object interaction (HOI) from challenging monocular videos remains
+                        difficult: methods often assume known objects or curated scenes, and separately estimated
+                        hands and objects easily become misaligned under clutter, occlusion, and unseen object
+                        geometries. Targeting this setting, we present <strong>Open-CHOIR</strong>, an Open-world
+                        Contact-aware HOI Reconstruction framework for a monocular camera, using contact as an
+                        explicit coupling signal between hands and objects. Open-CHOIR first initializes a coarse,
+                        contact-agnostic 4D HOI sequence from open-world visual priors. It then introduces a
+                        <em>generative HOI spatial rectification</em> module to predict ray-depth corrections and
+                        rectify hand-object relative placement, then derives initial per-frame contact correspondences
+                        on the rectified geometry. Last, a contact-aware joint optimization with dynamically updated
+                        contact constraints enforces geometric, temporal, and contact consistency. Experiments on
+                        controlled and challenging videos show that Open-CHOIR improves object reconstruction,
+                        physical plausibility, and temporal consistency over state-of-the-art methods.
                     </p>
                 </div>
+                <section class="contributions" aria-labelledby="contributions-title">
+                    <h2 id="contributions-title">Contributions</h2>
+                    <ol class="contrib">
+                        <li>An <strong>open-world monocular 4D HOI reconstruction method</strong> that extracts 2D interaction cues,
+                            performs guarded object tracking, and produces a coarse contact-agnostic sequence.</li>
+                        <li>A <strong>generative HOI spatial rectification</strong> module that predicts ray-depth
+                            corrections before constructing initial per-frame barycentric contact correspondences.</li>
+                        <li>A <strong>contact-aware joint optimization</strong> with dynamically updated contact
+                            constraints, validated on controlled and in-the-wild videos.</li>
+                    </ol>
+                </section>
                 <section class="pipeline-figure" aria-labelledby="pipeline-title">
                     <h2 id="pipeline-title">Method Overview</h2>
                     <div class="pipeline-stage-grid">
@@ -213,9 +255,25 @@
                 <div id="challengingCasesList"></div>
             </section>
 
+            <section id="bibtex" class="section" aria-labelledby="bibtex-title">
+                <h2 id="bibtex-title">BibTeX</h2>
+                <div class="bib-box">
+                    <button class="copy-btn" type="button" id="bibCopyBtn" aria-label="Copy BibTeX to clipboard">Copy</button>
+                    <pre id="bibText">@article{openchoir2026,
+  title     = {Open-CHOIR: Contact-aware 4D Hand-Object Interaction Reconstruction},
+  author    = {Xu, Hao and Liu, Yilin and Wang, Yinqiao and Fu, Chi-Wing and Mitra, Niloy J.},
+  journal   = {ACM Transactions on Graphics},
+  volume    = {45},
+  number    = {6},
+  year      = {2026},
+  publisher = {Association for Computing Machinery},
+  note      = {Presented at SIGGRAPH Asia 2026}
+}</pre>
+                </div>
+            </section>
+
             <section class="code-release section" aria-label="Code release">
-                <!-- <p>Our code and training dataset will be released on <a href="#" aria-label="GitHub repository placeholder">GitHub</a>.</p> -->
-                <p>Our code and training dataset will be released.</p>
+                <p>Our code is available on <a href="https://github.com/hxwork/CHOIR" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
             </section>
         </main>
         <footer class="footer">
@@ -2076,6 +2134,65 @@
             }
 
             initBimanualSection();
+        })();
+    </script>
+    <script>
+        (function () {
+            const btn = document.getElementById('bibCopyBtn');
+            const pre = document.getElementById('bibText');
+            if (!btn || !pre) return;
+            btn.addEventListener('click', async () => {
+                const text = pre.textContent;
+                try {
+                    await navigator.clipboard.writeText(text);
+                } catch (_) {
+                    const range = document.createRange();
+                    range.selectNodeContents(pre);
+                    const sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                    try { document.execCommand('copy'); } catch (__) { }
+                    sel.removeAllRanges();
+                }
+                btn.textContent = 'Copied';
+                btn.classList.add('copied');
+                window.setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 1600);
+            });
+        })();
+
+        /* Sticky-nav scroll-spy: highlight the link for the section in view */
+        (function () {
+            const links = Array.from(document.querySelectorAll('.site-nav__links a'));
+            if (!links.length || !('IntersectionObserver' in window)) return;
+            const byId = new Map();
+            const sections = [];
+            links.forEach(link => {
+                const id = (link.getAttribute('href') || '').replace('#', '');
+                const section = id && document.getElementById(id);
+                if (section) { byId.set(id, link); sections.push(section); }
+            });
+            let activeId = null;
+            const setActive = (id) => {
+                if (id === activeId) return;
+                activeId = id;
+                links.forEach(link => link.classList.toggle(
+                    'active', link.getAttribute('href') === `#${id}`));
+            };
+            const observer = new IntersectionObserver(() => {
+                let best = null;
+                let bestTop = Infinity;
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.bottom > 80 && rect.top < window.innerHeight * 0.5) {
+                        if (rect.top < bestTop) { bestTop = rect.top; best = section.id; }
+                    }
+                });
+                if (best) setActive(best);
+            }, { rootMargin: '-72px 0px -55% 0px', threshold: [0, 0.1, 0.5, 1] });
+            sections.forEach(section => observer.observe(section));
         })();
     </script>
 </body>
