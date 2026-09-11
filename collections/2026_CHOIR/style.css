@@ -2203,23 +2203,6 @@ a {
   flex: 0 0 auto;
 }
 
-.site-nav__home {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--muted);
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  white-space: nowrap;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.site-nav__home:hover {
-  color: var(--brand);
-  border-color: var(--brand);
-  text-decoration: none;
-}
-
 .site-nav__brand {
   font-weight: 700;
   font-size: 1.02rem;
