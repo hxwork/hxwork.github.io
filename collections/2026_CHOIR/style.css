@@ -118,6 +118,12 @@ a {
   font-weight: 500;
   color: var(--text-muted);
 }
+
+.acronym-letter {
+  color: var(--brand);
+  font-weight: 700;
+}
+
 .submission-id {
   margin: 0 0 var(--space-md);
   color: var(--text-muted);
