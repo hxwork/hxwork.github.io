@@ -12,11 +12,12 @@ redirect_from:
 
 # About Me
 
-I am a fourth-year Ph.D. student at the CSE Department, the Chinese University of Hong Kong (CUHK), supervised by [Prof. Chi-Wing FU, Philip](https://www.cse.cuhk.edu.hk/~cwfu/). I received my Master's degree at the School of Information and Communication Engineering from the University of Electronic Science and Technology of China (UESTC), supervised by [Prof. Guanghui LIU](https://scholar.google.com.hk/citations?user=AjfD95EAAAAJ&hl=zh-CN&oi=ao) and [Prof. Shuaicheng LIU](http://www.liushuaicheng.org/). Before that, I got my Bachelor's degree from Sichuan University (SCU). My research mainly focuses on 3D vision.
+I am a Research Scientist at [Adobe](https://research.adobe.com/). I received my Ph.D. degree from the CSE Department, the Chinese University of Hong Kong (CUHK), supervised by [Prof. Chi-Wing FU, Philip](https://www.cse.cuhk.edu.hk/~cwfu/). I received my Master's degree at the School of Information and Communication Engineering from the University of Electronic Science and Technology of China (UESTC), supervised by [Prof. Guanghui LIU](https://scholar.google.com.hk/citations?user=AjfD95EAAAAJ&hl=zh-CN&oi=ao) and [Prof. Shuaicheng LIU](http://www.liushuaicheng.org/). Before that, I got my Bachelor's degree from Sichuan University (SCU). My research mainly focuses on 3D vision.
 
 # News
 
 <div class="news-scroll" markdown="1">
+- *2026.11*: &nbsp; Join Adobe as a Research Scientist.
 - *2026.08*: &nbsp; Open-CHOIR is accepted to SIGGRAPH Asia 2026.
 - *2026.08*: &nbsp; ATOM is accepted to UIST 2026.
 - *2026.02*: &nbsp; LaS-Comp is accepted to CVPR 2026.
