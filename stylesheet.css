@@ -131,14 +131,40 @@ h2 {
 
 /* Publications */
 .paper {
-  display: flex;
-  align-items: flex-start;
-  gap: 4%;
   padding: 16px 2.5%;
 }
 
+/* Hairline divider between consecutive entries, spanning the 550px column */
+.paper + .paper {
+  padding-top: 0;
+}
+
+.paper + .paper::before {
+  content: "";
+  display: block;
+  width: 550px;
+  max-width: 100%;
+  margin-bottom: 16px;
+  border-top: 1px solid #e6e6e6;
+}
+
+/* Every entry: title row on top, everything in one 550px column */
+.paper-title,
+.paper-body {
+  width: 550px;
+  max-width: 100%;
+}
+
+/* Normal entries: thumbnail left, authors/venue/links right */
+.paper-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 10px;
+}
+
 .paper-image {
-  flex: 0 0 26%;
+  flex: 0 0 190px;
 }
 
 .paper-image img {
@@ -151,6 +177,10 @@ h2 {
 .paper-text {
   flex: 1;
   min-width: 0;
+}
+
+.paper-body .paper-text > p:first-child {
+  margin-top: 0;
 }
 
 .paper.wide {
@@ -227,7 +257,7 @@ h2 {
     max-width: 180px;
   }
 
-  .paper {
+  .paper-body {
     flex-direction: column;
     align-items: stretch;
     gap: 10px;
