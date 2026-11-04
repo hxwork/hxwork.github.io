@@ -90,14 +90,6 @@ h2 {
   font-weight: 400;
 }
 
-.year {
-  margin: 22px 0 4px;
-  padding-left: 2.5%;
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--muted);
-}
-
 /* News */
 .news {
   max-height: 114px;
@@ -140,10 +132,9 @@ h2 {
 /* Publications */
 .paper {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 4%;
   padding: 16px 2.5%;
-  border-radius: 6px;
 }
 
 .paper-image {
@@ -160,6 +151,25 @@ h2 {
 .paper-text {
   flex: 1;
   min-width: 0;
+}
+
+.paper.wide {
+  display: block;
+}
+
+/* Wide entries: fixed-width block (teaser fills it), left-aligned with the thumbnails */
+.paper.wide .paper-text {
+  width: 550px;
+  max-width: 100%;
+}
+
+.wide-teaser {
+  display: block;
+  width: 0;
+  min-width: 100%;
+  height: auto;
+  margin: 10px 0 8px;
+  border-radius: 4px;
 }
 
 .papertitle {
@@ -225,6 +235,10 @@ h2 {
 
   .paper-image {
     flex: none;
+  }
+
+  .paper.wide .paper-text {
+    max-width: 100%;
   }
 
   .footer {
